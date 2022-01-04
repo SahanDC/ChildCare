@@ -1,227 +1,6 @@
 <?php
-include_once('config/db.php');
-
-// if (!isset($_SESSION['login'])) {
-//     header("Location: ./login.php");
-// }
-
-// print_r($_POST);// print_r($_POST);
-$ChildId;
-$name = '';
-$age = '';
-$guardian = '';
-$birth_place = '';
-$user = $_SESSION['role'];
-//$user = "manager";
-//$user = "parent";
-$last_vaccination;
-$vaccine_data = array();
-$vaccine = array("BCG Vaccine", "Triple Vaccine", "Triple/Polio Vaccine", "MMR Vaccine", "Japanese Encephalitis Vaccine", "Dual Polio Vaccine", "Hepatitis A, B Vaccine (there are separate vaccines for both A and B as well)", "Anti Rabies Vaccine", "Chicken Pox Vaccine", "Meningicoccal Vaccine");
-$database_fields = array('BCG', 'Triple', 'Triple_Polio', 'MMR', 'Japanese_Encephalitis', 'Dual_Polio', 'Hepatitis_AB', 'Anti_Rabies', 'Chicken_Pox', 'Meningicoccal');
-$prevents = array("Tuberculosis", "Diptheria/Tetanus/Whooping Cough", "Diptheria/Tetanus/Whooping Cough and Polio", "Measles, Mumps and Rubella", "Japanese Encephalitis", "Polio", "Hepatitis A+B", "Rabies", "Chicken Pox", "Meningitis");
-$weights = array();
-
-$edit_vaccine = '';
-$edit_date = '';
-$edit_NVdate = '';
-$edit_place = '';
-$edit_comment = '';
-$add_vaccine = '';
-$add_Vdate = '';
-$add_NVdate = '';
-$add_place = '';
-$add_comment = '';
-$add_Wdate = '';
-$add_weight = '';
-$errors = array();
-// print_r($_GET);
-
-function check_req_fields($req_fields)
-{
-    // checks required fields
-    $errors = array();
-
-    foreach ($req_fields as $field) {
-        if (empty(trim($_POST[$field]))) {
-            $errors[] = $field . ' is required.';
-        }
-    }
-    return $errors;
-}
-
-function display_errors($errors)
-{
-    // format and displays form errors
-    echo '<div class="container col-6 text-center bg-danger bg-opacity-75 p-3 rounded">';
-    echo '<b>There were error(s) on your form.</b><br>';
-    foreach ($errors as $error) {
-        $error = ucfirst(str_replace("_", " ", $error));
-        echo $error . '<br>';
-    }
-    echo '</div>';
-}
-
-if (isset($_GET['ChildId'])) {
-    $ChildId = $_GET['ChildId'];
-    //echo $ChildId;
-}
-
-if (isset($_POST['edit'])) {
-    $last_vaccination = $_POST['last_vaccination'];
-    $edit_vaccine = $_POST['edit_vaccine'];
-    $edit_date = trim($_POST['edit_date']);
-    $edit_NVdate = trim($_POST['edit_NVdate']);
-    $edit_place = trim($_POST['edit_place']);
-    $edit_comment = trim($_POST['edit_comment']);
-    $ChildId = $_POST['ChildId'];
-    //echo $edit_vaccine;
-    $req_fields = array('edit_date', 'edit_place', 'add_NVdate');
-    if ($edit_vaccine != '-1') {
-        $errors = array_merge($errors, check_req_fields($req_fields));
-        $edit_field = date("Y/m/d", strtotime($edit_date)) . '_' . $edit_place . '_' . $edit_comment;
-        //echo $edit_field;
-        if (strlen($edit_field) > 200) {
-            array_push($errors, "Comment is too long.");
-        }
-        $ChildId = mysqli_real_escape_string($connection, $ChildId);
-        $query = "SELECT * FROM child_report WHERE ChildId = {$ChildId} LIMIT 1";
-        $result_set = mysqli_query($connection, $query);
-        //print_r($result_set);
-        if ($result_set) {
-            if (!(mysqli_num_rows($result_set) == 1)) {
-                array_push($errors, "Child does not found.");
-            }
-        }
-        if (empty($erors)) {
-            $edit_field = mysqli_real_escape_string($connection, $edit_field);
-            $query =  "UPDATE child_report SET {$database_fields[(int)$edit_vaccine]} = '{$edit_field}' WHERE ChildId = {$ChildId} LIMIT 1";
-            // TO DO:   put the updated next vaccination date to the database
-            $result = mysqli_query($connection, $query);
-            if (!$result) {
-                // NOTquery successful
-                $errors[] = 'Failed to modify the record.';
-            } else {
-                $edit_vaccine = '-1';
-                $edit_date = '';
-                $edit_place = '';
-                $edit_comment = '';
-            }
-        }
-    } else {
-        array_push($errors, "Choose a vaccine.");
-    }
-    //print_r($errors);
-
-}
-
-if (isset($_POST['add_V'])) {
-    $last_vaccination = $_POST['last_vaccination'];
-    $add_vaccine = $_POST['add_vaccine'];
-    $add_Vdate = $_POST['add_Vdate'];
-    $add_NVdate = $POST['add_NVdate'];
-    $add_place = $_POST['add_place'];
-    $add_comment = $_POST['add_comment'];
-    $ChildId = $_POST['ChildId'];
-    $req_fields = array('add_Vdate', 'add_place');
-    if ($add_vaccine != '-1') {
-        $errors = array_merge($errors, check_req_fields($req_fields));
-        $add_field = date("Y/m/d", strtotime($add_Vdate)) . '_' . $add_place . '_' . $add_comment;
-        //echo $add_field;
-        if (strlen($add_field) > 200) {
-            array_push($errors, "Comment is too long.");
-        }
-        $ChildId = mysqli_real_escape_string($connection, $ChildId);
-        $query = "SELECT * FROM child_report WHERE ChildId = {$ChildId} LIMIT 1";
-        $result_set = mysqli_query($connection, $query);
-        //print_r($result_set);
-        if ($result_set) {
-            if (!(mysqli_num_rows($result_set) == 1)) {
-                array_push($errors, "Child does not found.");
-            }
-        }
-        if (empty($errors)) {
-            $edit_field = mysqli_real_escape_string($connection, $add_field);
-            $query =  "UPDATE child_report SET {$database_fields[(int)$add_vaccine]} = '{$add_field}' WHERE ChildId = {$ChildId} LIMIT 1";
-            // TO DO:   put the next vaccination date to the database
-            $result = mysqli_query($connection, $query);
-            if (!$result) {
-                // NOTquery successful
-                $errors[] = 'Failed to modify the record.';
-            } else {
-                $add_vaccine = '-1';
-                $add_Vdate = '';
-                $add_place = '';
-                $add_comment = '';
-            }
-        }
-    } else {
-        array_push($errors, "Choose a vaccine.");
-    }
-    //print_r($errors);
-}
-
-if (isset($_POST['add_W'])) {
-    $add_Wdate = $_POST['add_Wdate'];
-    $add_weight = $_POST['add_weight'];
-    $ChildId = $_POST['ChildId'];
-    $added_weights = $_POST['added_weights'];
-    $req_fields = array('add_Wdate', 'add_weight');
-    $errors = array_merge($errors, check_req_fields($req_fields));
-    $add_Wfield = $added_weights . ',' . date("Y/m/d", strtotime($add_Wdate)) . '_' . $add_weight;
-    //echo $add_field;
-    $ChildId = mysqli_real_escape_string($connection, $ChildId);
-    $query = "SELECT * FROM child_report WHERE ChildId = {$ChildId} LIMIT 1";
-    $result_set = mysqli_query($connection, $query);
-    //print_r($result_set);
-    if ($result_set) {
-        if (!(mysqli_num_rows($result_set) == 1)) {
-            array_push($errors, "Child does not found.");
-        }
-    }
-    if (empty($errors)) {
-        $add_Wfield = mysqli_real_escape_string($connection, $add_Wfield);
-        $query =  "UPDATE child_report SET Weight = '{$add_Wfield}' WHERE ChildId = {$ChildId} LIMIT 1";
-        $result = mysqli_query($connection, $query);
-        if (!$result) {
-            // NOTquery successful
-            $errors[] = 'Failed to modify the record.';
-        } else {
-            $add_Wdate = '';
-            $add_weight = '';
-        }
-    }
-    //print_r($errors);
-}
-
-
-
-$ChildId = mysqli_real_escape_string($connection, $ChildId);
-$query = "SELECT * FROM child_report WHERE ChildId = {$ChildId} LIMIT 1";
-
-$result_set = mysqli_query($connection, $query);
-//print_r($result_set);
-
-if ($result_set) {
-    if (mysqli_num_rows($result_set) == 1) {
-        // user found
-        $result = mysqli_fetch_assoc($result_set);
-        //print_r($result);
-        $name = $result['Name'];
-        $age = round((strtotime(date("Y-m-d", time())) - strtotime($result['Birthday'])) / (60 * 60 * 24 * 30));
-        $guardian = $result['Guardian'];
-        $birth_place = $result['BirthPlace'];
-        $vaccine_data   = array($result['BCG'], $result['Triple'], $result['Triple_Polio'], $result['MMR'], $result['Japanese_Encephalitis'], $result['Dual_Polio'], $result['Hepatitis_AB'], $result['Anti_Rabies'], $result['Chicken_Pox'], $result['Meningicoccal']);
-        for ($v = 0; $v < count($vaccine_data); $v++) {
-            if (empty($vaccine_data[$v])) {
-                $last_vaccination = $v;
-                break;
-            }
-        }
-        $weights = explode(',', $result['Weight']);
-        //print_r($weights);
-    }
-}
-
+include('controllers/childreport.php');
+session_start();
 
 ?>
 
@@ -242,19 +21,23 @@ if ($result_set) {
         }
     </style>
 </head>
-
 <body>
+
+<?php if (!empty($report1->Errors) && (in_array("Fail database",$report1->Errors) || in_array("Childreport not found",$report1->Errors))) {
+    display_errors($report1->Errors);
+    }else{
+?>
+
     <div class="row h4 p-1 bg-primary">
         <div class="col-2 text-center  ">Child Report</div>
         <div class="col-8 text-capitalized bg-primary text-center "><?php echo $ChildId ?></div>
-        <div class="col bg-primary text-center"><button type="button"  id = "back" onclick="goBack(this)" class="btn btn-dark m1-2">BACK</button></div>
-        <!-- <div class="col bg-primary text-center"><button type="button" onclick=location.href = "./controllers/logout.php" class="btn btn-danger m1-2">Log out</button></div> -->
+        <div class="col bg-primary text-center"><button type="button"  id = "back" class="btn btn-dark m1-2">BACK</button></div>
         <div class="col bg-primary text-center"><a href="./controllers/logout.php" class="btn btn-danger m1-2">Log Out</a></div>
     </div>
 
     <?php
-    if (!empty($errors)) {
-        display_errors($errors);
+    if (!empty($report1->Errors)) {
+        display_errors($report1->Errors);
     }
     ?>
 
@@ -281,12 +64,12 @@ if ($result_set) {
             <input type='hidden' name='last_vaccination' value=<?php echo $last_vaccination ?>>
             <div class='container mt-5 col-10 px-5 border border-dark border-3'>
             <label for='exampleDataList' class='form-label h2 mt-4'>Edit vaccination details</label>
-
+            
             <div class='input-group mb-4'> 
             <div class='input-group-prepend'>
                 <label class='input-group-text' for='inputGroupSelect01'>Select Vaccine</label>
             </div>
-            <select class='col custom-select' name ='edit_vaccine' id='edit_vaccine'  onchange='editVaccination(event)''>
+            <select class='col custom-select' name ='edit_vaccine' id='edit_vaccine'  onchange='editVaccination(event)'>
             <option value='-1'>Choose...</option>    
             <option value='0'>BCG Vaccine</option>
             <option value='1'>Triple Vaccine</option>
@@ -312,7 +95,7 @@ if ($result_set) {
                         </div>
                         <div class='col-2 mt-1'>Next vaccination :</div>
                         <div class='col-2'>
-                        <input type='date' class='form-control bg-light border-dark' placeholder='Next Vaccination' name='edit_NVdate' value= <?php echo $edit_NVdate ?> >
+                        <input type='date' class='form-control bg-light border-dark' placeholder='Next Vaccination' id="edit_NVdate" name='edit_NVdate' value= <?php echo $edit_NVdate ?> >
                         </div>
                     </div>
                 </form>
@@ -325,14 +108,14 @@ if ($result_set) {
     }
     ?>
 
-    <?php
+<?php
     if (!strcmp($user, "midwife")) {?>
         <form action='child_report.php' method='post'>
             <input type='hidden' name='ChildId' value=<?php echo $ChildId ?>>
             <input type='hidden' name='last_vaccination' value=<?php echo $last_vaccination ?>>
             <div class='container mt-5 col-10 px-5 border border-dark border-3'>
             <label for='exampleDataList' class='form-label h2 mt-4'>Add vaccination details</label>
-
+            
             <div class='input-group mb-4'> 
             <div class='input-group-prepend'>
                 <label class='input-group-text' for='inputGroupSelect01'>Select Vaccine</label>
@@ -351,7 +134,7 @@ if ($result_set) {
             <option value='9' id= 9 >Meningicoccal Vaccine</option>
             </select>
             </div>
-    
+                
                 <form>
                     <div class='row'>
                         <div class='col-2 mt-1'>Date of vaccination :</div>
@@ -381,6 +164,7 @@ if ($result_set) {
     <?php
     }
     ?>
+
     <div class="container mt-5">
         <table class="table table-bordered border-5 border-dark table-hover">
             <thead>
@@ -394,60 +178,39 @@ if ($result_set) {
             </thead>
             <tbody class="border-3">
                 <?php
-                for ($i = 0; $i < 10; $i++) {
-                    echo "<tr class=' border-2'>
-                        <td class='col-2 text-break'> $vaccine[$i] </td>";
-                    if (strcmp($vaccine_data[$i], "")) {
-                        $curr_vaccine = explode("_", $vaccine_data[$i]);
-                        echo "<td class='col-2 border-2 text-break text-center'> $curr_vaccine[0]</td>";
-                        echo "<td class='col-2 border-2 text-break text-center'> $curr_vaccine[1]</td>";
-                    } else {
-                        echo "<td class=' border-2'> </td>
-                            <td class=' border-2' > </td>";
-                    }
-                    echo "<td class='col-2 border-2 text-break'> $prevents[$i] </td>";
-                    if (strcmp($vaccine_data[$i], "")) {
-                        if (strlen($curr_vaccine[2]) == 0) {
-                            echo "<td class='col-2 border-2 text-center'> - </td>";
-                        } else {
-                            echo "<td class='col-2 border-2 text-break'> $curr_vaccine[2]</td>";
-                        }
-                    } else {
-                        echo "<td class=' border-2' > </td>";
-                    }
-                    echo "</tr>";
-                }
+                    $report1->showVaccinations();
                 ?>
             </tbody>
         </table>
     </div>
 
     <?php
-    if (!strcmp($user, "midwife")) {
-        echo "<form action='child_report.php' method='post'>
-            <input type='hidden' name='ChildId' value='" . $ChildId . "'>
-            <input type='hidden' name='added_weights' value='" . implode(',', $weights) . "'>
+    if (!strcmp($user, "midwife")) { ?>
+        <form action='child_report.php' method='post'>
+            <input type='hidden' name='ChildId' value=<?php echo $ChildId ?> >
+            <input type='hidden' name='added_weights' value=<?php echo implode(',', $weights) ?> >
             <div class='container mt-5 col-4 px-5 border border-dark border-3'>
             <label for='exampleDataList' class='form-label h2 mt-4'>Add weight details</label>
                 <form>
                     <div class='row'>
                         <div class='col mt-1'>Date of Weight check  &emsp;:</div>
                         <div class='col'>
-                        <input type='date' class='form-control bg-light border-dark' placeholder='Date of Weight check' name='add_Wdate' value='" . $add_Wdate . "' >
+                        <input type='date' class='form-control bg-light border-dark' placeholder='Date of Weight check' name='add_Wdate' value=<?php echo $add_Wdate ?> >
                         </div>
                     </div>
                     <div class='row mt-3'>
                     <div class='col mt-2'>Weight of the child &emsp;&emsp;:</div>
                         <div class='col'>
-                        <input type='text' class='form-control mb-4 bg-light border-dark' placeholder='weight' name='add_weight' value='" . $add_weight . "' >
+                        <input type='text' class='form-control mb-4 bg-light border-dark' placeholder='weight' name='add_weight' value=<?php echo $add_weight ?>  >
                         </div>
                     </div>
                 </form>
                 <div class=' col-11 text-end mb-4'>
                     <button type='submit' class='btn btn-warning px-4 m1-2 rounded ' name='add_W' value='submit'>Add</button>
                 </div>
-            </div>";
-    }
+            </div>
+    <?php 
+    } 
     ?>
 
     <div class="container col-4 pt-5 pb-5 px-5">
@@ -460,33 +223,11 @@ if ($result_set) {
             </thead>
             <tbody class="border-3">
                 <?php
-                $var_date;
-                $weight_chart = "[";
-                if ($weights[0] != '') {
-                    for ($j = 0; $j < count($weights); $j++) {
-                        $curr_weights = explode("_", $weights[$j]);
-                        if ($j > 0) {
-                            $diff = round(abs(strtotime($curr_weights[0]) - $var_date) / (30 * 24 * 60 * 60));
-                            for ($k = 0; $k < $diff - 1; $k++) {
-                                $weight_chart .= null;
-                                $weight_chart .= ",";
-                            }
-                        }
-                        $weight_chart .= $curr_weights[1] . ",";
-                        $var_date = strtotime($curr_weights[0]);
-                        echo "<tr class='border-2'>
-                                <td class='col-2 border-2 text-break'> $curr_weights[0] </td>
-                                <td class='col-2 border-2 text-break'> $curr_weights[1] </td>
-                                </tr>";
-                    }
-                }
-                $weight_chart .= "]";
-                // print_r($weight_chart);
+                    $report1->showWeight();
                 ?>
             </tbody>
         </table>
     </div>
-
 
     <div>
         <canvas id="myChart" style="width:100%;max-width:1200px;margin:auto;margin-bottom:5%"></canvas>
@@ -514,7 +255,7 @@ if ($result_set) {
                         fill: true
                     },
                     {
-                        data: <?php echo $weight_chart ?>,
+                        data: <?php echo $report1->getWeightArray(); ?>,
                         connectNullData: true,
                         borderColor: "green",
                         label: "weight of the child",
@@ -576,6 +317,10 @@ if ($result_set) {
     <script type="text/javascript">
         document.getElementById('edit_vaccine').value = "<?php echo ($edit_vaccine == '') ? -1 : $edit_vaccine;; ?>";
     </script>
+    <script type="text/javascript">
+        document.getElementById('edit_NVdate').value = "<?php echo ($edit_vaccine == '') ? -1 : $edit_vaccine;; ?>";
+    </script>
+
     <script>
         function editVaccination(e) {
             var vaccine_data = <?php echo json_encode($vaccine_data); ?>;
@@ -593,7 +338,6 @@ if ($result_set) {
             } else {
                 document.getElementById("edit_comment").value = arr[2];
             }
-
         };
     </script>
 
@@ -602,21 +346,22 @@ if ($result_set) {
             document.getElementById(index).hidden = true;
         }
     </script>
+
     <script type="text/javascript">
         let user =<?php echo json_encode($_SESSION['role']) ;?>;
-        document.getElementById("back").onclick = function () {
             if (user === "midwife") {
-                location.href = "midwife.php";
+                document.getElementById("back").location.href = "midwife.php";
             }else if(user === "manager"){
-                location.href = "requests.php";
+                document.getElementById("back"),location.href = "requests.php";
             }else if (user = "parent") {
-                location.href = "dashboard.php"
+                document.getElementById("back").location.href = "dashboard.php"
             }
-    };
 </script>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
-</body>
+<?php }?>
 
+</body>
 </html>
