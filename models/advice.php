@@ -1,6 +1,6 @@
 <?php
     
-    include_once('dbh.class.php');
+    
     class Advice{
       
 
@@ -38,24 +38,31 @@
         function get_isdeleted(){
             return $this->isdeleted;
         }
-        function get_advice(){
+        function get_advices(){
              
-            $sql = 'SELECT * FROM advices WHERE Id= ?;';
-            $content = $this->database->connect()->prepare($sql);
-            if (!$content->execute(array($this->Id))) {
-                $content=null;
-                exit();
-            }
+            // $sql = 'SELECT * FROM advices WHERE Id= ?;';
+            // $content = $this->database->connect()->prepare($sql);
+            // if (!$content->execute(array($this->Id))) {
+            //     $content=null;
+            //     exit();
+            // }
 
-            if($content->rowCount() == 0){
-                $content = null;
-                exit();
+            // if($content->rowCount() == 0){
+            //     $content = null;
+            //     exit();
+            // }
+            // $details = $content->fetch();
+            // $this->topic = $details["topic"];
+            // $this->content=$details["content"];
+            // $this->id=$details["id"];
+            // $this->isdeleted->$details["isdeleted"];
+            $query = $this->connection->query("SELECT * FROM advice ORDER BY Id");
+            $requests = array();
+            while ($row = $query->fetch_assoc()) {
+                // $requests[] = $row;
+                array_push($requests, $row);
             }
-            $details = $content->fetch();
-            $this->topic = $details["topic"];
-            $this->content=$details["content"];
-            $this->id=$details["id"];
-            $this->isdeleted->$details["isdeleted"];
+            return $requests;
 
         }
         function editAdvice($content,$topic){
