@@ -10,6 +10,9 @@ if ($_SESSION['role'] == 'parent') {
     header("Location: ./dashboard.php");
 }
 $search = '';
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+}
 $mail = $_SESSION['email'];
 // echo $_SESSION['email'];
 
