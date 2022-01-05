@@ -352,7 +352,7 @@ session_start();
             if (user === "midwife") {
                 document.getElementById("back").location.href = "midwife.php";
             }else if(user === "manager"){
-                document.getElementById("back"),location.href = "requests.php";
+                document.getElementById("back"),location.href = "child report.php";
             }else if (user = "parent") {
                 document.getElementById("back").location.href = "dashboard.php"
             }
