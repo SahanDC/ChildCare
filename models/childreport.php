@@ -131,6 +131,10 @@
     }
 
 
+    public function addDetails(Array $array){
+        
+    }
+
 //----------------------modifing data functions-------------------------------------- 
 
     public function openChildReport(){
