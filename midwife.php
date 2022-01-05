@@ -48,7 +48,7 @@ $result4 = mysqli_query($connection, $query4);
 <body>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="btn btn-primary" href="#" role="button">See Medicale Advice</a>
+            <a class="btn btn-primary" href="#" role="button">See Medical Advice</a>
             <a class="btn btn-danger" href="./controllers/logout.php" role="button">Log Out</a>
         </div>
     </nav>
