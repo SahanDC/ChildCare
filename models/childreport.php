@@ -8,6 +8,8 @@
         private $name;
         private $age;
         private $guardian;
+        private $area;
+        private $NVD;
         private $birth_place;
         private $last_vaccination;
         private $weights;
@@ -36,6 +38,12 @@
 
         public function getGuardian(){  return $this->guardian; }
         public function setGuardian($guardian){ $this->guardian = $guardian;    return $this;   }
+
+        public function getArea(){    return $this->area;  }
+        public function setArea($area){    $this->area = $area;  return $this;   }
+
+        public function getNVD(){   return $this->NVD;  }
+        public function setNVD($NVD){   $this->NVD = $NVD;  return $this;   }
 
         public function getBirthPlace(){    return $this->birth_place;  }
         public function setBirthPlace($birth_place){    $this->birth_place = $birth_place;  return $this;   }
@@ -132,7 +140,10 @@
 
 
     public function addDetails(Array $array){
-        
+        $this->name = $array['Name'];
+        $this->guardian = $array['"Guardian"'];
+        $this->area = $array['Area'];
+        $this->NVD = $array['NVD'];
     }
 
 //----------------------modifing data functions-------------------------------------- 
@@ -235,6 +246,8 @@
                     $this->name = $report["Name"];
                     $this->age = round((strtotime(date("Y-m-d", time())) - strtotime($report['Birthday'])) / (60 * 60 * 24 * 30));
                     $this->guardian = $report["Guardian"];
+                    $this->area = $report["Area"];
+                    $this->NVD = $report["NVD"];
                     $this->birth_place = $report["BirthPlace"];
                     $this->vaccine_data   = array($report['BCG'], $report['Triple'], $report['Triple_Polio'], $report['MMR'], $report['Japanese_Encephalitis'], $report['Dual_Polio'], $report['Hepatitis_AB'], $report['Anti_Rabies'], $report['Chicken_Pox'], $report['Meningicoccal']);
                     $this->weights = explode(',', $report['Weight']);
