@@ -18,12 +18,13 @@ class Midwife{
         return $details;
     }
 
-    public function getChildReportDetails($mail, $search){
+    public function getChildReportDetails($mail, $search_){
         $childReportDetails = array();
-        if (isset($_GET['search'])) {
+        if ($search_ != '') {
+            $search = mysqli_real_escape_string($this->connection, $search_);
             $query = $this->connection->query("SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%'))");
         } else {
-            $query = $this->connection->query("select * from child_report WHERE MidwifeEmail = '$mail'");
+            $query = $this->connection->query("SELECT * FROM child_report WHERE MidwifeEmail = '$mail'");
         }
         while ($row = $query->fetch_assoc()) {
             array_push($childReportDetails, $row);

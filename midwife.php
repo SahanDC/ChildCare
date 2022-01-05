@@ -1,4 +1,5 @@
 <?php include('config/db.php');
+require_once('models/midwife.php');
 if (!isset($_SESSION['login'])) {
     header("Location: ./login.php");
 }
@@ -14,16 +15,30 @@ $mail = $_SESSION['email'];
 
 $_SESSION['type'] = 'Midwife';
 
-$query1 = "select * from midwife";
-$result1 = mysqli_query($connection, $query1);
+$midwifeObj = new Midwife($connection);
+// $details = array();
+$details = $midwifeObj->getDetails();
+// foreach ($details as $item){
+//     print_r($item); echo "<br>";
+// }
 
-if (isset($_GET['search'])) {
-    $search = mysqli_real_escape_string($connection, $_GET['search']);
-    $query2 = "SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%'))";
-} else {
-    $query2 = "select * from child_report WHERE MidwifeEmail = '$mail'";
-}
-$result2 = mysqli_query($connection, $query2);
+// $query1 = "select * from midwife";
+// $result1 = mysqli_query($connection, $query1);
+
+$midwifeObj2 = new Midwife($connection);
+// $childReportDetails = array();
+$childReportDetails = $midwifeObj2->getChildReportDetails($mail, $search);
+// foreach($childReportDetails as $item2){
+//     print_r($item2); echo "<br>";
+// }
+
+// if (isset($_GET['search'])) {
+//     $search = mysqli_real_escape_string($connection, $_GET['search']);
+//     $query2 = "SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%'))";
+// } else {
+//     $query2 = "select * from child_report WHERE MidwifeEmail = '$mail'";
+// }
+// $result2 = mysqli_query($connection, $query2);
 
 $query3 = "select * from child_report WHERE MidwifeEmail = '$mail'";
 $result3 = mysqli_query($connection, $query3);
@@ -66,12 +81,12 @@ $result4 = mysqli_query($connection, $query4);
 
                 <tbody>
                     <?php
-                    while ($rows = mysqli_fetch_assoc($result1)) {
+                    foreach ($details as $item) {
                     ?>
                         <tr>
-                            <td><?php echo $rows['centre']; ?></td>
-                            <td><?php echo $rows['noc']; ?></td>
-                            <td><?php echo $rows['areas']; ?></td>
+                            <td><?php echo $item['centre']; ?></td>
+                            <td><?php echo $item['noc']; ?></td>
+                            <td><?php echo $item['areas']; ?></td>
                         </tr>
                     <?php
                     }
@@ -103,17 +118,17 @@ $result4 = mysqli_query($connection, $query4);
                         <th class="table-primary">Next Vaccination</th>
                     </tr>
                 </thead>
-
+                
                 <tbody>
                     <?php
-                    while ($rows = mysqli_fetch_assoc($result2)) {
+                    foreach ($childReportDetails as $item) {
                     ?>
                         <tr>
-                            <td><a href="child_report.php?ChildId= <?php echo $rows['ChildId']; ?>"><?php echo $rows['ChildId']; ?></a></td>
-                            <td><?php echo $rows['Name']; ?></td>
-                            <td><?php echo $rows['Guardian']; ?></td>
-                            <td><?php echo $rows['Area']; ?></td>
-                            <td><?php echo $rows['NVD']; ?></td>
+                            <td><a href="child_report.php?ChildId= <?php echo $item['ChildId']; ?>"><?php echo $item['ChildId']; ?></a></td>
+                            <td><?php echo $item['Name']; ?></td>
+                            <td><?php echo $item['Guardian']; ?></td>
+                            <td><?php echo $item['Area']; ?></td>
+                            <td><?php echo $item['NVD']; ?></td>
                         </tr>
 
                     <?php
