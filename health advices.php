@@ -1,4 +1,5 @@
-<?php require_once('config/db.php') ?>
+<?php require_once('config/db.php');
+require_once('models/advice.php'); ?>
 <?php
 $advice_topic = "advice 1";
 $advice_content = "dknnnnnnjdkjdgjdljggjdlgdljls;ljgdsdsbnbnbbnfbn
@@ -8,6 +9,7 @@ $advice_content = "dknnnnnnjdkjdgjdljggjdlgdljls;ljgdsdsbnbnbbnfbn
 $is_deleted = 0;
 $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topic}','{$advice_content}',{$is_deleted})";
 # $result=mysqli_query($connection,$query);
+$requestObj = new Advice($connection);
 ?>
 <!--?php
   // if($result){
@@ -273,7 +275,11 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
 
         Successful parenting is not about achieving perfection. But it doesn’t mean that we shouldn’t work towards that goal. Set high standards for ourselves first and then our children second. We serve as role models for them.
 
-        Here are 10 tips on learning good parenting skills and avoiding bad parenting. Many of them are not quick nor easy. And probably no one can do all of them all of the time. But if you can keep working on the tips in this parenting guide, even though you may only do part of these some of the time, you will still be moving in the right direction.
+        Here are 10 tips on learning good parenting skills and avoiding bad parenting. Many of them are not 
+        
+        quick nor easy. And probably no one can do all of them all of the time. But if you can keep working 
+        on the tips in this parenting guide, even though you may only do part of these some of the time, you will 
+        still be moving in the right direction.
 
       </strong>.
     </p>
@@ -281,6 +287,29 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
 
     $advice_set = "SELECT * FROM advice WHERE isdeleted=0";
     $result_advices = mysqli_query($connection, $advice_set);
+    
+    $requests = $requestObj->get_advices();
+    foreach ($requests as $request) { 
+        
+        echo " <br>";?>
+        <div class="row mb-3">
+          <div class="col-md-4 themed-grid-col"><?php echo $request['topic']; ?></div>
+          <div class="col-md-8 themed-grid-col">
+            <p><?php echo $request['content'];
+                 ?></p>
+            <div class="container">
+
+              <button type="button" class="btn btn-secondary"><a href="delete advices.php?id=<?php echo $request['id']; ?>">DELETE</a> </button>
+              <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $request['id']; ?>">EDIT</a> </button>
+            </div>
+          </div>
+        </div>
+        
+    <?php 
+    }
+    ?>
+    <?php
+  
     if ($result_advices) {
       #echo mysqli_num_rows($result_advices);
       #$records=mysqli_fetch_assoc($result_advices);
@@ -294,8 +323,27 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
                  ?></p>
             <div class="container">
 
+              <!-- <button type="button" class="btn btn-secondary"><a href="delete advices.php?id=<?php echo $records['id']; ?>">DELETE</a> </button> -->
               <button type="button" class="btn btn-secondary"><a href="delete advices.php?id=<?php echo $records['id']; ?>">DELETE</a> </button>
+
               <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $records['id']; ?>">EDIT</a> </button>
+                          <?php
+                  
+                              if(isset($_POST['button1'])) {
+                                  $requestObj->deleteAdvice($records['id']);
+                                  echo "This is Button1 that is selected";
+                              }
+                              if(isset($_POST['button2'])) {
+                                  echo "This is Button2 that is selected";
+                              }
+                          ?>
+                          <form method="post">
+                            <input type="submit" name="button1" class="btn btn-secondary"
+                                    value="Delete"/>
+                              
+                            <button type="submit" name="button2" class="btn btn-secondary"
+                                    value="Edit"/>
+                        </form>
             </div>
           </div>
         </div>
