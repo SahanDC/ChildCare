@@ -56,7 +56,7 @@
             // $this->content=$details["content"];
             // $this->id=$details["id"];
             // $this->isdeleted->$details["isdeleted"];
-            $query = $this->connection->query("SELECT * FROM advice ORDER BY Id  ");
+            $query = $this->connection->query("SELECT * FROM advice ORDER BY id  ");
             $requests = array();
             while ($row = $query->fetch_assoc()) {
                 
@@ -68,13 +68,29 @@
             return $requests;
 
         }
-        function editAdvice($content,$topic){
-            $sql = 'SELECT * FROM advices WHERE Id = {$this->id}';
-            $content = $this->database->connect()->prepare($sql);
+        function editAdvice($id,$content,$topic){
+            // $sql = 'SELECT * FROM advices WHERE Id = $id';
+            // $content = $this->database->connect()->prepare($sql);
+            $query=$this->connection->query("UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} ");
+            echo "eeee";
+            # $query="INSERT INTO advices (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$isdeleted})";
+             
+             $insert =$query;
+         
+             if(!$insert)
+             {
+                 echo mysqli_error($this->connection);
+             }
+             else
+             {
+                 header("location:health advices.php"); // redirects to all records page
+                 exit;	
+                 echo "";
+             }
 
         }
         function deleteAdvice($id){
-            $query=$this->connection->query("UPDATE advice SET isdeleted=1 WHERE id= {$id} LIMIT 1");
+            $query=$this->connection->query("UPDATE advice SET isdeleted=1 WHERE id= {$id} ");
             echo "1111111111111111111111111111111111111111111111111111111111111";
         
             if($query)

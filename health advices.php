@@ -334,15 +334,18 @@ $requestObj = new Advice($connection);
                                   echo "This is Button1 that is selected";
                               }
                               if(isset($_POST['button2'])) {
-                                  echo "This is Button2 that is selected";
+                                $requestObj->editAdvice($records['id'],"wee4444ee","qqq4444444444qqqqqqqqqqqq");
+                                echo "This is Button2 that is selected";
+                                  
                               }
                           ?>
                           <form method="post">
                             <input type="submit" name="button1" class="btn btn-secondary"
-                                    value="Delete"/>
+                                    value="Delete">
+                            <input type="submit" name="button2" class="btn btn-secondary"
+                            value="Edit">
                               
-                            <button type="submit" name="button2" class="btn btn-secondary"
-                                    value="Edit"/>
+                           
                         </form>
             </div>
           </div>
