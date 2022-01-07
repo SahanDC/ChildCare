@@ -289,6 +289,7 @@ $requestObj = new Advice($connection);
     $result_advices = mysqli_query($connection, $advice_set);
     
     $requests = $requestObj->get_advices();
+    
     foreach ($requests as $request) { 
         
         echo " <br>";?>
@@ -296,6 +297,7 @@ $requestObj = new Advice($connection);
           <div class="col-md-4 themed-grid-col"><?php echo $request['topic']; ?></div>
           <div class="col-md-8 themed-grid-col">
             <p><?php echo $request['content'];
+             
                  ?></p>
             <div class="container">
 
@@ -323,7 +325,6 @@ $requestObj = new Advice($connection);
                  ?></p>
             <div class="container">
 
-              <!-- <button type="button" class="btn btn-secondary"><a href="delete advices.php?id=<?php echo $records['id']; ?>">DELETE</a> </button> -->
               <button type="button" class="btn btn-secondary"><a href="delete advices.php?id=<?php echo $records['id']; ?>">DELETE</a> </button>
 
               <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $records['id']; ?>">EDIT</a> </button>

@@ -1,8 +1,11 @@
 
 <?php require_once('config/db.php');
-?>
+
+require_once('models/advice.php'); ?>
+
 <?php
     include 'config/db.php'; // Using database connection file here
+    $requestObj = new Advice($connection);
 
     $id = $_GET['id']; // get id through query string
     $advice_id=mysqli_real_escape_string($connection,$id);
@@ -68,22 +71,27 @@
         $topic=$_POST['topic'];
         $content=$_POST['content'];
         $isdeleted=0;
-        $query="UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} LIMIT 1";
+        $id = $_GET['id'];
+        //
+        $requestObj->editAdvice($id,$content,$topic);
+
+
+      //   $query="UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} LIMIT 1";
         
-       # $query="INSERT INTO advices (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$isdeleted})";
+      //  # $query="INSERT INTO advices (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$isdeleted})";
         
-        $insert = mysqli_query($connection,$query);
+      //   $insert = mysqli_query($connection,$query);
     
-        if(!$insert)
-        {
-            echo mysqli_error($connection);
-        }
-        else
-        {
-            header("location:health advices.php"); // redirects to all records page
-            exit;	
-            echo "";
-        }
+      //   if(!$insert)
+      //   {
+      //       echo mysqli_error($connection);
+      //   }
+      //   else
+      //   {
+      //       header("location:health advices.php"); // redirects to all records page
+      //       exit;	
+      //       echo "";
+      //   }
     }
 ?>
 </html>

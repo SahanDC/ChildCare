@@ -39,23 +39,6 @@
             return $this->isdeleted;
         }
         function get_advices(){
-             
-            // $sql = 'SELECT * FROM advices WHERE Id= ?;';
-            // $content = $this->database->connect()->prepare($sql);
-            // if (!$content->execute(array($this->Id))) {
-            //     $content=null;
-            //     exit();
-            // }
-
-            // if($content->rowCount() == 0){
-            //     $content = null;
-            //     exit();
-            // }
-            // $details = $content->fetch();
-            // $this->topic = $details["topic"];
-            // $this->content=$details["content"];
-            // $this->id=$details["id"];
-            // $this->isdeleted->$details["isdeleted"];
             $query = $this->connection->query("SELECT * FROM advice ORDER BY id  ");
             $requests = array();
             while ($row = $query->fetch_assoc()) {
@@ -71,19 +54,19 @@
         function editAdvice($id,$content,$topic){
             // $sql = 'SELECT * FROM advices WHERE Id = $id';
             // $content = $this->database->connect()->prepare($sql);
-            $query=$this->connection->query("UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} ");
+            $query=$this->connection->query("UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} limit 1");
             echo "eeee";
             # $query="INSERT INTO advices (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$isdeleted})";
              
-             $insert =$query;
-         
-             if(!$insert)
+             
+             
+             if(!$query)
              {
                  echo mysqli_error($this->connection);
              }
              else
-             {
-                 header("location:health advices.php"); // redirects to all records page
+             {  echo "Xdf";
+                header("location:health advices.php"); // redirects to all records page
                  exit;	
                  echo "";
              }
