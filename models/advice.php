@@ -89,4 +89,14 @@
             }
 
         }
+
+        function addAdvice($topic,$content)
+        {
+            $query = $this->connection->query("INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',0)");
+            if (!$query) {
+            echo mysqli_error($this->connection);
+            } 
+            else {
+            echo ""; }
+        }
     }

@@ -151,6 +151,7 @@ $requestObj = new Advice($connection);
   <br>
   <!--Slider-->
   <div class="container">
+    <div class="container">
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -162,7 +163,7 @@ $requestObj = new Advice($connection);
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="#777" />
         </svg>
-        <img class="d-block w-100" src="img/high3.jpg" alt="Third slide">
+        <img class="d-block w-100" src="img/immunation.jpg" alt="Third slide">
         <div class="container" style="background-color: red;">
           <div class="carousel-caption text-start">
             <h1 style="color: black;">Young children’s health: what to expect</h1>
@@ -175,7 +176,7 @@ $requestObj = new Advice($connection);
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="#777" />
         </svg>
-        <img class="d-block w-100" src="img/high 2.jpg" alt="Third slide">
+        <img class="d-block w-100" src="img/1234.jfif" alt="Third slide">
         <div class="container">
           <div class="carousel-caption">
             <h1>Make Childrens Happy.</h1>
@@ -188,7 +189,7 @@ $requestObj = new Advice($connection);
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="#777" />
         </svg>
-        <img class="d-block w-100" src="img/high1.jpg" alt="Third slide">
+        <img class="d-block w-100" src="img/122.jfif" alt="Third slide">
         <div class="container">
           <div class="carousel-caption text-end">
             <h1>Eat Balanced Meal.</h1>
@@ -206,6 +207,7 @@ $requestObj = new Advice($connection);
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
+  </div>
   </div>
   </div>
   <!--slider finish-->
@@ -247,16 +249,16 @@ $requestObj = new Advice($connection);
     $topic = $_POST['topic'];
     $content = $_POST['content'];
     $is_deleted = 0;
+    $requestObj->addAdvice($topic,$content);
+    // $query = "INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$is_deleted})";
 
-    $query = "INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$is_deleted})";
+    // $insert = mysqli_query($connection, $query);
 
-    $insert = mysqli_query($connection, $query);
-
-    if (!$insert) {
-      echo mysqli_error($connection);
-    } else {
-      echo "";
-    }
+    // if (!$insert) {
+    //   echo mysqli_error($connection);
+    // } else {
+    //   echo "";
+    // }
   }
 
   ?>
