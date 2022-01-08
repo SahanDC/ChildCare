@@ -107,6 +107,17 @@
             }
             return $requests;
         }
+        function getChildReports(){
+            $query = $this->connection->query("SELECT * FROM child_report ORDER BY Childid ");
+            $reports = array();
+            while ($row = $query->fetch_assoc()) {
+                
+                
+                    array_push($reports, $row);
+                    
+            }
+            return $reports;
+        }
 
         
     }
