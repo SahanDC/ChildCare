@@ -1,0 +1,22 @@
+html{
+    height: 100vh;
+}
+    
+body {
+    background-image: url(../img/doctor-flip.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: left;
+    height: 100%;
+    /* position: fixed; */
+}
+
+.container {
+    float: right;
+    margin-top: 10%;
+}
+
+.card {
+    float: right;
+}

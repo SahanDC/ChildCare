@@ -1,3 +1,6 @@
+html {
+    height: 100vh;
+}
 body{
     background-image: url(../img/doctor.jpg);
     background-repeat: no-repeat;
