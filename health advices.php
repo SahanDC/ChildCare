@@ -1,39 +1,6 @@
 <?php require_once('config/db.php');
 require_once('models/advice.php'); ?>
-<?php
-$advice_topic = "advice 1";
-$advice_content = "dknnnnnnjdkjdgjdljggjdlgdljls;ljgdsdsbnbnbbnfbn
-  // dmlddlndlnbdlbndlkbndlbnbbd;bnbkdbnd;bdbn;dbdnbojbdsvsm;vsdvm
-  // dkndvdnvdkvndnvdvdvnv dvndl;vnd;vndnbd;dbnd;blldbndbnb;dm;vcl;ml
-  // mvmdlvmdvlmdlvmdlvmdl;vmdvmd;vlmdvldldvdlvmdmvdmldldmvldmvdvldvmdl";
-$is_deleted = 0;
-$query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topic}','{$advice_content}',{$is_deleted})";
-# $result=mysqli_query($connection,$query);
-$requestObj = new Advice($connection);
-?>
-<!--?php
-  // if($result){
-  //   echo "added 1 record";
-  // }
-  // else{
-  //   echo "unsuccessful";
-  // }
-  // $advice_set="SELECT * FROM advices";
-  // $result_advices=mysqli_query($connection,$advice_set);
-  // if ($result_advices){
-  //   echo mysqli_num_rows($result_advices);
-  //   $records=mysqli_fetch_assoc($result_advices);
-  //   echo "<pre>";
-  //   print_r($records);
-  //   echo "</pre>";
-  //   while ($records=mysqli_fetch_assoc($result_advices)){
-  //     echo "<pre>";
-  //     print_r($records);
-  //     echo "</pre>";
-  //   }
-  // }
 
-  ?> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -294,7 +261,7 @@ $requestObj = new Advice($connection);
     
     foreach ($requests as $request) { 
         
-        echo " <br>";?>
+        ?>
         <div class="row mb-3">
           <div class="col-md-4 themed-grid-col"><?php echo $request['topic']; ?></div>
           <div class="col-md-8 themed-grid-col">
@@ -303,8 +270,21 @@ $requestObj = new Advice($connection);
                  ?></p>
             <div class="container">
 
-              <button type="button" class="btn btn-secondary"><a href="delete advices.php?id=<?php echo $request['id']; ?>">DELETE</a> </button>
-              <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $request['id']; ?>">EDIT</a> </button>
+               <?php
+                  
+                  if(isset($_POST['button1'])) {
+                      $requestObj->deleteAdvice($request['id']);
+                      
+                  }
+                             
+                  ?>
+                  <form method="post">
+                    <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $request['id']; ?>">EDIT</a> </button>
+                    <input type="submit" name="button1" class="btn btn-secondary" value="DELETE">
+                    
+                      
+                    
+                  </form>
             </div>
           </div>
         </div>
@@ -312,51 +292,7 @@ $requestObj = new Advice($connection);
     <?php 
     }
     ?>
-    <?php
-  
-    if ($result_advices) {
-      #echo mysqli_num_rows($result_advices);
-      #$records=mysqli_fetch_assoc($result_advices);
 
-      while ($records = mysqli_fetch_assoc($result_advices)) {
-    ?>
-        <div class="row mb-3">
-          <div class="col-md-4 themed-grid-col"><?php echo $records['topic']; ?></div>
-          <div class="col-md-8 themed-grid-col">
-            <p><?php echo $records['content'];
-                 ?></p>
-            <div class="container">
-
-              <button type="button" class="btn btn-secondary"><a href="delete advices.php?id=<?php echo $records['id']; ?>">DELETE</a> </button>
-
-              <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $records['id']; ?>">EDIT</a> </button>
-                          <?php
-                  
-                              if(isset($_POST['button1'])) {
-                                  $requestObj->deleteAdvice($records['id']);
-                                  echo "This is Button1 that is selected";
-                              }
-                              if(isset($_POST['button2'])) {
-                                $requestObj->editAdvice($records['id'],"wee4444ee","qqq4444444444qqqqqqqqqqqq");
-                                echo "This is Button2 that is selected";
-                                  
-                              }
-                          ?>
-                          <form method="post">
-                            <input type="submit" name="button1" class="btn btn-secondary"
-                                    value="Delete">
-                            <input type="submit" name="button2" class="btn btn-secondary"
-                            value="Edit">
-                              
-                           
-                        </form>
-            </div>
-          </div>
-        </div>
-    <?php
-      }
-    }
-    ?>
 
 
 

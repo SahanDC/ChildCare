@@ -2,8 +2,6 @@
     
     
     class Advice{
-      
-
         public $topic;
         public $id;
         public $content;
@@ -52,20 +50,15 @@
 
         }
         function editAdvice($id,$content,$topic){
-            // $sql = 'SELECT * FROM advices WHERE Id = $id';
-            // $content = $this->database->connect()->prepare($sql);
             $query=$this->connection->query("UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} limit 1");
             echo "eeee";
-            # $query="INSERT INTO advices (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$isdeleted})";
-             
-             
              
              if(!$query)
              {
                  echo mysqli_error($this->connection);
              }
              else
-             {  echo "Xdf";
+             {  
                 header("location:health advices.php"); // redirects to all records page
                  exit;	
                  echo "";
@@ -74,11 +67,11 @@
         }
         function deleteAdvice($id){
             $query=$this->connection->query("UPDATE advice SET isdeleted=1 WHERE id= {$id} ");
-            echo "1111111111111111111111111111111111111111111111111111111111111";
+           
         
             if($query)
             {
-                echo "1111111111111111111111111111111111111111111111111111111111111";
+                
                 header("location:health advices.php"); // redirects to all records page
                 exit;	
             }
@@ -99,4 +92,21 @@
             else {
             echo ""; }
         }
+
+
+        //thiis is not completed
+        function search($term){
+            $query = $this->connection->query("SELECT * FROM advice ORDER BY id  ");
+            $requests = array();
+            while ($row = $query->fetch_assoc()) {
+                
+                if($row['isdeleted']==0)
+                    {
+                    array_push($requests, $row);
+                    }
+            }
+            return $requests;
+        }
+
+        
     }
