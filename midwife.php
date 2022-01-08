@@ -16,7 +16,6 @@
 
 <body>
     <!-- header section starts  -->
-
     <header style="background-color: rgb(181, 239, 241);">
         <div class="container" style="background-color: rgb(181, 239, 241);">
             <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem.</a>
@@ -29,10 +28,6 @@
             <div class="fas fa-bars"></div>
         </div>
     </header>
-
-
-
-
     <!-- header section ends  -->
 
     <div class="container">
