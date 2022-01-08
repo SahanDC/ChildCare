@@ -38,22 +38,28 @@
         function get_isdeleted(){
             return $this->isdeleted;
         }
-        function get_advices(){
-            $query = $this->connection->query("SELECT * FROM advice ORDER BY id  ");
-            $requests = array();
-            while ($row = $query->fetch_assoc()) {
+        // function get_advices(){
+        //     $query = $this->connection->query("SELECT * FROM advice ORDER BY id  ");
+        //     $requests = array();
+        //     while ($row = $query->fetch_assoc()) {
                 
-                if($row['isdeleted']==0)
-                    {
-                    array_push($requests, $row);
-                    }
-            }
-            // print_r($requests);
-            return $requests;
+        //         if($row['isdeleted']==0)
+        //             {
+        //             array_push($requests, $row);
+        //             }
+        //     }
+        //     // print_r($requests);
+        //     return $requests;
 
+        // }
+        function set_advice($id,$topic,$content,$status){
+            $this->id=$id;
+            $this->topic=$topic;
+            $this->content=$content;
+            $this->isdeleted=$status;
         }
-        function editAdvice($id,$content,$topic){
-            $query=$this->connection->query("UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} limit 1");
+        function editAdvice($connection,$topic,$content){
+            $query=$connection->query("UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id = {$this->id} limit 1");
             echo "eeee";
             
             if(!$query)
@@ -68,9 +74,8 @@
             }
 
         }
-        function deleteAdvice($id){
-            $query=$this->connection->query("UPDATE advice SET isdeleted=1 WHERE id= {$id} ");
-            
+        function deleteAdvice(){
+            $query=$this->connection->query("UPDATE advice SET isdeleted=1 WHERE id={$this->id}");
         
             if($query)
             {
@@ -86,15 +91,15 @@
 
         }
 
-        function addAdvice($topic,$content)
-        {
-            $query = $this->connection->query("INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',0)");
-            if (!$query) {
-            echo mysqli_error($this->connection);
-            } 
-            else {
-            echo ""; }
-        }
+        // function addAdvice($topic,$content)
+        // {
+        //     $query = $this->connection->query("INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',0)");
+        //     if (!$query) {
+        //     echo mysqli_error($this->connection);
+        //     } 
+        //     else {
+        //     echo ""; }
+        // }
 
 
         //thiis is not completed ----  yacai yacai  -----

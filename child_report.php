@@ -119,7 +119,7 @@ include('controllers/childreport.php');
             <div class='input-group-prepend'>
                 <label class='input-group-text' for='inputGroupSelect01'>Select Vaccine</label>
             </div>
-            <select class='col custom-select' name ='add_vaccine' id='add_vaccine''>
+            <select class='col custom-select' name ='add_vaccine' id='add_vaccine'>
             <option value='-1' >Choose...</option>
             <option value='0' id= 0 >BCG Vaccine</option>
             <option value='1' id= 1 >Triple Vaccine</option>
@@ -356,8 +356,6 @@ include('controllers/childreport.php');
                 location.href = "dashboard.php";
             }
     };
-    
-        
 
     // }   
 

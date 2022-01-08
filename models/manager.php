@@ -1,11 +1,13 @@
 <?php 
+    include_once('advice.php');
+
     class manager{
         private $connection;
         private $userId ;
         private $name ;
         private $email ;
 
-        private $midwife_aarray ;
+        private $midwife_array ;
         private $Advice_array ;
         private $childReport_array ;
 
@@ -14,6 +16,14 @@
             $this->userId = $id;
             $this->name = $name;
             $this->email = $email;
+        }
+
+        /**
+         * Get the value of Advice_array
+         */ 
+        public function getAdvice_array()
+        {
+                return $this->Advice_array;
         }
 
         public function getMidwives($search_){
@@ -35,5 +45,35 @@
             // print_r($midwives);
             return $midwives;
             }
+
+        public function get_advices(){
+            $query = $this->connection->query("SELECT * FROM advice WHERE isdeleted = 0 ORDER BY id ");
+            while ($row = $query->fetch_assoc()) {
+                $advice = new Advice($this->connection);
+                $advice->set_advice($row['id'],$row['topic'],$row['content'],$row['isdeleted']);
+                $this->Advice_array[$row['id']]=$advice;
+            }
+            // print_r($requests);
+            return $this->Advice_array;
+        }
+
+        public function deleteAdvice($id){
+            $this->Advice_array[$id]->deleteAdvice();
+        }
+
+        public function editAdvice($connection,$object,$topic,$content){
+            $object->editAdvice($connection,$topic,$content);
+        }
+        
+        function addAdvice($topic,$content)
+        {
+            $query = $this->connection->query("INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',0)");
+            if (!$query) {
+            echo mysqli_error($this->connection);
+            } 
+            else {
+            echo ""; }
+        }
+
     }
 ?>

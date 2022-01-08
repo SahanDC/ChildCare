@@ -1,13 +1,13 @@
 <?php require_once('config/db.php');
-require_once('models/advice.php'); 
+require_once('models/manager.php'); 
 
-$requestObj = new Advice($connection);
+$manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
 
 if (isset($_POST['submit'])) {
   $topic = $_POST['topic'];
   $content = $_POST['content'];
   $is_deleted = 0;
-  $requestObj->addAdvice($topic,$content);
+  $manager->addAdvice($topic,$content);
   // $query = "INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$is_deleted})";
 
   // $insert = mysqli_query($connection, $query);
@@ -19,6 +19,9 @@ if (isset($_POST['submit'])) {
   // }
 }
 
+if(isset($_POST['delete'])) {
+  $manager->deleteAdvice($_POST['delete']);
+}
 
 
 ?>
@@ -259,32 +262,26 @@ if (isset($_POST['submit'])) {
     </p>
     <?php
 
-    $advice_set = "SELECT * FROM advice WHERE isdeleted=0";
-    $result_advices = mysqli_query($connection, $advice_set);
+    // $advice_set = "SELECT * FROM advice WHERE isdeleted=0";
+    // $result_advices = mysqli_query($connection, $advice_set);
     
-    $requests = $requestObj->get_advices();
+    $advices = $manager->get_advices();
     
-    foreach ($requests as $request) { 
-        
+    foreach ($advices as $id => $advice) { 
         ?>
         <div class="row mb-3">
-          <div class="col-md-4 themed-grid-col"><?php echo $request['topic']; ?></div>
+          <div class="col-md-4 themed-grid-col"><?php echo $advice->get_topic(); ?></div>
           <div class="col-md-8 themed-grid-col">
-            <p><?php echo $request['content'];
+            <p><?php echo $advice->get_content();
             
                 ?></p>
             <div class="container">
 
               <?php
-                  
-                  if(isset($_POST['button1'])) {
-                      $requestObj->deleteAdvice($request['id']);
-                      
-                  }
                   ?>
                   <form method="post">
-                    <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $request['id']; ?>">EDIT</a> </button>
-                    <input type="submit" name="button1" class="btn btn-secondary" value="DELETE">
+                    <button type="button" onclick="addEdit()" class="btn btn-secondary"><a href="update record.php?id=<?php echo $id; ?>">EDIT</a> </button>
+                    <button type="submit" name="delete" class="btn btn-secondary" value='<?php echo $id;?>'>DELETE</button>
                     
                       
                     
@@ -339,6 +336,13 @@ if (isset($_POST['submit'])) {
         </div>
     </footer>
   </div>
+
+
+  <script>
+    function addEdit(){
+      <?php $_SESSION['manager'] = serialize($manager);?>
+    }
+    </script>
 </body>
 
 </html>
