@@ -43,8 +43,8 @@ $childReportDetails = $midwifeObj2->getChildReportDetails($mail, $search);
 // }
 // $result2 = mysqli_query($connection, $query2);
 
-$query3 = "select * from child_report WHERE MidwifeEmail = '$mail'";
-$result3 = mysqli_query($connection, $query3);
+// $query3 = "select * from child_report WHERE MidwifeEmail = '$mail'";
+// $result3 = mysqli_query($connection, $query3);
 
 $query4 = "select * from child_report WHERE MidwifeEmail = '$mail'";
 $result4 = mysqli_query($connection, $query4);
@@ -159,16 +159,16 @@ $result4 = mysqli_query($connection, $query4);
 
                 <tbody>
                     <?php
-                    while ($rows = mysqli_fetch_assoc($result3)) {
-                        if (((strtotime($rows['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 14) && ((strtotime($rows['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 > 0)) {
+                    foreach ($childReportDetails as $item){
+                        if (((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 14) && ((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 > 0)) {
                     ?>
                             <tr>
-                                <td><?php echo $rows['ChildId']; ?></td>
-                                <td><?php echo $rows['Name']; ?></td>
-                                <td><?php echo $rows['NVD']; ?></td>
-                                <td><?php echo $rows['Centre']; ?></td>
+                                <td><?php echo $item['ChildId']; ?></td>
+                                <td><?php echo $item['Name']; ?></td>
+                                <td><?php echo $item['NVD']; ?></td>
+                                <td><?php echo $item['Centre']; ?></td>                        
                             </tr>
-                    <?php
+                    <?php        
                         }
                     }
                     ?>
@@ -194,14 +194,14 @@ $result4 = mysqli_query($connection, $query4);
 
                 <tbody>
                     <?php
-                    while ($rows = mysqli_fetch_assoc($result4)) {
-                        if ((strtotime($rows['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 0) {
+                    foreach ($childReportDetails as $item) {
+                        if ((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 0) {
                     ?>
                             <tr>
-                                <td><?php echo $rows['ChildId']; ?></td>
-                                <td><?php echo $rows['Name']; ?></td>
-                                <td><?php echo $rows['NVD']; ?></td>
-                                <td><?php echo $rows['Centre']; ?></td>
+                                <td><?php echo $item['ChildId']; ?></td>
+                                <td><?php echo $item['Name']; ?></td>
+                                <td><?php echo $item['NVD']; ?></td>
+                                <td><?php echo $item['Centre']; ?></td>
                             </tr>
                     <?php
                         }
