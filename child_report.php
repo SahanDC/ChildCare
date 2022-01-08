@@ -83,6 +83,7 @@ include('controllers/childreport.php');
                 <div class="col-xl-2 h4"><?php echo $birth_place ?></div>
             </div>
         </div>
+        <hr style="margin-top: 5%; border: 1px solid blue;">
 
         <!-- ----------------------------------------------------------------------Manager ----------------------------------------------------------------------------->
         <?php
@@ -215,7 +216,7 @@ include('controllers/childreport.php');
                         </tbody>
                     </table>
                 </div>
-
+                <hr style="margin-top: 5%; border: 1px solid blue;">
                 <?php
                 if (!strcmp($user, "midwife")) { ?>
                     <form action='child_report.php' method='post' id="weightTable">
