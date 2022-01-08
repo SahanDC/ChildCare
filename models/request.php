@@ -22,6 +22,19 @@ class Request
     public function setStatus($status)
     {
         $this->status = $status;
+        switch ($status) {
+            case $status instanceof Valid:
+                $st = 'Valid';
+                break;
+            case $status instanceof Invalid:
+                $st = 'Invalid';
+                break;
+            case $status instanceof Created:
+                $st = 'Created';
+                break;
+        }
+
+        return $this->connection->query("UPDATE request set status = '$st' where id = $this->id");
     }
 
     public function getRequestById($id)
@@ -88,8 +101,8 @@ class Request
             $this->status = new Invalid();
         }
 
-        $this->status->validate($this);
-        return $this->connection->query("UPDATE request set status = 'Valid' where id = $id");;
+        return $this->status->validate($this);
+        // return $this->connection->query("UPDATE request set status = 'Valid' where id = $id");;
     }
 
     public function declineDocuments($id)
@@ -109,8 +122,8 @@ class Request
             $this->status = new Valid();
         }
 
-        $this->status->decline($this);
-        return $this->connection->query("UPDATE request set status = 'Invalid' where id = $id");
+        return $this->status->decline($this);
+        // return $this->connection->query("UPDATE request set status = 'Invalid' where id = $id");
     }
 
     public function createReport($id)
@@ -122,15 +135,10 @@ class Request
         $this->clinic_card = $request['clinic_card'];
         $this->uploaded_on = $request['uploaded_on'];
 
-        if ($request['status'] == 'New') {
-            $this->status = new NewRequest();
-        }
-
         if ($request['status'] == 'Valid') {
             $this->status = new Valid();
+            $this->status->createReport($this);
         }
-
-        $this->status->createReport($this);
         // return $this->connection->query("UPDATE request set status = 'Invalid' where id = $id");
     }
 }
@@ -147,15 +155,15 @@ class NewRequest extends State
 {
     public function validate($request)
     {
-        $request->setStatus(new Valid());
+        return $request->setStatus(new Valid());
     }
     public function decline($request)
     {
-        $request->setStatus(new Invalid());
+        return $request->setStatus(new Invalid());
     }
     public function createReport($request)
     {
-        $request->setStatus(new Created());
+        echo "transition cannot be done from current state";
     }
 }
 class Created extends State
@@ -177,7 +185,7 @@ class Invalid extends State
 {
     public function validate($request)
     {
-        $request->setStatus(new Valid());
+        return $request->setStatus(new Valid());
     }
     public function decline($request)
     {
@@ -185,7 +193,7 @@ class Invalid extends State
     }
     public function createReport($request)
     {
-        $request->setStatus(new Created());
+        echo "transition cannot be done from current state";
     }
 }
 class Valid extends State
@@ -196,10 +204,10 @@ class Valid extends State
     }
     public function decline($request)
     {
-        $request->setStatus(new Invalid());
+        return $request->setStatus(new Invalid());
     }
     public function createReport($request)
     {
-        $request->setStatus(new Created());
+        return $request->setStatus(new Created());
     }
 }
