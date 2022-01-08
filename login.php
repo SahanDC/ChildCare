@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="css/loginStyle.css">
+    
     <title>Login</title>
     <script>
         // var popup_msg = document.getElementById("popup_msg");
@@ -20,18 +21,19 @@
 
 <body>
 
-    <section class="min-vh-100 d-flex align-items-center" style="background-color: #eee;">
+    <section class="min-vh-100 align-items-right">
         <div class="container v-100">
-            <div class="row d-flex justify-content-center align-items-center h-100 my-3">
-                <div class="col-lg-12 col-xl-11">
+            <div class="row justify-content-right align-items-right h-100 my-3">
+                <div class="col-lg-5 col-xl-5"></div>
+                <div class="col-lg-6 col-xl-6">
                     <div class="card text-black" style="border-radius: 25px;">
                         <div class="card-body p-md-5">
                             <div class="row justify-content-center">
-                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <div class="col-md-10 col-lg-10 col-xl-10 order-2 order-lg-1">
 
-                                    <p class=" text-center h4 fw-bold mb-4 mx-1 mx-md-4"><a class="text-dark bor" href="./index.php" style="text-decoration: none;">Child Care</a></p>
+                                    <p class=" text-center h4 fw-bold mb-4 mx-1 mx-md-4"><a class="text-dark bor" href="./index.php">Child Care Management System</a></p>
 
-                                    <form class="row g-3" action="" method="post">
+                                    <form class="row g-3" id="form-top" action="" method="post">
                                         <!-- <h4><a class="text-dark" href="./index.php" style="text-decoration: none;">Child Care</a></h4> -->
 
                                         <?php if ($accountNotExistErr || $emailPwdErr || $verificationRequiredErr) {
@@ -39,9 +41,8 @@
                                             echo $emailPwdErr;
                                             echo $verificationRequiredErr;
                                         } else {
-                                        ?> <div class="border rounded border-dark alert alert-light text-center" style="display:inline-block;">
-                                                Welcome to child care!
-                                            </div>
+                                        ?> 
+                                        <!-- <div class="border rounded border-dark alert alert-light text-center" id="welcome"> Welcome to child care! </div> -->
                                         <?php } ?>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
@@ -60,18 +61,17 @@
 
 
                                         <!-- Button trigger modal -->
-                                        <button type="submit" name="login" id="sign_in" class="text-dark border-light btn btn-dark btn-lg btn-block" style="background-color: #e3f2fd">Sign
-                                            in</button>
+                                        <button type="submit" name="login" id="sign_in" class="text-dark border-light btn btn-dark btn-lg btn-block" style="background-color: #e3f2fd">Log In</button>
 
 
-                                        <a href="./signup.php" style="text-decoration: none;"> Haven't an account?</a>
+                                        <a href="./signup.php"> Haven't an account?</a>
                                     </form>
                                 </div>
-                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                <!-- <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
                                     <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png" class="img-fluid" alt="Sample image">
 
-                                </div>
+                                </div> -->
                                 <!-- Modal -->
                                 <div class="modal-fullscreen fade d-none" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" id="popup_msg">
                                     <div class="modal-dialog">
