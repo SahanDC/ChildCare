@@ -220,12 +220,3 @@ $result4 = mysqli_query($connection, $query4);
 </body>
 
 </html>
-
-<!-- <?php
-        $datetime1 = strtotime('2021-11-16');
-        $datetime2 = strtotime('2021-11-28');
-
-        $secs = $datetime2 - $datetime1; // == <seconds between the two times>
-        $days = $secs / 86400;
-        echo $days;
-        ?> -->
