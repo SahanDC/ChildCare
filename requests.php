@@ -9,14 +9,19 @@ if ($_SESSION['role'] == 'parent') {
 if ($_SESSION['role'] == 'midwife') {
     header("Location: ./midwife.php");
 }
-if (isset($_POST['invalid'])) {
-    $connection->query("UPDATE request set status = 'Invalid' where id = '{$_POST['reqId']}'");
-}
-if (isset($_POST['valid'])) {
-    $connection->query("UPDATE request set status = 'Valid' where id = '{$_POST['reqId']}'");
-}
 
 $requestObj = new Request($connection);
+
+if (isset($_POST['valid'])) {
+    $requestObj->validateDocuments($_POST['reqId']);
+    // $connection->query("UPDATE request set status = 'Valid' where id = '{$_POST['reqId']}'");
+}
+
+if (isset($_POST['invalid'])) {
+    $requestObj->declineDocuments($_POST['reqId']);
+    // $connection->query("UPDATE request set status = 'Invalid' where id = '{$_POST['reqId']}'");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +119,7 @@ $requestObj = new Request($connection);
         </div>
     </div>
 
-    <div class="container-xl mt-5">
+    <div class="container-xl mt-5 mb-5">
 
         <?php $requests = $requestObj->getRequests();
         $count = 0 ?>

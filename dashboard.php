@@ -1,6 +1,7 @@
 <?php include('config/db.php');
 include('controllers/upload.php');
 require_once('models/request.php');
+require_once('models/parent.php');
 
 if (!isset($_SESSION['login'])) {
     header("Location: ./login.php");
@@ -12,7 +13,7 @@ if ($_SESSION['role'] == 'midwife') {
     header("Location: ./midwife.php");
 }
 
-$requestObj = new Request($connection);
+$parentObj = new User_Parent($connection);
 ?>
 
 
@@ -128,7 +129,7 @@ $requestObj = new Request($connection);
             <div class="col-xl-6 col-lg-6 order-2 order-lg-2 px-4">
                 <div class="container-xl mt-3 mb-3">
                     <!-- {$_SESSION["id"]} -->
-                    <?php $requests = $requestObj->getRequests($_SESSION["id"]);
+                    <?php $requests = $parentObj->getRequestsByParent($_SESSION["id"]);
                     $count = 0; ?>
                     <h5 class="row justify-content-center mb-3">Child Report Requests</h5>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -139,6 +140,7 @@ $requestObj = new Request($connection);
                                 <h2 class="accordion-header" id="flush-heading<?= $count ?>">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne<?= $count ?>" aria-expanded="false" aria-controls="flush-collapseOne<?= $count ?>">
                                         <?php $query = $connection->query("SELECT * FROM request where id = '{$request['id']}'");
+                                        // $request = $requestObj->getRequestById($requestx['id']);
                                         $requestID = $request['id'];
                                         // $row = $query->fetch_assoc();
 
@@ -283,75 +285,79 @@ $requestObj = new Request($connection);
 
             <div class="col-xl-6 col-lg-6 order-1 order-lg-1 px-4 justify-content-center">
                 <div class="row justify-content-left mt-3">
-                    <?php $child_reports = $connection->query("SELECT * FROM child_report WHERE GuardianId = '{$_SESSION["id"]}' ORDER BY Birthday ASC");
-                    if ($child_reports->num_rows > 0) { ?>
-                        <h5 class="row justify-content-center mb-3">Child Reports</h5>
-                        <?php $i = 0;
-                        while ($row = $child_reports->fetch_assoc()) {
-                            $i += 1; ?>
-                            <div class="col-sm-12 col-md-6 col-lg-12 p-1">
+                    <?php $reports = $parentObj->getReportsByParent($_SESSION["id"]);
+                    $count = 0
+                    // child_reports = $connection->query("SELECT * FROM child_report WHERE GuardianId = '{$_SESSION["id"]}' ORDER BY Birthday ASC");
+                    // if ($child_reports->num_rows > 0) { 
+                    ?>
+                    <h5 class="row justify-content-center mb-3">Child Reports</h5>
+                    <?php
+                    // while ($row = $child_reports->fetch_assoc()) {
+                    foreach ($reports as $row) {
+                        $count += 1; ?>
+                        <div class="col-sm-12 col-md-6 col-lg-12 p-1">
 
-                                <div class="card mb-3">
-                                    <!-- <h5 class="card-header bg-white text-dark d-flex justify-content-center p-2"><?php echo $row["Name"] ?></h5> -->
-                                    <div class="card-body bg-light">
-                                        <!-- border border-1 border-light rounded-3 -->
-                                        <!-- <h5 class="card-title row justify-content-center my-2 p-2"></h5> -->
-                                        <?php if ($row['NVD'] != '') { ?>
+                            <div class="card mb-3">
+                                <!-- <h5 class="card-header bg-white text-dark d-flex justify-content-center p-2"><?php echo $row["Name"] ?></h5> -->
+                                <div class="card-body bg-light">
+                                    <!-- border border-1 border-light rounded-3 -->
+                                    <!-- <h5 class="card-title row justify-content-center my-2 p-2"></h5> -->
+                                    <?php if ($row['NVD'] != '') { ?>
 
-                                            <?php if (0 > (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
-                                                <p class="alert-auto alert-danger text-center p-1 mb-0">Vaccination on <?php echo $row['NVD']; ?> missed</p>
-                                            <?php } ?>
-                                            <?php if (14 >= (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 && 0 <= (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
-                                                <p class="alert-auto alert-warning text-center p-1 mb-0"><?php echo (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400;
-                                                                                                            ?> days more for next vaccination</p>
-                                            <?php } ?>
-                                            <?php if (14 < (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
-                                                <p class="alert-auto alert-success text-center p-1 mb-0"><?php echo (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400;
-                                                                                                            ?> days more for next vaccination</p>
-                                            <?php } ?>
-                                        <?php } else { ?>
-                                            <p class="alert alert-light text-center"></p>
+                                        <?php if (0 > (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
+                                            <p class="alert-auto alert-danger text-center p-1 mb-0">Vaccination on <?php echo $row['NVD']; ?> missed</p>
                                         <?php } ?>
-                                        <?php
-                                        if ($row['Weight'] != '' || $row['Weight'] != NULL) {
-                                            $split = explode(',', $row['Weight']);
-                                            $last_weight_record = end($split);
-                                            $split = explode('_', $last_weight_record);
-                                            $last_weight_date = array_shift($split);
-
-                                            $next_weight_date = date("Y-m-d", strtotime($last_weight_date . ' + 28 days')); ?>
-
-                                            <?php if (0 > (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
-                                                <p class="alert-auto alert-danger text-center p-1">Weight recording on <?php echo $next_weight_date; ?> missed</p>
-                                            <?php } ?>
-                                            <?php if (14 >= (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400 && 0 <= (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
-                                                <p class="alert-auto alert-warning text-center p-1"><?php echo (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400;
-                                                                                                    ?> days more to record weight</p>
-                                            <?php } ?>
-                                            <?php if (14 < (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
-                                                <p class="alert-auto alert-success text-center p-1"><?php echo (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400;
-                                                                                                    ?> days more to record weight</p>
-                                            <?php } ?>
-                                        <?php } else { ?>
-                                            <p class="alert alert-light text-center"></p>
+                                        <?php if (14 >= (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 && 0 <= (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
+                                            <p class="alert-auto alert-warning text-center p-1 mb-0"><?php echo (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400;
+                                                                                                        ?> days more for next vaccination</p>
                                         <?php } ?>
-                                        <p class="card-text m-0">Name: <?php echo $row["Name"] ?></p>
-                                        <p class="card-text m-0">Birthdate: <?php echo $row["Birthday"] ?></p>
-                                        <p class="card-text m-0">Midwife: <?php echo $row["MidwifeEmail"] ?></p>
-                                        <p class="card-text m-0">Centre: <?php echo $row["Centre"] ?></p>
-                                        <p class="card-text m-0">Next vaccination: <?php echo $row["NVD"] ?></p>
-                                        <p class="card-text m-0">Next weight recording: <?php echo $next_weight_date ?></p>
+                                        <?php if (14 < (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
+                                            <p class="alert-auto alert-success text-center p-1 mb-0"><?php echo (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400;
+                                                                                                        ?> days more for next vaccination</p>
+                                        <?php } ?>
+                                    <?php } else { ?>
+                                        <p class="alert alert-light text-center"></p>
+                                    <?php } ?>
+                                    <?php
+                                    if ($row['Weight'] != '' || $row['Weight'] != NULL) {
+                                        $split = explode(',', $row['Weight']);
+                                        $last_weight_record = end($split);
+                                        $split = explode('_', $last_weight_record);
+                                        $last_weight_date = array_shift($split);
 
-                                        <div class="text-center mt-2">
-                                            <a href="./child_report.php/?ChildId=<?php echo $row["ChildId"] ?>" class="btn btn-outline-dark">View Child Report</a>
-                                        </div>
+                                        $next_weight_date = date("Y-m-d", strtotime($last_weight_date . ' + 28 days')); ?>
+
+                                        <?php if (0 > (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
+                                            <p class="alert-auto alert-danger text-center p-1">Weight recording on <?php echo $next_weight_date; ?> missed</p>
+                                        <?php } ?>
+                                        <?php if (14 >= (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400 && 0 <= (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
+                                            <p class="alert-auto alert-warning text-center p-1"><?php echo (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400;
+                                                                                                ?> days more to record weight</p>
+                                        <?php } ?>
+                                        <?php if (14 < (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
+                                            <p class="alert-auto alert-success text-center p-1"><?php echo (strtotime($next_weight_date) - strtotime(date("Y-m-d", time()))) / 86400;
+                                                                                                ?> days more to record weight</p>
+                                        <?php } ?>
+                                    <?php } else { ?>
+                                        <p class="alert alert-light text-center"></p>
+                                    <?php } ?>
+                                    <p class="card-text m-0">Name: <?php echo $row["Name"] ?></p>
+                                    <p class="card-text m-0">Birthdate: <?php echo $row["Birthday"] ?></p>
+                                    <p class="card-text m-0">Midwife: <?php echo $row["MidwifeEmail"] ?></p>
+                                    <p class="card-text m-0">Centre: <?php echo $row["Centre"] ?></p>
+                                    <p class="card-text m-0">Next vaccination: <?php echo $row["NVD"] ?></p>
+                                    <p class="card-text m-0">Next weight recording: <?php echo $next_weight_date ?></p>
+
+                                    <div class="text-center mt-2">
+                                        <a href="./child_report.php/?ChildId=<?php echo $row["ChildId"] ?>" class="btn btn-outline-dark">View Child Report</a>
                                     </div>
                                 </div>
-
                             </div>
-                        <?php
-                        }
-                    } else { ?>
+
+                        </div>
+                    <?php
+                    }
+                    if ($count == 0) { ?>
                         <div class="row justify-content-center">
 
                             No child reports yet.
