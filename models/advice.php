@@ -46,6 +46,7 @@
                     array_push($requests, $row);
                     }
             }
+            echo $requests;
             return $requests;
 
         }

@@ -49,11 +49,10 @@ class Midwife{
             
             echo "search<br>";
             $search = mysqli_real_escape_string($this->connection, $search_);
-            $query = $this->connection->query("SELECT * FROM midwife WHERE (id LIKE '%{$search}%'or areas '%{$search}%' OR email LIKE '%{$search}% )");
+            $query = $this->connection->query("SELECT * FROM midwife WHERE (id LIKE '%{$search}%'or areas '%{$search}%' OR email LIKE '%{$search}% );");
             echo ("query");
         } else {
-           
-            $query = $this->connection->query("SELECT * FROM midwife ");
+            $query = $this->connection->query("SELECT * FROM midwife ;");
         }
         
         while ($row = $query->fetch_assoc()) {
