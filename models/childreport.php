@@ -226,6 +226,7 @@
             array_push($this->Errors, $field_name . " is too long.");
         }
     }
+    
 
 //----------------------database access functions--------------------------------------
 

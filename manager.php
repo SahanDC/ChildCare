@@ -1,4 +1,6 @@
 <?php include('config/db.php');
+include('models/midwife.php');
+
 if (!isset($_SESSION['login'])) {
   header("Location: ./login.php");
 }
@@ -7,7 +9,13 @@ if ($_SESSION['role'] == 'parent') {
 }
 if ($_SESSION['role'] == 'midwife') {
   header("Location: ./midwife.php");
-} ?>
+} 
+$search = '';
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];}
+$midwifeObject= new Midwife($connection);
+$midwifeList=$midwifeObject-> getDetails();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -208,8 +216,9 @@ if ($_SESSION['role'] == 'midwife') {
             <form action="manager.php" method="get">
               <div class="form">
                 <i class="fa fa-search"></i>
-                  <input type="text" class="form-control form-input" placeholder="Search by name, id, center, areas..." autofocus name="search" > <span class="left-pan"><i class="fa fa-microphone"></i></span>
-                  
+                  <input type="text" class="form-control form-input" name='search' placeholder="Search by name, id, center, areas..." autofocus name="search" > <span class="left-pan"><i class="fa fa-microphone"></i></span>
+                  <!-- <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" style="float: left; width: 50%" value="<?php echo $search; ?>" autofocus> -->
+              
                 </div>
             </form>
             
@@ -232,12 +241,26 @@ if ($_SESSION['role'] == 'midwife') {
       <div class="col-3 themed-grid-col">AREAS</div>
     </div>
     <?php
+    $midwifeObj2 = new Midwife($connection);
+    // $childReportDetails = array();
+    $childReportDetails = $midwifeObj2->getD($search);
+    foreach ($childReportDetails as $midwife) { ?>
+      <div class="row mb-4">
+          <div class="col-3 themed-grid-col"><?php echo $midwife['id'];?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife['email'];?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife['centre'];?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife['areas'];?></div>
+        </div>
+      <?php
+    }
     $search='';
     if(isset($_GET['search'])){
       
-      
+      //$midwifeList=$midwifeObject-> getD($_GET['search']);
       $search=mysqli_real_escape_string($connection,$_GET['search']);
       $midwife_set="SELECT * FROM midwife WHERE (email LIKE '%{$search}%' or id LIKE '%{$search}%') ORDER BY id";
+      $midwife_set1=array();
+
       
     }else{
       
@@ -245,7 +268,15 @@ if ($_SESSION['role'] == 'midwife') {
     }
 
 
-     //$midwife_set = "SELECT * FROM midwife ";
+    foreach ($midwifeList as $midwife) { ?>
+      <!-- <div class="row mb-4">
+          <div class="col-3 themed-grid-col"><?php echo $midwife['id'];?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife['email'];?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife['centre'];?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife['areas'];?></div>
+        </div> -->
+      <?php
+    }
     $midwife = mysqli_query($connection, $midwife_set);
     if ($midwife) {
       
@@ -253,12 +284,12 @@ if ($_SESSION['role'] == 'midwife') {
       while ($records = mysqli_fetch_assoc($midwife)) {
     ?>
         
-        <div class="row mb-4">
+        <!-- <div class="row mb-4">
           <div class="col-3 themed-grid-col"><?php echo $records['id'];?></div>
           <div class="col-3 themed-grid-col"><?php echo $records['email'];?></div>
           <div class="col-3 themed-grid-col"><?php echo $records['centre'];?></div>
           <div class="col-3 themed-grid-col"><?php echo $records['areas'];?></div>
-        </div>
+        </div> -->
 
     <?php
       }

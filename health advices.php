@@ -1,37 +1,6 @@
-<?php require_once('config/db.php') ?>
-<?php
-$advice_topic = "advice 1";
-$advice_content = "dknnnnnnjdkjdgjdljggjdlgdljls;ljgdsdsbnbnbbnfbn
-  // dmlddlndlnbdlbndlkbndlbnbbd;bnbkdbnd;bdbn;dbdnbojbdsvsm;vsdvm
-  // dkndvdnvdkvndnvdvdvnv dvndl;vnd;vndnbd;dbnd;blldbndbnb;dm;vcl;ml
-  // mvmdlvmdvlmdlvmdlvmdl;vmdvmd;vlmdvldldvdlvmdmvdmldldmvldmvdvldvmdl";
-$is_deleted = 0;
-$query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topic}','{$advice_content}',{$is_deleted})";
-# $result=mysqli_query($connection,$query);
-?>
-<!--?php
-  // if($result){
-  //   echo "added 1 record";
-  // }
-  // else{
-  //   echo "unsuccessful";
-  // }
-  // $advice_set="SELECT * FROM advices";
-  // $result_advices=mysqli_query($connection,$advice_set);
-  // if ($result_advices){
-  //   echo mysqli_num_rows($result_advices);
-  //   $records=mysqli_fetch_assoc($result_advices);
-  //   echo "<pre>";
-  //   print_r($records);
-  //   echo "</pre>";
-  //   while ($records=mysqli_fetch_assoc($result_advices)){
-  //     echo "<pre>";
-  //     print_r($records);
-  //     echo "</pre>";
-  //   }
-  // }
+<?php require_once('config/db.php');
+require_once('models/advice.php'); ?>
 
-  ?> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -149,6 +118,7 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
   <br>
   <!--Slider-->
   <div class="container">
+    <div class="container">
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -160,7 +130,7 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="#777" />
         </svg>
-        <img class="d-block w-100" src="img/high3.jpg" alt="Third slide">
+        <img class="d-block w-100" src="img/immunation.jpg" alt="Third slide">
         <div class="container" style="background-color: red;">
           <div class="carousel-caption text-start">
             <h1 style="color: black;">Young children’s health: what to expect</h1>
@@ -173,7 +143,7 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="#777" />
         </svg>
-        <img class="d-block w-100" src="img/high 2.jpg" alt="Third slide">
+        <img class="d-block w-100" src="img/1234.jfif" alt="Third slide">
         <div class="container">
           <div class="carousel-caption">
             <h1>Make Childrens Happy.</h1>
@@ -186,7 +156,7 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="#777" />
         </svg>
-        <img class="d-block w-100" src="img/high1.jpg" alt="Third slide">
+        <img class="d-block w-100" src="img/122.jfif" alt="Third slide">
         <div class="container">
           <div class="carousel-caption text-end">
             <h1>Eat Balanced Meal.</h1>
@@ -204,6 +174,7 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
+  </div>
   </div>
   </div>
   <!--slider finish-->
@@ -245,16 +216,16 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
     $topic = $_POST['topic'];
     $content = $_POST['content'];
     $is_deleted = 0;
+    $requestObj->addAdvice($topic,$content);
+    // $query = "INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$is_deleted})";
 
-    $query = "INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$is_deleted})";
+    // $insert = mysqli_query($connection, $query);
 
-    $insert = mysqli_query($connection, $query);
-
-    if (!$insert) {
-      echo mysqli_error($connection);
-    } else {
-      echo "";
-    }
+    // if (!$insert) {
+    //   echo mysqli_error($connection);
+    // } else {
+    //   echo "";
+    // }
   }
 
   ?>
@@ -273,7 +244,11 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
 
         Successful parenting is not about achieving perfection. But it doesn’t mean that we shouldn’t work towards that goal. Set high standards for ourselves first and then our children second. We serve as role models for them.
 
-        Here are 10 tips on learning good parenting skills and avoiding bad parenting. Many of them are not quick nor easy. And probably no one can do all of them all of the time. But if you can keep working on the tips in this parenting guide, even though you may only do part of these some of the time, you will still be moving in the right direction.
+        Here are 10 tips on learning good parenting skills and avoiding bad parenting. Many of them are not 
+        
+        quick nor easy. And probably no one can do all of them all of the time. But if you can keep working 
+        on the tips in this parenting guide, even though you may only do part of these some of the time, you will 
+        still be moving in the right direction.
 
       </strong>.
     </p>
@@ -281,28 +256,43 @@ $query = "INSERT INTO advices (topic, content, isdeleted) VALUES ('{$advice_topi
 
     $advice_set = "SELECT * FROM advice WHERE isdeleted=0";
     $result_advices = mysqli_query($connection, $advice_set);
-    if ($result_advices) {
-      #echo mysqli_num_rows($result_advices);
-      #$records=mysqli_fetch_assoc($result_advices);
-
-      while ($records = mysqli_fetch_assoc($result_advices)) {
-    ?>
+    
+    $requests = $requestObj->get_advices();
+    
+    foreach ($requests as $request) { 
+        
+        ?>
         <div class="row mb-3">
-          <div class="col-md-4 themed-grid-col"><?php echo $records['topic']; ?></div>
+          <div class="col-md-4 themed-grid-col"><?php echo $request['topic']; ?></div>
           <div class="col-md-8 themed-grid-col">
-            <p><?php echo $records['content'];
+            <p><?php echo $request['content'];
+             
                  ?></p>
             <div class="container">
 
-              <button type="button" class="btn btn-secondary"><a href="delete advices.php?id=<?php echo $records['id']; ?>">DELETE</a> </button>
-              <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $records['id']; ?>">EDIT</a> </button>
+               <?php
+                  
+                  if(isset($_POST['button1'])) {
+                      $requestObj->deleteAdvice($request['id']);
+                      
+                  }
+                             
+                  ?>
+                  <form method="post">
+                    <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $request['id']; ?>">EDIT</a> </button>
+                    <input type="submit" name="button1" class="btn btn-secondary" value="DELETE">
+                    
+                      
+                    
+                  </form>
             </div>
           </div>
         </div>
-    <?php
-      }
+        
+    <?php 
     }
     ?>
+
 
 
 

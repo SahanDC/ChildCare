@@ -11,7 +11,7 @@
 
     if($del)
     {
-        
+        echo "1111111111111111111111111111111111111111111111111111111111111";
         header("location:health advices.php"); // redirects to all records page
         exit;	
     }

@@ -1,9 +1,7 @@
 <?php
     
-    include_once('dbh.class.php');
+    
     class Advice{
-      
-
         public $topic;
         public $id;
         public $content;
@@ -38,29 +36,77 @@
         function get_isdeleted(){
             return $this->isdeleted;
         }
-        function get_advice(){
+        function get_advices(){
+            $query = $this->connection->query("SELECT * FROM advice ORDER BY id  ");
+            $requests = array();
+            while ($row = $query->fetch_assoc()) {
+                
+                if($row['isdeleted']==0)
+                    {
+                    array_push($requests, $row);
+                    }
+            }
+            return $requests;
+
+        }
+        function editAdvice($id,$content,$topic){
+            $query=$this->connection->query("UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} limit 1");
+            echo "eeee";
              
-            $sql = 'SELECT * FROM advices WHERE Id= ?;';
-            $content = $this->database->connect()->prepare($sql);
-            if (!$content->execute(array($this->Id))) {
-                $content=null;
-                exit();
-            }
-
-            if($content->rowCount() == 0){
-                $content = null;
-                exit();
-            }
-            $details = $content->fetch();
-            $this->topic = $details["topic"];
-            $this->content=$details["content"];
-            $this->id=$details["id"];
-            $this->isdeleted->$details["isdeleted"];
+             if(!$query)
+             {
+                 echo mysqli_error($this->connection);
+             }
+             else
+             {  
+                header("location:health advices.php"); // redirects to all records page
+                 exit;	
+                 echo "";
+             }
 
         }
-        function editAdvice($content,$topic){
-            $sql = 'SELECT * FROM advices WHERE Id = {$this->id}';
-            $content = $this->database->connect()->prepare($sql);
+        function deleteAdvice($id){
+            $query=$this->connection->query("UPDATE advice SET isdeleted=1 WHERE id= {$id} ");
+           
+        
+            if($query)
+            {
+                
+                header("location:health advices.php"); // redirects to all records page
+                exit;	
+            }
+            else
+            {   echo mysqli_connect_error();
+                echo "Error deleting record";
+                echo mysqli_connect_error(); // display error message if not delete
+            }
 
         }
+
+        function addAdvice($topic,$content)
+        {
+            $query = $this->connection->query("INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',0)");
+            if (!$query) {
+            echo mysqli_error($this->connection);
+            } 
+            else {
+            echo ""; }
+        }
+
+
+        //thiis is not completed
+        function search($term){
+            $query = $this->connection->query("SELECT * FROM advice ORDER BY id  ");
+            $requests = array();
+            while ($row = $query->fetch_assoc()) {
+                
+                if($row['isdeleted']==0)
+                    {
+                    array_push($requests, $row);
+                    }
+            }
+            return $requests;
+        }
+
+        
     }

@@ -41,5 +41,26 @@ class Midwife{
         }
         return $childReportDetails;
     }
+
+    //this is not completed
+    public function getD($search_){
+        $advices = array();
+        if ($search_ !='') {
+            
+            echo "search<br>";
+            $search = mysqli_real_escape_string($this->connection, $search_);
+            $query = $this->connection->query("SELECT * FROM midwife WHERE (id LIKE '%{$search}%'or areas '%{$search}%' OR email LIKE '%{$search}% )");
+            echo ("query");
+        } else {
+           
+            $query = $this->connection->query("SELECT * FROM midwife ");
+        }
+        
+        while ($row = $query->fetch_assoc()) {
+            array_push($advices, $row);
+            
+        }
+        return $advices;
+    }
 }
 ?>
