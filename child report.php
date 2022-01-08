@@ -1,4 +1,7 @@
-<?php include('config/db.php');
+<?php 
+include('config/db.php');
+include_once('controllers/autoloader.php');
+
 if (!isset($_SESSION['login'])) {
   header("Location: ./login.php");
 }
@@ -7,7 +10,33 @@ if ($_SESSION['role'] == 'parent') {
 }
 if ($_SESSION['role'] == 'midwife') {
   header("Location: ./midwife.php");
-} ?>
+}
+
+$search='';
+
+if (isset($_GET['search'])) {
+  $search = $_GET['search'];
+}
+
+$manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
+$ChildReports = $manager->getChildreports($search);
+
+
+
+    // if(isset($_GET['search'])){
+      
+      
+    //   $search=mysqli_real_escape_string($connection,$_GET['search']);
+    //   $report_set="SELECT * FROM child_report WHERE (name LIKE '%{$search}%' or ChildId LIKE '%{$search}%') ORDER BY ChildId";
+      
+    // }else{
+      
+    //   $report_set="SELECT * FROM child_report ";
+    // }
+
+    // $report = mysqli_query($connection, $report_set);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -113,7 +142,7 @@ if ($_SESSION['role'] == 'midwife') {
             <form action="child report.php" method="get">
               <div class="form">
                 <i class="fa fa-search"></i>
-                  <input type="text" class="form-control form-input" placeholder="Search by name, id, ..." autofocus name="search" > 
+                  <input type="text" class="form-control form-input" placeholder="Search by name, id, ..." autofocus name="search" value = '<?php echo $search?>' > 
                   <span class="left-pan"><i class="fa fa-microphone"></i></span>
                   
                 </div>
@@ -137,39 +166,24 @@ if ($_SESSION['role'] == 'midwife') {
       <div class="col-3 themed-grid-col">CENTER</div>
       <div class="col-3 themed-grid-col">AREAS</div>
     </div>
-    <?php
-    $search='';
-    if(isset($_GET['search'])){
-      
-      
-      $search=mysqli_real_escape_string($connection,$_GET['search']);
-      $report_set="SELECT * FROM child_report WHERE (name LIKE '%{$search}%' or ChildId LIKE '%{$search}%') ORDER BY ChildId";
-      
-    }else{
-      
-      $report_set="SELECT * FROM child_report ";
-    }
 
-
-     
-    $report = mysqli_query($connection, $report_set);
-    if ($report) {
-      
-
-      while ($records = mysqli_fetch_assoc($report)) {
+    <?php if(!empty($ChildReports)){
+      foreach ($ChildReports as $id => $ChildReport) { 
     ?>
-        <a href="child_report.php?ChildId= <?php echo $records['ChildId']; ?>">
+        <a href="child_report.php?ChildId= <?php echo $ChildReport->getChildId(); ?>">
         <div class="row mb-4">
-          <div class="col-3 themed-grid-col"><?php echo $records['ChildId']; ?></a></div>
-          <div class="col-3 themed-grid-col"><?php echo $records['Name'];?></div>
-          <div class="col-3 themed-grid-col"><?php echo $records['Centre'];?></div>
-          <div class="col-3 themed-grid-col"><?php echo $records['Area'];?></div> 
+          <div class="col-3 themed-grid-col"><?php echo $ChildReport->getChildId(); ?></a></div>
+          <div class="col-3 themed-grid-col"><?php echo $ChildReport->getName();?></div>
+          <div class="col-3 themed-grid-col"><?php echo $ChildReport->getCentre();?></div>
+          <div class="col-3 themed-grid-col"><?php echo $ChildReport->getArea();?></div> 
         </div>
       </a>
     <?php
       }
+    }else{
+      echo "NOT FOUND ANY RESULT!";
     }
-     ?>
+    ?>
 </div>
 <!-- content reports finsh -->
 

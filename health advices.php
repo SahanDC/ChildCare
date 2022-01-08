@@ -280,8 +280,8 @@ if(isset($_POST['delete'])) {
               <?php
                   ?>
                   <form method="post">
-                    <button type="button" onclick="addEdit()" class="btn btn-secondary"><a href="update record.php?id=<?php echo $id; ?>">EDIT</a> </button>
-                    <button type="submit" name="delete" class="btn btn-secondary" value='<?php echo $id;?>'>DELETE</button>
+                    <button type="button" onclick="addEdit()" class="btn btn-secondary"><a href="update record.php?id=<?php echo  $advice->get_id(); ?>">EDIT</a> </button>
+                    <button type="submit" name="delete" class="btn btn-secondary" value='<?php echo $advice->get_id();?>'>DELETE</button>
                     
                       
                     

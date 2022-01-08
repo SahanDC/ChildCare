@@ -27,7 +27,6 @@
         }
 
         public function getMidwives($search_){
-            $midwives = array();
             if ($search_ !='') {
                 
                 // echo "search<br>";
@@ -39,12 +38,27 @@
             }
             
             while ($row = $query->fetch_assoc()) {
-                array_push($midwives, $row);
-                
+                $midwife = new Midwife($this->connection);
+                $midwife->setId($row['id']);
+                $midwife->setEmail($row['email']);
+                $midwife->setCentre($row['centre']);
+                $midwife->setArea($row['areas']);
+
+                $this->midwife_array[$row['id']]=$midwife;
             }
             // print_r($midwives);
-            return $midwives;
+            return $this->midwife_array;
             }
+
+        public function addMidwife($email,$centre,$areas,$noc){
+            $query = "INSERT INTO midwife (email,centre,areas,noc) VALUES ('{$email}','{$centre}','{$areas}',{$noc})";
+            $insert = mysqli_query($this->connection, $query);
+            if (!$insert) {
+                echo mysqli_error($this->connection);
+            } else {
+                echo "";
+            }
+        }
 
         public function get_advices(){
             $query = $this->connection->query("SELECT * FROM advice WHERE isdeleted = 0 ORDER BY id ");
@@ -75,5 +89,25 @@
             echo ""; }
         }
 
+        public function getChildreports($search_){
+            if ($search_ !='') {
+                
+                // echo "search<br>";
+                $search = mysqli_real_escape_string($this->connection, $search_);
+                $query = $this->connection->query("SELECT * FROM child_report WHERE (name LIKE '%{$search}%' or ChildId LIKE '%{$search}%') ORDER BY ChildId");
+                // echo ("query");
+            } else {
+                $query = $this->connection->query("SELECT * FROM child_report ");
+            }
+            
+            while ($row = $query->fetch_assoc()) {
+                $childreport = new ChildReport($row['ChildId']);
+                $childreport->addDetails($row);
+
+                $this->childReport_array[$row['ChildId']]=$childreport;
+            }
+            // print_r($midwives);
+            return $this->childReport_array;
+            }
     }
 ?>

@@ -158,24 +158,6 @@ include_once('controllers/manager.php');
       </div>
     </div>
   </div>
-  <?php
-  if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $center = $_POST['center'];
-    $areas=$_POST['area'];
-    $noc=$_POST['noc'];
-    
-
-    $query = "INSERT INTO midwife (email,centre,areas,noc) VALUES ('{$email}','{$center}','{$areas}',{$noc})";
-
-    $insert = mysqli_query($connection, $query);
-
-    if (!$insert) {
-      echo mysqli_error($connection);
-    } else {
-      echo "";
-    }
-  }?>
 
 
 
@@ -197,7 +179,7 @@ include_once('controllers/manager.php');
             <form action="manager.php" method="get">
               <div class="form">
                 <i class="fa fa-search"></i>
-                  <input type="text" class="form-control form-input" name='search' placeholder="Search by name, id, center, areas..." autofocus name="search" > <span class="left-pan"><i class="fa fa-microphone"></i></span>
+                  <input type="text" class="form-control form-input" name='search' placeholder="Search by name, id, center, areas..." autofocus name="search" value = '<?php echo $search?>' > <span class="left-pan"><i class="fa fa-microphone"></i></span>
                   <!-- <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" style="float: left; width: 50%" value="<?php echo $search; ?>" autofocus> -->
               
                 </div>
@@ -225,16 +207,20 @@ include_once('controllers/manager.php');
     ?>
       
       <?php
-
-    foreach ($midwifeList as $midwife) { ?>
-      <div class="row mb-4">
-          <div class="col-3 themed-grid-col"><?php echo $midwife['id'];?></div>
-          <div class="col-3 themed-grid-col"><?php echo $midwife['email'];?></div>
-          <div class="col-3 themed-grid-col"><?php echo $midwife['centre'];?></div>
-          <div class="col-3 themed-grid-col"><?php echo $midwife['areas'];?></div>
+        if(!empty($midwifeList)){
+          foreach ($midwifeList as $id => $midwife) { 
+      ?>
+        <div class="row mb-4">
+          <div class="col-3 themed-grid-col"><?php echo $midwife->getId();?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife->getEmail();?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife->getCentre();?></div>
+          <div class="col-3 themed-grid-col"><?php echo $midwife->getArea();?></div>
         </div>
       <?php
-    }
+          }
+        }else{
+          echo "NOT FOUND ANY RESULT!";
+        }
     ?>
 
   <!--first table finish************************************************************************************************-->

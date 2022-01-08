@@ -33,11 +33,11 @@ class Midwife
         return $this;
     }
 
-    public function getCenter()
+    public function getCentre()
     {
         return $this->center;
     }
-    public function setCenter($center)
+    public function setCentre($center)
     {
         $this->center = $center;
         return $this;
