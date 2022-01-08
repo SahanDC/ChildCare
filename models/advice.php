@@ -94,7 +94,7 @@
         }
 
 
-        //thiis is not completed
+        //thiis is not completed ----  yacai yacai  -----
         function search($term){
             $query = $this->connection->query("SELECT * FROM advice ORDER BY id  ");
             $requests = array();
