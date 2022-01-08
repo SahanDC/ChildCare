@@ -1,4 +1,5 @@
-<?php include('controllers/midwife.php')?>
+<?php include('controllers/midwife.php') ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,7 +71,7 @@
                         <th class="table-primary">Next Vaccination</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                     <?php
                     foreach ($childReportDetails as $item) {
@@ -96,7 +97,7 @@
             <h2>Vaccination within two weeks</h2>
         </div>
         <div class="mb-5 ms-5 me-5">
-            <table class="table table-info table-bordered" width=100% >
+            <table class="table table-info table-bordered" width=100%>
                 <thead>
                     <tr class="table-success">
                         <th class="table-primary">Child Id</th>
@@ -108,7 +109,7 @@
 
                 <tbody>
                     <?php
-                    foreach($childReportDetails as $item) {
+                    foreach ($childReportDetails as $item) {
                         if (((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 14) && ((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 > 0)) {
                     ?>
                             <tr>
@@ -143,7 +144,7 @@
 
                 <tbody>
                     <?php
-                    foreach($childReportDetails as $item) {
+                    foreach ($childReportDetails as $item) {
                         if ((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 0) {
                     ?>
                             <tr>
