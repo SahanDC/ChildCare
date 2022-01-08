@@ -6,73 +6,6 @@ if (isset($_SESSION['login'])) {
 }
 ?>
 
-<!-- <!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/styles_index.css">
-    <title>Child Care</title>
-</head>
-
-<body background="img/doctor.jpg" style="background-size: cover;">
-<header>
-
-<span class="d-block p-4 bg-info text-white" style="background-color:black">
- </span>
-</header>
-    <nav class="navbar navbar-expand-lg navbar-light mb-4" style="background-color: blue">
-        <div class="container">
-            <a class="navbar-brand" href="./index.php">Child Care</a>
-            <br>
-            <br>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse justify-content-right" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">Sign in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="signup.php">Sign up</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-        <br>
-        <br>
-        <h1 style="justify-content: center;">Child Care Managent System</h1>
-    </div>
-
-    <div class="container" style="background-image: img/24093.jpg">
-        <div class="card text-white bg-info mb-3" style="max-width: 40rem; opacity:.5; height:100%">
-            <div class="card-header">Welcome to child care</div>
-            <div class="card-body">
-                <br>
-                <br>
-                <br>
-                <p>Create an account <a href="signup.php">Sign up</a> </p>
-                <p>Already have an account? <a href="login.php">Log in</a></p>
-            </div>
-        </div>
-
-        <h3></h3>
-        <br>
-        
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
-
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -255,7 +188,7 @@ if (isset($_SESSION['login'])) {
         <div class="row">
 
             <div class="col-md-4" data-aos="fade-right">
-                <a href="#" class="logo"><span>C</span>ild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
+                <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur nemo porro quasi minima consequuntur dolorum, quas amet in autem id?</p>
             </div>
 
@@ -278,7 +211,7 @@ if (isset($_SESSION['login'])) {
 
     </div>
 
-    <h1 class="credit text-center mx-auto">created by <span>ALL STARS-GROUP 23</span> | all rights reserved.</h1>
+    <h1 class="credit text-center mx-auto">created by <span>TEAM NINJAS-GROUP 23</span> | all rights reserved.</h1>
 
 </section>
 

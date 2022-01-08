@@ -9,17 +9,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/midwifeStyle.css">
+    <!-- <link rel="stylesheet" href="css/indexStyle.css"> -->
     <title>Midwife Main Page</title>
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <div class="container-fluid">
-            <a class="btn btn-primary" href="#" role="button">See Medical Advice</a>
-            <a class="btn btn-danger" href="./controllers/logout.php" role="button">Log Out</a>
+    <!-- header section starts  -->
+
+    <header style="background-color: rgb(181, 239, 241);">
+        <div class="container" style="background-color: rgb(181, 239, 241);">
+            <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem.</a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="login.php">See Medical Advice</a></li>
+                    <li><a href="./controllers/logout.php">Log Out</a></li>
+                </ul>
+            </nav>
+            <div class="fas fa-bars"></div>
         </div>
-    </nav>
+    </header>
+
+
+
+
+    <!-- header section ends  -->
 
     <div class="container">
         <div class="m-5">
@@ -52,9 +66,13 @@
     <div class="container">
         <div class="mt-5 ms-5 me-5">
             <form class="form-inline" action="midwife.php" method="get">
-                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" style="float: left; width: 50%" value="<?php echo $search; ?>" autofocus>
-                <!-- <div class="mt-1"><button class="btn btn-dark my-sm-0" type="submit">Refresh</button></div> -->
-                <div class="mt-1"><button class="btn btn-light my-sm-0" type="submit"><a href="midwife.php">Refresh</a></button> </div>
+                <div class="type">
+                    <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search by Id, Name, etc." aria-label="Search" value="<?php echo $search; ?>" autofocus>
+                </div>
+
+                <div class="search mt-1">
+                    <button class="btn btn-light my-sm-0" type="submit"><a href="midwife.php">Refresh</a></button>
+                </div>
             </form>
         </div>
     </div>
