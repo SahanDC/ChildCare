@@ -1,10 +1,11 @@
 <?php 
+include("./config/db.php");
 include_once('models/childreport.php');
 if (!isset($_SESSION['login'])) {
     header("Location: ./login.php");
 }
 
-// print_r($_POST);// print_r($_POST);
+//print_r($_POST);// print_r($_POST);
 $ChildId;
 $name = '';
 $age = '';
@@ -45,6 +46,7 @@ if (isset($_POST['edit'])) {
     $edit_comment = trim($_POST['edit_comment']);
     $ChildId = $_POST['ChildId'];
     
+    //echo $edit_NVdate;
     $report1 = new ChildReport($ChildId);
     $report1->editVaccination($edit_vaccine, $edit_date, $edit_place, $edit_NVdate, $edit_comment);
     if ($report1->checkErrors()){
@@ -54,6 +56,7 @@ if (isset($_POST['edit'])) {
         $edit_comment = '';
         $edit_NVdate = '';
     }
+    //print_r($report1->Errors);
 }
 
 if (isset($_POST['add_V'])) {
@@ -66,7 +69,7 @@ if (isset($_POST['add_V'])) {
     $ChildId = $_POST['ChildId'];
     
     $report1 = new ChildReport($ChildId);
-    $report1->editVaccination($add_vaccine, $add_Vdate, $add_place, $add_NVdate, $add_comment);
+    $report1->addVaccination($add_vaccine, $add_Vdate, $add_place, $add_NVdate, $add_comment);
     if ($report1->checkErrors()){
         $add_vaccine = '-1';
         $add_Vdate = '';
@@ -91,15 +94,15 @@ if (isset($_POST['add_W'])) {
 }
 
 if (!empty($ChildId)) {
-    $report1 = new ChildReport($ChildId);
-    $report1->openChildReport();
-    $name = $report1->getName();
-    $age = $report1->getAge();
-    $guardian = $report1->getGuardian();
-    $birth_place = $report1->getBirthPlace();
-    $vaccine_data = $report1->getVaccineData();
-    $last_vaccination = $report1->getLastVaccination();
-    $weights = $report1->getWeights();
+    $report2 = new ChildReport($ChildId);
+    $report2->openChildReport();
+    $name = $report2->getName();
+    $age = $report2->getAge();
+    $guardian = $report2->getGuardian();
+    $birth_place = $report2->getBirthPlace();
+    $vaccine_data = $report2->getVaccineData();
+    $last_vaccination = $report2->getLastVaccination();
+    $weights = $report2->getWeights();
 }
 
 

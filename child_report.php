@@ -1,6 +1,5 @@
 <?php
 include('controllers/childreport.php');
-session_start();
 
 ?>
 
@@ -31,7 +30,7 @@ session_start();
     <div class="row h4 p-1 bg-primary">
         <div class="col-2 text-center  ">Child Report</div>
         <div class="col-8 text-capitalized bg-primary text-center "><?php echo $ChildId ?></div>
-        <div class="col bg-primary text-center"><button type="button"  id = "back" class="btn btn-dark m1-2">BACK</button></div>
+        <div class="col bg-primary text-center"><button type="button" id="back" onclick="goBack()" class="btn btn-dark m1-2">BACK</button></div>
         <div class="col bg-primary text-center"><a href="./controllers/logout.php" class="btn btn-danger m1-2">Log Out</a></div>
     </div>
 
@@ -178,7 +177,7 @@ session_start();
             </thead>
             <tbody class="border-3">
                 <?php
-                    $report1->showVaccinations();
+                    $report2->showVaccinations();
                 ?>
             </tbody>
         </table>
@@ -223,7 +222,7 @@ session_start();
             </thead>
             <tbody class="border-3">
                 <?php
-                    $report1->showWeight();
+                    $report2->showWeight();
                 ?>
             </tbody>
         </table>
@@ -255,7 +254,7 @@ session_start();
                         fill: true
                     },
                     {
-                        data: <?php echo $report1->getWeightArray(); ?>,
+                        data: <?php echo $report2->getWeightArray(); ?>,
                         connectNullData: true,
                         borderColor: "green",
                         label: "weight of the child",
@@ -346,18 +345,23 @@ session_start();
             document.getElementById(index).hidden = true;
         }
     </script>
-
-    <script type="text/javascript">
-        let user =<?php echo json_encode($_SESSION['role']) ;?>;
-            if (user === "midwife") {
-                document.getElementById("back").location.href = "midwife.php";
-            }else if(user === "manager"){
-                document.getElementById("back"),location.href = "child report.php";
-            }else if (user === "parent") {
-                document.getElementById("back").location.href = "dashboard.php"
+<script>
+    document.getElementById("back").onclick = function () {
+        let user =<?php  echo json_encode($_SESSION['role']) ;?>;
+            if (user == "midwife") {
+                location.href = "midwife.php";
+            }else if(user == "manager"){
+                location.href = "child report.php";
+            }else if (user = "parent") {
+                location.href = "dashboard.php";
             }
-</script>
+    };
+    
+        
 
+    // }   
+
+</script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
