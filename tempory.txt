@@ -18,3 +18,7 @@
 
 
     <!-- header section ends  -->
+
+
+
+    ************when go back from childreport of manager goto midwifedetails
