@@ -1,55 +1,4 @@
-<?php include('config/db.php');
-require_once('models/midwife.php');
-if (!isset($_SESSION['login'])) {
-    header("Location: ./login.php");
-}
-if ($_SESSION['role'] == 'manager') {
-    header("Location: ./manager.php");
-}
-if ($_SESSION['role'] == 'parent') {
-    header("Location: ./dashboard.php");
-}
-$search = '';
-if (isset($_GET['search'])) {
-    $search = $_GET['search'];
-}
-$mail = $_SESSION['email'];
-// echo $_SESSION['email'];
-
-$_SESSION['type'] = 'Midwife';
-
-$midwifeObj = new Midwife($connection);
-// $details = array();
-$details = $midwifeObj->getDetails();
-// foreach ($details as $item){
-//     print_r($item); echo "<br>";
-// }
-
-// $query1 = "select * from midwife";
-// $result1 = mysqli_query($connection, $query1);
-
-$midwifeObj2 = new Midwife($connection);
-// $childReportDetails = array();
-$childReportDetails = $midwifeObj2->getChildReportDetails($mail, $search);
-// foreach($childReportDetails as $item2){
-//     print_r($item2); echo "<br>";
-// }
-
-// if (isset($_GET['search'])) {
-//     $search = mysqli_real_escape_string($connection, $_GET['search']);
-//     $query2 = "SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%'))";
-// } else {
-//     $query2 = "select * from child_report WHERE MidwifeEmail = '$mail'";
-// }
-// $result2 = mysqli_query($connection, $query2);
-
-// $query3 = "select * from child_report WHERE MidwifeEmail = '$mail'";
-// $result3 = mysqli_query($connection, $query3);
-
-$query4 = "select * from child_report WHERE MidwifeEmail = '$mail'";
-$result4 = mysqli_query($connection, $query4);
-?>
-
+<?php include('controllers/midwife.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,7 +15,7 @@ $result4 = mysqli_query($connection, $query4);
 <body>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="btn btn-primary" href="#" role="button">See Medical Advice</a>
+            <a class="btn btn-primary" href="health advices.php" role="button">See Medical Advice</a>
             <a class="btn btn-danger" href="./controllers/logout.php" role="button">Log Out</a>
         </div>
     </nav>
