@@ -1,0 +1,39 @@
+body{
+    background-image: url(../img/doctor.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: left;
+}
+
+.container {
+    float: left;
+    margin-top: 6%;
+    margin-left: 3%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.card {
+    background-color: rgb(43, 189, 247, 0.3);
+}
+
+.card .card-body{
+    color: rgb(0, 0, 0);
+}
+
+.card .card-body .row p:link,
+.card .card-body .row p:visited{
+    text-decoration: none;
+    color: #090C89;
+}
+
+.form-group label {
+    font-size: 120%;
+    
+}
+
+.row a:visited,
+.row a:link{
+    text-decoration: none;
+    color: #090C89;
+}
