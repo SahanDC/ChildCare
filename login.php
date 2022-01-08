@@ -31,9 +31,9 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-10 col-xl-10 order-2 order-lg-1">
 
-                                    <p class=" text-center h4 fw-bold mb-4 mx-1 mx-md-4"><a class="text-dark bor" href="./index.php" style="text-decoration: none;">Child Care</a></p>
+                                    <p class=" text-center h4 fw-bold mb-4 mx-1 mx-md-4"><a class="text-dark bor" href="./index.php">Child Care Management System</a></p>
 
-                                    <form class="row g-3" action="" method="post">
+                                    <form class="row g-3" id="form-top" action="" method="post">
                                         <!-- <h4><a class="text-dark" href="./index.php" style="text-decoration: none;">Child Care</a></h4> -->
 
                                         <?php if ($accountNotExistErr || $emailPwdErr || $verificationRequiredErr) {
@@ -41,9 +41,8 @@
                                             echo $emailPwdErr;
                                             echo $verificationRequiredErr;
                                         } else {
-                                        ?> <div class="border rounded border-dark alert alert-light text-center" style="display:inline-block;">
-                                                Welcome to child care!
-                                            </div>
+                                        ?> 
+                                        <!-- <div class="border rounded border-dark alert alert-light text-center" id="welcome"> Welcome to child care! </div> -->
                                         <?php } ?>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
@@ -62,11 +61,10 @@
 
 
                                         <!-- Button trigger modal -->
-                                        <button type="submit" name="login" id="sign_in" class="text-dark border-light btn btn-dark btn-lg btn-block" style="background-color: #e3f2fd">Sign
-                                            in</button>
+                                        <button type="submit" name="login" id="sign_in" class="text-dark border-light btn btn-dark btn-lg btn-block" style="background-color: #e3f2fd">Log In</button>
 
 
-                                        <a href="./signup.php" style="text-decoration: none;"> Haven't an account?</a>
+                                        <a href="./signup.php"> Haven't an account?</a>
                                     </form>
                                 </div>
                                 <!-- <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">

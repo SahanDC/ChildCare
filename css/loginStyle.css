@@ -15,8 +15,30 @@ body {
 .container {
     float: right;
     margin-top: 10%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .card {
-    float: right;
+    /* float: right; */
+    background-color: rgb(43, 189, 247, 0.3);
+}
+
+input {
+    color: darkgoldenrod;
+}
+
+#form-top {
+    margin-top: 3%;
+}
+
+.card .card-body .row p a:visited,
+.card .card-body .row p a:link{
+    text-decoration: none;
+    color: #090C89;
+}
+
+.row a:visited,
+.row a:link{
+    text-decoration: none;
+    color: #090C89;
 }
