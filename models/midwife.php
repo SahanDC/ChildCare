@@ -1,15 +1,61 @@
 <?php
-class Midwife{
+class Midwife
+{
     private $connection;
 
-    public $id;
+    private $id;
+    private $email;
+    private $center;
+    private $area;
 
     public function __construct($db)
     {
         $this->connection = $db;
     }
+    ///////////////////////////////////////////////////////////
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 
-    public function getDetails(){
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    public function getCenter()
+    {
+        return $this->center;
+    }
+    public function setCenter($center)
+    {
+        $this->center = $center;
+        return $this;
+    }
+
+    public function getArea()
+    {
+        return $this->area;
+    }
+    public function setArea($area)
+    {
+        $this->area = $area;
+        return $this;
+    }
+    ////////////////////////////////////////////////////////////
+
+    public function getDetails()
+    {
         $query = $this->connection->query("SELECT * FROM midwife");
         $details = array();
         while ($row = $query->fetch_assoc()) {
@@ -18,9 +64,10 @@ class Midwife{
         return $details;
     }
 
-    public function getChildReportDetails($mail, $search_){
+    public function getChildReportDetails($mail, $search_)
+    {
         $childReportDetails = array();
-        if ($search_ !='') {
+        if ($search_ != '') {
             echo "search<br>";
             $search = mysqli_real_escape_string($this->connection, $search_);
             //$query = "SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%')) And MidwifeEmail = '$mail'";
@@ -43,10 +90,11 @@ class Midwife{
     }
 
     //this is not completed
-    public function getD($search_){
+    public function getD($search_)
+    {
         $advices = array();
-        if ($search_ !='') {
-            
+        if ($search_ != '') {
+
             echo "search<br>";
             $search = mysqli_real_escape_string($this->connection, $search_);
             $query = $this->connection->query("SELECT * FROM midwife WHERE (id LIKE '%{$search}%'or areas '%{$search}%' OR email LIKE '%{$search}% );");
@@ -54,12 +102,10 @@ class Midwife{
         } else {
             $query = $this->connection->query("SELECT * FROM midwife ;");
         }
-        
+
         while ($row = $query->fetch_assoc()) {
             array_push($advices, $row);
-            
         }
         return $advices;
     }
 }
-?>
