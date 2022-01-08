@@ -1,22 +1,53 @@
 
 <?php require_once('config/db.php');
+require_once('controllers/autoloader.php'); 
 
-require_once('models/advice.php'); ?>
+?>
 
 <?php
     include 'config/db.php'; // Using database connection file here
-    $requestObj = new Advice($connection);
-
+    // $requestObj = new Advice($connection);
+    //print_r(unserialize($_SESSION['manager']));
+    $manager = unserialize($_SESSION['manager']);
     $id = $_GET['id']; // get id through query string
-    $advice_id=mysqli_real_escape_string($connection,$id);
-    $query="SELECT * FROM advice WHERE id={$advice_id} LIMIT 1";
-    $results=mysqli_query($connection,$query);
-    if($results){
-        echo 'successful';
-        $result=mysqli_fetch_assoc($results);
-        $topic=$result['topic'];
-        $content=$result['content'];
-    }else{echo 'unsuccessful';}
+    $advice = $manager->getAdvice_array()[$id];
+    //print_r($advice);
+    $topic = $advice->get_topic();
+    $content = $advice->get_content();
+    // $advice_id=mysqli_real_escape_string($connection,$id);
+    // $query="SELECT * FROM advice WHERE id={$advice_id} LIMIT 1";
+    // $results=mysqli_query($connection,$query);
+    // if($results){
+    //     echo 'successful';
+    //     $result=mysqli_fetch_assoc($results);
+    //     $topic=$result['topic'];
+    //     $content=$result['content'];
+    // }else{echo 'unsuccessful';}
+
+    if(isset($_POST['submit'])){
+        $topic=$_POST['topic'];
+        $content=$_POST['content'];
+        //
+        $manager->editAdvice($connection,$advice,$content,$topic);
+
+
+      //   $query="UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} LIMIT 1";
+        
+      //  # $query="INSERT INTO advices (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$isdeleted})";
+        
+      //   $insert = mysqli_query($connection,$query);
+    
+      //   if(!$insert)
+      //   {
+      //       echo mysqli_error($connection);
+      //   }
+      //   else
+      //   {
+      //       header("location:health advices.php"); // redirects to all records page
+      //       exit;	
+      //       echo "";
+      //   }
+    }
 ?>
 
 <!doctype html>
@@ -66,32 +97,4 @@ require_once('models/advice.php'); ?>
     </div>
   </div>
 </div>
-<?php
-    if(isset($_POST['submit'])){
-        $topic=$_POST['topic'];
-        $content=$_POST['content'];
-        $isdeleted=0;
-        $id = $_GET['id'];
-        //
-        $requestObj->editAdvice($id,$content,$topic);
-
-
-      //   $query="UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} LIMIT 1";
-        
-      //  # $query="INSERT INTO advices (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$isdeleted})";
-        
-      //   $insert = mysqli_query($connection,$query);
-    
-      //   if(!$insert)
-      //   {
-      //       echo mysqli_error($connection);
-      //   }
-      //   else
-      //   {
-      //       header("location:health advices.php"); // redirects to all records page
-      //       exit;	
-      //       echo "";
-      //   }
-    }
-?>
 </html>
