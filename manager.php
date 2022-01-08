@@ -1,23 +1,6 @@
-<?php include('config/db.php');
-include('models/midwife.php');
-include_once('models/manager.php');
+<?php 
 
-if (!isset($_SESSION['login'])) {
-  header("Location: ./login.php");
-}
-if ($_SESSION['role'] == 'parent') {
-  header("Location: ./dashboard.php");
-}
-if ($_SESSION['role'] == 'midwife') {
-  header("Location: ./midwife.php");
-} 
-$search = '';
-if (isset($_GET['search'])) {
-    $search = $_GET['search'];}
-// $midwifeObject= new Midwife($connection);
-// $midwifeList=$midwifeObject-> getDetails();
-$manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
-$midwifeList=$manager-> getMidwives($search);
+include_once('controllers/manager.php');
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +16,6 @@ $midwifeList=$manager-> getMidwives($search);
   <title>Patient Manager Home</title>
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-
- 
- 
-
 </head>
 
 <body>
@@ -58,7 +36,7 @@ $midwifeList=$manager-> getMidwives($search);
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
           <li>
             <a href="manager.php" class="nav-link text-secondary">
-             
+            
               <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                 <use xlink:href="#home" />
               </svg> 
@@ -66,7 +44,7 @@ $midwifeList=$manager-> getMidwives($search);
               Home 
             </p>
             </a>
-           
+          
           </li>
           <li>
             <a href="health advices.php" class="nav-link text-white">
@@ -76,7 +54,7 @@ $midwifeList=$manager-> getMidwives($search);
               <p class="hover-underline-animation">
                 Health Advice
               </p>
-             
+            
             </a>
           </li>
           <li>
@@ -244,32 +222,9 @@ $midwifeList=$manager-> getMidwives($search);
       <div class="col-3 themed-grid-col">AREAS</div>
     </div>
     <?php
-    // $midwifeObj2 = new Midwife($connection);
-    // // $childReportDetails = array();
-    // //$childReportDetails = $midwifeObj2->getD($search);
-    // foreach ($childReportDetails as $midwife) { ?>
-      <!-- <div class="row mb-4">
-          <div class="col-3 themed-grid-col"><?php echo $midwife['id'];?></div>
-          <div class="col-3 themed-grid-col"><?php echo $midwife['email'];?></div>
-          <div class="col-3 themed-grid-col"><?php echo $midwife['centre'];?></div>
-          <div class="col-3 themed-grid-col"><?php echo $midwife['areas'];?></div>
-        </div> -->
+    ?>
+      
       <?php
-    // }
-    // $search='';
-    // if(isset($_GET['search'])){
-      
-    //   //$midwifeList=$midwifeObject-> getD($_GET['search']);
-    //   $search=mysqli_real_escape_string($connection,$_GET['search']);
-    //   $midwife_set="SELECT * FROM midwife WHERE (email LIKE '%{$search}%' or id LIKE '%{$search}%') ORDER BY id";
-    //   $midwife_set1=array();
-
-      
-    // }else{
-      
-    //   $midwife_set="SELECT * FROM midwife ";
-    // }
-
 
     foreach ($midwifeList as $midwife) { ?>
       <div class="row mb-4">
@@ -280,26 +235,8 @@ $midwifeList=$manager-> getMidwives($search);
         </div>
       <?php
     }
-    // $midwife = mysqli_query($connection, $midwife_set);
-    // if ($midwife) {
-      
-
-    //   while ($records = mysqli_fetch_assoc($midwife)) {
     ?>
-        
-        <!-- <div class="row mb-4">
-          <div class="col-3 themed-grid-col"><?php // echo $records['id'];?></div>
-          <div class="col-3 themed-grid-col"><?php // echo $records['email'];?></div>
-          <div class="col-3 themed-grid-col"><?php // echo $records['centre'];?></div>
-          <div class="col-3 themed-grid-col"><?php // echo $records['areas'];?></div>
-        </div> -->
 
-    <?php
-    //   }
-    // }
-    //  ?>
-     <!-- ***************** -->
-    
   <!--first table finish************************************************************************************************-->
 
 

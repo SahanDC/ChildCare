@@ -6,6 +6,8 @@
         public $id;
         public $content;
         public $isdeleted;
+        public $connection;
+
         public function __construct($db)
         {
             $this->connection = $db;
@@ -46,29 +48,29 @@
                     array_push($requests, $row);
                     }
             }
-            echo $requests;
+            // print_r($requests);
             return $requests;
 
         }
         function editAdvice($id,$content,$topic){
             $query=$this->connection->query("UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} limit 1");
             echo "eeee";
-             
-             if(!$query)
-             {
-                 echo mysqli_error($this->connection);
-             }
-             else
-             {  
+            
+            if(!$query)
+            {
+                echo mysqli_error($this->connection);
+            }
+            else
+            {  
                 header("location:health advices.php"); // redirects to all records page
-                 exit;	
-                 echo "";
-             }
+                exit;	
+                echo "";
+            }
 
         }
         function deleteAdvice($id){
             $query=$this->connection->query("UPDATE advice SET isdeleted=1 WHERE id= {$id} ");
-           
+            
         
             if($query)
             {

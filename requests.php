@@ -105,10 +105,10 @@ $requestObj = new Request($connection);
                     <!-- <li>
             <div class="text-end"><a href="main.php" class="nav-link text-white"></a>
 
-              <a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
+            <a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
             </div>
-      </div>
-      </li> -->
+    </div>
+    </li> -->
                 </ul>
             </div>
         </div>
