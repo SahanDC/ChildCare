@@ -109,7 +109,7 @@
 
                 <tbody>
                     <?php
-                    foreach ($childReportDetails as $item) {
+                    foreach ($vaccinateWithinTwoWeeks as $item) {
                         if (((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 14) && ((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 > 0)) {
                     ?>
                             <tr>
@@ -144,7 +144,7 @@
 
                 <tbody>
                     <?php
-                    foreach ($childReportDetails as $item) {
+                    foreach ($vaccinationMissed as $item) {
                         if ((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 0) {
                     ?>
                             <tr>

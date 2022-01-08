@@ -23,3 +23,5 @@ $details = $midwifeObj->getDetails();
 
 $midwifeObj2 = new Midwife($connection);
 $childReportDetails = $midwifeObj2->getChildReportDetails($mail, $search);
+$vaccinateWithinTwoWeeks = $midwifeObj2->getChildReportDetails($mail, '');
+$vaccinationMissed = $midwifeObj2->getChildReportDetails($mail, '');

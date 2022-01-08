@@ -68,7 +68,7 @@ class Midwife
     {
         $childReportDetails = array();
         if ($search_ != '') {
-            echo "search<br>";
+            // echo "search<br>";
             $search = mysqli_real_escape_string($this->connection, $search_);
             //$query = "SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%')) And MidwifeEmail = '$mail'";
             $query = $this->connection->query("SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%')) And MidwifeEmail = '$mail'");
