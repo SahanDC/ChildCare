@@ -1,5 +1,27 @@
 <?php require_once('config/db.php');
-require_once('models/advice.php'); ?>
+require_once('models/advice.php'); 
+
+$requestObj = new Advice($connection);
+
+if (isset($_POST['submit'])) {
+  $topic = $_POST['topic'];
+  $content = $_POST['content'];
+  $is_deleted = 0;
+  $requestObj->addAdvice($topic,$content);
+  // $query = "INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$is_deleted})";
+
+  // $insert = mysqli_query($connection, $query);
+
+  // if (!$insert) {
+  //   echo mysqli_error($connection);
+  // } else {
+  //   echo "";
+  // }
+}
+
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -195,7 +217,7 @@ require_once('models/advice.php'); ?>
             <h5 class="modal-title" id="exampleModalLabel">Add Advice</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-         
+        
           <form action="" method="POST">
           
             <div class="modal-body">
@@ -211,24 +233,7 @@ require_once('models/advice.php'); ?>
       </div>
     </div>
   </div>
-  <?php
-  if (isset($_POST['submit'])) {
-    $topic = $_POST['topic'];
-    $content = $_POST['content'];
-    $is_deleted = 0;
-    $requestObj->addAdvice($topic,$content);
-    // $query = "INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$is_deleted})";
 
-    // $insert = mysqli_query($connection, $query);
-
-    // if (!$insert) {
-    //   echo mysqli_error($connection);
-    // } else {
-    //   echo "";
-    // }
-  }
-
-  ?>
   <!--finish add advice-->
   <!--advices grid-->
 
@@ -266,17 +271,16 @@ require_once('models/advice.php'); ?>
           <div class="col-md-4 themed-grid-col"><?php echo $request['topic']; ?></div>
           <div class="col-md-8 themed-grid-col">
             <p><?php echo $request['content'];
-             
-                 ?></p>
+            
+                ?></p>
             <div class="container">
 
-               <?php
+              <?php
                   
                   if(isset($_POST['button1'])) {
                       $requestObj->deleteAdvice($request['id']);
                       
                   }
-                             
                   ?>
                   <form method="post">
                     <button type="button" class="btn btn-secondary"><a href="update record.php?id=<?php echo $request['id']; ?>">EDIT</a> </button>
