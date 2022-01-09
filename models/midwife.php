@@ -1,10 +1,12 @@
 <?php
-class Midwife
+require_once('models/user.php');
+require_once('models/AdviceObserver.php');
+
+class Midwife extends User implements AdviceObserver
 {
     private $connection;
 
-    private $id;
-    private $email;
+    private $midwifeId;
     private $center;
     private $area;
 
@@ -12,14 +14,19 @@ class Midwife
     {
         $this->connection = $db;
     }
+
+    public function update()
+    {
+    }
+
     ///////////////////////////////////////////////////////////
     public function getId()
     {
-        return $this->id;
+        return $this->midwifeId;
     }
-    public function setId($id)
+    public function setId($midwifeId)
     {
-        $this->id = $id;
+        $this->midwifeId = $midwifeId;
         return $this;
     }
 

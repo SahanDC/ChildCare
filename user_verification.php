@@ -24,7 +24,7 @@
                 <?php echo $activation_error; ?>
             </div>
             <p class="lead">If user account is verified then click on the following button to login.</p>
-            <a class="btn btn-lg btn-success" href="http://localhost/child-care/login.php">Click to Login
+            <a class="btn btn-lg btn-success" href="http://localhost/ChildCare/login.php">Click to Login
             </a>
         </div>
     </div>

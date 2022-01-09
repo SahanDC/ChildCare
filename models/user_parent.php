@@ -1,7 +1,8 @@
 <?php
 require_once('models/user.php');
+include('controllers/autoloader.php');
 
-class User_Parent extends User
+class User_Parent extends User implements AdviceObserver
 {
     private $connection;
 
@@ -28,5 +29,9 @@ class User_Parent extends User
             $requests[] = $row;
         }
         return $requests;
+    }
+
+    public function update()
+    {
     }
 }

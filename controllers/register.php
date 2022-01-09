@@ -97,7 +97,7 @@ if (isset($_POST["submit"])) {
                 // Send verification email
                 if ($sqlQuery) {
                     $msg = 'Click on the activation link to verify your email. <br><br>
-                          <a href="http://localhost/child-care/user_verification.php?token=' . $token . '"> Click here to verify email</a>
+                          <a href="http://localhost/ChildCare/user_verification.php?token=' . $token . '"> Click here to verify email</a>
                         ';
 
                     // Create the Transport

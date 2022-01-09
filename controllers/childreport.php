@@ -47,7 +47,7 @@ if (isset($_POST['edit'])) {
     $ChildId = $_POST['ChildId'];
     
     //echo $edit_NVdate;
-    $report1 = new ChildReport($ChildId);
+    $report1 = ChildReport::getChildreport($ChildId);
     $report1->editVaccination($edit_vaccine, $edit_date, $edit_place, $edit_NVdate, $edit_comment);
     if ($report1->checkErrors()){
         $edit_vaccine = '-1';
@@ -68,7 +68,7 @@ if (isset($_POST['add_V'])) {
     $add_comment = $_POST['add_comment'];
     $ChildId = $_POST['ChildId'];
     
-    $report1 = new ChildReport($ChildId);
+    $report1 = ChildReport::getChildreport($ChildId);
     $report1->addVaccination($add_vaccine, $add_Vdate, $add_place, $add_NVdate, $add_comment);
     if ($report1->checkErrors()){
         $add_vaccine = '-1';
@@ -85,7 +85,7 @@ if (isset($_POST['add_W'])) {
     $ChildId = $_POST['ChildId'];
     $added_weights = $_POST['added_weights'];
     
-    $report1 = new ChildReport($ChildId);
+    $report1 = ChildReport::getChildreport($ChildId);
     $report1->addWeight($added_weights,$add_Wdate,$add_weight);
     if ($report1->checkErrors()){
         $add_Wdate = '';
@@ -94,7 +94,7 @@ if (isset($_POST['add_W'])) {
 }
 
 if (!empty($ChildId)) {
-    $report2 = new ChildReport($ChildId);
+    $report2 = ChildReport::getChildreport($ChildId);
     $report2->openChildReport();
     $name = $report2->getName();
     $age = $report2->getAge();
