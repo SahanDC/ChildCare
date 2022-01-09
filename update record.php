@@ -1,6 +1,6 @@
 
 <?php require_once('config/db.php');
-require_once('controllers/autoloader.php'); 
+require_once('models/manager.php'); 
 
 ?>
 
@@ -28,7 +28,7 @@ require_once('controllers/autoloader.php');
         $topic=$_POST['topic'];
         $content=$_POST['content'];
         //
-        $manager->editAdvice($connection,$advice,$content,$topic);
+        $manager->editAdvice($connection,$advice,$topic,$content);
 
 
       //   $query="UPDATE advice SET isdeleted=0, content='{$content}', topic='{$topic}' WHERE id= {$id} LIMIT 1";

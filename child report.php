@@ -53,6 +53,8 @@ $ChildReports = $manager->getChildreports($search);
 
 
   <link href="css/patientmanager_styles.css" rel="stylesheet">
+  <link href="css/header.css" rel="stylesheet">
+  <link href="css/footer.css" rel="stylesheet">
   <title>child report</title>
   <title>Document</title>
 </head>
@@ -75,73 +77,67 @@ $ChildReports = $manager->getChildreports($search);
 
   <!--header start-->
   <header>
-    <div class="px-3 py-2 bg-dark text-white">
-      <h3>Harshani Bandara</h3>
+    <div class="px-3 py-2 text-black">
       <div class="container">
-
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-              <use xlink:href="#bootstrap" />
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <li class="name">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+              <use xlink:href="#home" />
             </svg>
-          </a>
+            <h3>Harshani Bandara</h3>
+          </li>
+          <li class="details">
+            <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
+          </li>
 
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="manager.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#home" />
-                </svg>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="health advices.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#speedometer2" />
-                </svg>
-                Helth Advices
-              </a>
-            </li>
-            <li>
-              <a href="child report.php" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#table" />
-                </svg>
-                Child Reports
-              </a>
-            </li>
-            <li>
-              <a href="requests.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#grid" />
-                </svg>
-                Child Report Request
-              </a>
-            </li>
-            <li>
-              <a href="area details.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#grid" />
-                </svg>
-                Area details
-              </a>
-            </li>
-            <li>
-              <a href="profile.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#people-circle" />
-                </svg>
-                Profile
-              </a>
-            </li>
-            <li>
+          <li class="details">
+            <a href="manager.php" class="nav-link text-black">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#people-circle" />
-              </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
-            </li>
-          </ul>
-        </div>
+                <use xlink:href="#home" />
+              </svg>
+              <p class="hover-underline-animation">
+                Home
+              </p>
+            </a>
+          </li>
+
+          <li class="details">
+            <a href="health advices.php" class="nav-link text-black">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="#speedometer2" />
+              </svg>
+              <p class="hover-underline-animation">
+                Health Advice
+              </p>
+            </a>
+          </li>
+          <li class="details">
+            <a href="child report.php" class="nav-link text-black">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="#table" />
+              </svg>
+              <p class="hover-underline-animation">
+                Child Reports
+              </p>
+            </a>
+          </li>
+          <li class="details">
+            <a href="requests.php" class="nav-link text-black">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="#grid" />
+              </svg>
+              <p class="hover-underline-animation">
+                Child Report Request
+              </p>
+            </a>
+          </li>
+          <li class="details">
+            <!-- <a href="profile.php" class="nav-link text-white"> -->
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+              <use xlink:href="#people-circle" />
+            </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -178,10 +174,10 @@ $ChildReports = $manager->getChildreports($search);
     </div>
     <br>
     <div class="row mb-4">
-      <div class="col-3 themed-grid-col">ID</div>
-      <div class="col-3 themed-grid-col">Name</div>
-      <div class="col-3 themed-grid-col">CENTER</div>
-      <div class="col-3 themed-grid-col">AREAS</div>
+      <div class="col-3 themed-grid-col-title">ID</div>
+      <div class="col-3 themed-grid-col-title">Name</div>
+      <div class="col-3 themed-grid-col-title">CENTER</div>
+      <div class="col-3 themed-grid-col-title">AREAS</div>
     </div>
 
     <?php if (!empty($ChildReports)) {
@@ -207,38 +203,25 @@ $ChildReports = $manager->getChildreports($search);
 <!-- content reports finsh -->
 
 
-<!--footer**************************************************************************************************************-->
-<div class="container">
-  <footer class="py-5">
+
+<!-- footer section starts -->
+<section class="footer">
+
+  <div class="container">
+
     <div class="row">
-      <div class="col-2">
-        <h5>Section</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-        </ul>
+
+      <div class="col-md-6" data-aos="fade-right">
+        <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur nemo porro quasi minima consequuntur dolorum, quas amet in autem id?</p>
       </div>
 
-
-
-
-
-      <div class="d-flex justify-content-between py-4 my-4 border-top">
-        <p>&copy; 2021 Company, Inc. All rights reserved.</p>
-        <ul class="list-unstyled d-flex">
-          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                <use xlink:href="#twitter" />
-              </svg></a></li>
-          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                <use xlink:href="#instagram" />
-              </svg></a></li>
-          <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                <use xlink:href="#facebook" />
-              </svg></a></li>
-        </ul>
+      <div class="col-md-6 text-center" data-aos="fade-left">
+        <h3>share</h3>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Linkedin</a>
+        <a href="#">Github</a>
       </div>
   </footer>
 </div>
@@ -251,6 +234,16 @@ $ChildReports = $manager->getChildreports($search);
     };
   }
 </script>
+
+    </div>
+
+  </div>
+
+  <h4 class="credit text-center mx-auto">created by <span>TEAM NINJAS-GROUP 23</span> | all rights reserved.</h4>
+
+</section>
+
+<!-- footer section ends -->
 </body>
 
 </html>

@@ -32,90 +32,75 @@ if (isset($_POST['invalid'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link href="css/patientmanager_styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
 
     <title>Patient Manager Home</title>
 </head>
 
 <body>
-    <div class="px-3 py-2 bg-dark text-white">
-        <h3>Harshani Bandara</h3>
+    <div class="px-3 py-2 text-black">
         <div class="container">
-
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                        <use xlink:href="#bootstrap" />
+            <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                <li class="name">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                        <use xlink:href="#home" />
                     </svg>
-                </a>
+                    <h3>Harshani Bandara</h3>
+                </li>
+                <li class="details">
+                    <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
+                </li>
 
-                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-                    <li>
-                        <a href="manager.php" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                                <use xlink:href="#home" />
-                            </svg>
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="health advices.php" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                                <use xlink:href="#speedometer2" />
-                            </svg>
-                            Health Advices
-                        </a>
-                    </li>
-                    <li>
-                        <a href="child report.php" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                                <use xlink:href="#table" />
-                            </svg>
-                            Child Reports
-                        </a>
-                    </li>
-                    <li>
-                        <a href="requests.php" class="nav-link text-secondary">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                                <use xlink:href="#grid" />
-                            </svg>
-                            Child Report Request
-                        </a>
-                    </li>
-                    <li>
-                        <a href="area details.php" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                                <use xlink:href="#grid" />
-                            </svg>
-                            Area details
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="profile.php" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                                <use xlink:href="#people-circle" />
-                            </svg>
-                            Profile
-                        </a>
-                    </li>
-                    <li>
-                        <!-- <a href="profile.php" class="nav-link text-white"> -->
+                <li class="details">
+                    <a href="manager.php" class="nav-link text-black">
                         <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                            <use xlink:href="#people-circle" />
-                        </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
+                            <use xlink:href="#home" />
+                        </svg>
+                        <p class="hover-underline-animation">
+                            Home
+                        </p>
+                    </a>
+                </li>
 
-                        <!-- </a> -->
-                    </li>
-                    <!-- <li>
-            <div class="text-end"><a href="main.php" class="nav-link text-white"></a>
-
-            <a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
-            </div>
-    </div>
-    </li> -->
-                </ul>
-            </div>
+                <li class="details">
+                    <a href="health advices.php" class="nav-link text-black">
+                        <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                            <use xlink:href="#speedometer2" />
+                        </svg>
+                        <p class="hover-underline-animation">
+                            Health Advice
+                        </p>
+                    </a>
+                </li>
+                <li class="details">
+                    <a href="child report.php" class="nav-link text-black">
+                        <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                            <use xlink:href="#table" />
+                        </svg>
+                        <p class="hover-underline-animation">
+                            Child Reports
+                        </p>
+                    </a>
+                </li>
+                <li class="details">
+                    <a href="requests.php" class="nav-link text-black">
+                        <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                            <use xlink:href="#grid" />
+                        </svg>
+                        <p class="hover-underline-animation">
+                            Child Report Request
+                        </p>
+                    </a>
+                </li>
+                <li class="details">
+                    <!-- <a href="profile.php" class="nav-link text-white"> -->
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                        <use xlink:href="#people-circle" />
+                    </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -236,6 +221,40 @@ if (isset($_POST['invalid'])) {
             </div>
         <?php } ?>
     </div>
+
+    <!-- footer section starts -->
+    <footer>
+        <section class="footer">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-6" data-aos="fade-right">
+                        <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur nemo porro quasi minima consequuntur dolorum, quas amet in autem id?</p>
+                    </div>
+
+                    <div class="col-md-6 text-center" data-aos="fade-left">
+                        <h3>share</h3>
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Linkedin</a>
+                        <a href="#">Github</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <h4 class="credit text-center mx-auto">created by <span>TEAM NINJAS-GROUP 23</span> | all rights reserved.</h4>
+
+        </section>
+    </footer>
+
+
+
+    <!-- footer section ends -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
