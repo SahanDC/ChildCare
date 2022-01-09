@@ -4,20 +4,30 @@ class User
 
     private $connection;
 
-    public $id;
-    public $first_name;
-    public $last_name;
-    public $email;
-    public $mobile_number;
-    public $password;
-    public $token;
-    public $is_active;
-    public $date_time;
-    public $role;
+    private $id;
+    private $first_name;
+    private $last_name;
+    private $email;
+    private $mobile_number;
+    private $password;
+    private $token;
+    private $is_active;
+    private $date_time;
+    private $role;
 
     public function __construct($db)
     {
         $this->connection = $db;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
     public function getUserById($id)

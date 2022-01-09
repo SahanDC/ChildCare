@@ -15,15 +15,13 @@
         $search = $_GET['search'];}
     $manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
 
-    if (isset($_POST['submit'])) {
-        $email = $_POST['email'];
-        $centre = $_POST['center'];
-        $areas=$_POST['area'];
-        $noc=$_POST['noc'];
-        
-        $manager->addMidwife($email,$centre,$areas,$noc);
-        
-    }
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $centre = $_POST['center'];
+    $areas = $_POST['area'];
+    $noc = $_POST['noc'];
 
-    $midwifeList=$manager-> getMidwives($search);
-?>
+    $manager->addMidwife($email, $centre, $areas, $noc);
+}
+
+$midwifeList = $manager->getMidwives($search);

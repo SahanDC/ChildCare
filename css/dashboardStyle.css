@@ -1,3 +1,12 @@
+body{
+    background-image: url(../img/hospiytal.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: left;
+    height: 100%;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap");
 
 :root {
@@ -10,8 +19,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: none !important;
-    outline: none !important;
+    /* border: none !important; */
+    /* outline: none !important; */
     text-decoration: none !important;
     text-transform: capitalize;
     font-weight: 400;
@@ -89,4 +98,9 @@ header .fa-bars {
     color: var(--blue);
     cursor: pointer;
     display: none;
+}
+
+.container-xxl{
+    background-color: blueviolet;
+
 }

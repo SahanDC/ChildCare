@@ -1,7 +1,6 @@
 <?php
 
 // include('config/db.php');
-// $requestObj = new Request($connection);
 
 class Request
 {
