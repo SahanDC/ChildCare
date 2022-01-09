@@ -11,9 +11,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: none !important;
+    /* border: none !important;
     outline: none !important;
-    text-decoration: none !important;
+    text-decoration: none !important; */
     text-transform: capitalize;
     font-weight: 400;
     transition: all 0.2s linear;
@@ -140,3 +140,8 @@
     transform-origin: bottom left;
 }
 /*  */
+
+.modal-body input{
+    background: rgb(0, 238, 255, 0.5);
+    color: rgb(0, 0, 0);
+}

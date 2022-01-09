@@ -39,6 +39,7 @@ if (isset($_POST['delete'])) {
   <link href="css/patientmanager_styles.css" rel="stylesheet">
   <link href="css/footer.css" rel="stylesheet">
   <link href="css/header.css" rel="stylesheet">
+  <link href="css/healthAdviceStyle.css" rel="stylesheet">
 
   <title>Health advices</title>
   <title>Document</title>
@@ -62,62 +63,6 @@ if (isset($_POST['delete'])) {
 
   <!--header start-->
   <header>
-    <!-- <div class="px-3 py-2 bg-dark text-white">
-      <h3>Harshani Bandara</h3>
-      <div class="container">
-
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-              <use xlink:href="#bootstrap" />
-            </svg>
-          </a>
-
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="manager.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#home" />
-                </svg>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="health advices.php" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#speedometer2" />
-                </svg>
-                Health Advices
-              </a>
-            </li>
-            <li>
-              <a href="child report.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#table" />
-                </svg>
-                Child Reports
-              </a>
-            </li>
-            <li>
-              <a href="requests.php" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#grid" />
-                </svg>
-                Child Report Request
-              </a>
-            </li>            
-            <li>
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#people-circle" />
-              </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
-            </li>
-          </ul>
-
-        </div>
-
-      </div>
-    </div>
-    </div> -->
     <div class="px-3 py-2 text-black">
       <div class="container">
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
@@ -184,15 +129,15 @@ if (isset($_POST['delete'])) {
   </header>
   <!--header finish-->
   <br>
-  <div class="container">
+  <!-- <div class="container">
     <h2>Health Advices</h2>
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary"><a href="health advices.php" class="nav-link text-secondary"> My View</a></button>
-      <button type="button" class="btn btn-primary"><a href="parents health advices.php" class="nav-link text-white">Parent View</a></button>
+      <button type="button" class="btn btn-info"><a href="health advices.php" class="nav-link"> My View</a></button>
+      <button type="button" class="btn btn-info"><a href="parents health advices.php" class="nav-link">Parent View</a></button>
 
     </div>
   </div>
-  <br>
+  <br> -->
   <!--Slider-->
   <div class="container">
     <div class="container">
@@ -207,11 +152,11 @@ if (isset($_POST['delete'])) {
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
               <rect width="100%" height="100%" fill="#777" />
             </svg>
-            <img class="d-block w-100" src="img/immunation.jpg" alt="Third slide">
+            <img class="d-block w-100" src="img/bros (2).jpg" alt="First slide">
             <div class="container" style="background-color: red;">
-              <div class="carousel-caption text-start">
-                <h1 style="color: black;">Young children’s health: what to expect</h1>
-                <p>"This Church Leaders Guide is a very timely resource that responds to a critical need today: how churches can support parents with children at home amid the ongoing uncertainty and hardship caused by the global pandemic. Biblical, practical and focused specifically on pastors and church leaders, this guide will be greatly beneficial for local churches as they serve and equip the families among them.”</p>
+              <div class="carousel-caption">
+                <h1>Exercise as a family.</h1>
+                <p>Research shows that exercise increases the number of natural killer cells in adults—and regular activity can benefit kids in the same way, says Ranjit Chandra, M.D., a pediatric immunologist at the Memorial University of Newfoundland. To get your children into a lifelong fitness habit, be a good role model. "Exercise with them rather than just urge them to go outside and play," says Renee Stucky, Ph.D., a clinical psychologist in Columbia, Missouri. Fun family activities include bike riding, hiking, inline skating, basketball, and tennis.</p>
                 <!--p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p-->
               </div>
             </div>
@@ -220,12 +165,11 @@ if (isset($_POST['delete'])) {
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
               <rect width="100%" height="100%" fill="#777" />
             </svg>
-            <img class="d-block w-100" src="img/1234.jfif" alt="Third slide">
+            <img class="d-block w-100" src="img/eat.jpg" alt="Second slide">
             <div class="container">
               <div class="carousel-caption">
-                <h1>Make Childrens Happy.</h1>
-                <!--<p>Some representative placeholder content for the second slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>-->
+                <h1>Serve more fruits and vegetables.</h1>
+                <p>Carrots, green beans, oranges, strawberries: They all contain carotenoids, which are immunity-boosting phytonutrients, says William Sears, M.D., author of The Family Nutrition Book. Phytonutrients may increase the body's production of infection-fighting white blood cells and interferon, an antibody that coats cell surfaces, blocking out viruses. Studies show that a diet rich in phytonutrients can also protect against such chronic diseases as cancer and heart disease in adulthood. Try to get your child to eat five servings of fruits and veggies per day.</p>
               </div>
             </div>
           </div>
@@ -233,12 +177,11 @@ if (isset($_POST['delete'])) {
             <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
               <rect width="100%" height="100%" fill="#777" />
             </svg>
-            <img class="d-block w-100" src="img/122.jfif" alt="Third slide">
+            <img class="d-block w-100" src="img/BLACK AND WHITE1 .jpg" alt="Third slide">
             <div class="container">
-              <div class="carousel-caption text-end">
-                <h1>Eat Balanced Meal.</h1>
-                <!--<p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>-->
+              <div class="carousel-caption">
+                <h1>Breastfeed your baby.</h1>
+                <p>Breast milk contains turbo-charged immunity-enhancing antibodies and white blood cells. Nursing guards against ear infections, allergies, diarrhea, pneumonia, meningitis, urinary tract infections, and sudden infant death syndrome (SIDS). Studies show that it may also enhance your baby's brain power and help protect them against insulin-dependent diabetes, Crohn's disease, colitis, and certain forms of cancer later in life.</p>
               </div>
             </div>
           </div>
@@ -259,7 +202,7 @@ if (isset($_POST['delete'])) {
   <!--add advice button-->
   <!-- Button trigger modal -->
   <div class="container">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Add New Advice
     </button>
 
@@ -280,7 +223,7 @@ if (isset($_POST['delete'])) {
               <div class="col-md-12"><label class="labels">Advice content </label><textarea class="form-control" id="content_area" name="content" rows="8" placeholder="enter advice content here. " required></textarea></div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" name="submit"><input type="submit" value="submit" name="submit" style="background-color: blue;"></button>
+              <button type="button" class="btn btn-info" name="submit"><input type="submit" class="btn btn-info" value="submit" name="submit"></button>
             </div>
           </form>
           <!-- finish -->
@@ -296,21 +239,18 @@ if (isset($_POST['delete'])) {
 
     <h2 class="mt-4">Advices</h2>
     <p>Is the advice from your child’s doctor falling on deaf ears?<br>
-      <strong>A good parent is someone who strives to make decisions in the best interest of the child.
+      <strong>A good parent is someone who strives to make decisions in the best interest of the child. <br> What makes a great parent isn’t only defined by the parent’s action, but also their intention.<br>
 
-        What makes a great parent isn’t only defined by the parent’s action, but also their intention.
+        A good parent doesn’t have to be perfect. No one is perfect. No child is perfect either … keeping this in mind is important when we set our expectations.<br>
 
-        A good parent doesn’t have to be perfect. No one is perfect. No child is perfect either … keeping this in mind is important when we set our expectations.
-
-        Successful parenting is not about achieving perfection. But it doesn’t mean that we shouldn’t work towards that goal. Set high standards for ourselves first and then our children second. We serve as role models for them.
+        Successful parenting is not about achieving perfection. But it doesn’t mean that we shouldn’t work towards that goal. Set high standards for ourselves first and then our children second. We serve as role models for them.<br>
 
         Here are 10 tips on learning good parenting skills and avoiding bad parenting. Many of them are not
-
         quick nor easy. And probably no one can do all of them all of the time. But if you can keep working
         on the tips in this parenting guide, even though you may only do part of these some of the time, you will
         still be moving in the right direction.
 
-      </strong>.
+      </strong>
     </p>
     <?php
 
@@ -332,8 +272,8 @@ if (isset($_POST['delete'])) {
             <?php
             ?>
             <form method="post">
-              <button type="button" onclick="addEdit()" class="btn btn-secondary"><a href="update record.php?id=<?php echo  $advice->get_id(); ?>">EDIT</a> </button>
-              <button type="submit" name="delete" class="btn btn-secondary" value='<?php echo $advice->get_id(); ?>'>DELETE</button>
+              <button type="button" onclick="addEdit()" class="btn btn-info"><a href="update record.php?id=<?php echo  $advice->get_id(); ?>">EDIT</a> </button>
+              <button type="submit" name="delete" class="btn btn-info" value='<?php echo $advice->get_id(); ?>'>DELETE</button>
 
 
 

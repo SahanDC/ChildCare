@@ -26,66 +26,68 @@ include_once('controllers/manager.php');
   <!-- added ********************************************************************************-->
 
   <div class="px-3 py-2 text-black">
-    <div class="container">
-      <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-        <li class="name">
+      <div class="container">
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <li class="name">
             <svg class="bi d-block mx-auto mb-1" width="24" height="24">
               <use xlink:href="#home" />
             </svg>
             <h3>Harshani Bandara</h3>
-        </li>
-        <li class="details"><h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1></li>
-      
-        <li class="details">
-          <a href="manager.php" class="nav-link text-secondary">
+          </li>
+          <li class="details">
+            <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
+          </li>
+
+          <li class="details">
+            <a href="manager.php" class="nav-link text-secondary">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="#home" />
+              </svg>
+              <p class="hover-underline-animation">
+                Home
+              </p>
+            </a>
+          </li>
+
+          <li class="details">
+            <a href="health advices.php" class="nav-link text-black">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="#speedometer2" />
+              </svg>
+              <p class="hover-underline-animation">
+                Health Advice
+              </p>
+            </a>
+          </li>
+          <li class="details">
+            <a href="child report.php" class="nav-link text-black">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="#table" />
+              </svg>
+              <p class="hover-underline-animation">
+                Child Reports
+              </p>
+            </a>
+          </li>
+          <li class="details">
+            <a href="requests.php" class="nav-link text-black">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="#grid" />
+              </svg>
+              <p class="hover-underline-animation">
+                Child Report Request
+              </p>
+            </a>
+          </li>
+          <li class="details">
+            <!-- <a href="profile.php" class="nav-link text-white"> -->
             <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-              <use xlink:href="#home" />
-            </svg>
-            <p class="hover-underline-animation">
-              Home
-            </p>
-          </a>
-        </li>
-        
-        <li class="details">
-          <a href="health advices.php" class="nav-link text-black">
-            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-              <use xlink:href="#speedometer2" />
-            </svg>
-            <p class="hover-underline-animation">
-              Health Advice
-            </p>
-          </a>
-        </li>
-        <li class="details">
-          <a href="child report.php" class="nav-link text-black">
-            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-              <use xlink:href="#table" />
-            </svg>
-            <p class="hover-underline-animation">
-              Child Reports
-            </p>
-          </a>
-        </li>
-        <li class="details">
-          <a href="requests.php" class="nav-link text-black">
-            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-              <use xlink:href="#grid" />
-            </svg>
-            <p class="hover-underline-animation">
-              Child Report Request
-            </p>
-          </a>
-        </li>
-        <li class="details">
-          <!-- <a href="profile.php" class="nav-link text-white"> -->
-          <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-            <use xlink:href="#people-circle" />
-          </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
-        </li>
-      </ul>
+              <use xlink:href="#people-circle" />
+            </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 
 
   <!--header finish-->

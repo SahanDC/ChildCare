@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap"); */
 
-:root {
+/* :root {
     --blue: #0188df;
     --black: #354046;
 }
@@ -16,7 +16,7 @@
     text-transform: capitalize;
     font-weight: 400;
     transition: all 0.2s linear;
-}
+} */
 
 .footer {
     background: var(--black);

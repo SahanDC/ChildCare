@@ -1,0 +1,38 @@
+img .d-block{
+    background-size: cover;
+
+}
+
+.carousel-caption{
+    background: rgb(0, 238, 255, 0.5);
+}
+
+.carousel-caption h1{
+    color: darkblue;
+}
+
+.carousel-caption p{
+    color: rgb(255, 255, 255);
+}
+
+button a:link,
+button a:visited{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+button a:hover{
+    color: black;
+}
+
+.btn-info{
+    color: white;
+}
+
+
+
+#topic_area,
+#content_area{
+    background: rgb(0, 238, 255, 0.5);
+    color: rgb(0, 0, 0);
+}

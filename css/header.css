@@ -1,13 +1,23 @@
 .px-3{
     background-color: rgb(181, 239, 241);
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .px-3 .container .nav .name {
+    /* width: 20%; */
     justify-content: left;
     align-items: left;
 }
 
 .px-3 .container .nav .details{
+    /* width: 80%; */
     justify-content: right;
+}
+
+
+.px-3 .container .nav .details .col-lg-1,
+.px-3 .container .nav .details .col-lg-2,
+.px-3 .container .nav .details .col-lg-3{
     align-items: right;
+    float: left;
 }
