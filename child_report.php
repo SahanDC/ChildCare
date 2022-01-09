@@ -11,8 +11,9 @@ include('controllers/childreport.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
-    <link rel="stylesheet" href="css/child_reportStyle.css">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/child_reportStyle.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <title>Child Report</title>
     <style>
@@ -27,7 +28,8 @@ include('controllers/childreport.php');
             <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
             <nav class="nav">
                 <ul>
-                    <li><a href="midwife.php">Back</a></li>
+                    <li><a href="" id="back" onclick="goBack()">Back</a></li>
+                    <!-- <div class="col bg-primary text-center"><button type="button" id="back" onclick="goBack()" class="btn btn-dark m1-2">BACK</button></div> -->
                     <li><a href="./controllers/logout.php">Log Out</a></li>
                 </ul>
             </nav>
@@ -386,7 +388,7 @@ include('controllers/childreport.php');
                                 location.href = "midwife.php";
                             } else if (user == "manager") {
                                 location.href = "child report.php";
-                            } else if (user = "parent") {
+                            } else if (user == "parent") {
                                 location.href = "dashboard.php";
                             }
                         };

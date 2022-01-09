@@ -2,4 +2,4 @@
 session_start();
 session_destroy();
 
-header("Location: http://localhost/childcare/index.php");
+header("Location: http://localhost/ChildCare/index.php");
