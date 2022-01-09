@@ -380,18 +380,18 @@ include('controllers/childreport.php');
                         }
                     </script>
                     <script>
-                        document.getElementById("back").onclick = function() {
-                            let user = <?php echo json_encode($_SESSION['role']); ?>;
-                            if (user == "midwife") {
-                                location.href = "midwife.php";
-                            } else if (user == "manager") {
-                                location.href = "child report.php";
-                            } else if (user = "parent") {
-                                location.href = "dashboard.php";
-                            }
-                        };
-
-                        // }   
+                        function editVaccination(e) {
+                            document.getElementById("back").href = function() {
+                                let user = <?php echo json_encode($_SESSION['role']); ?>;
+                                if (user == "midwife") {
+                                    "midwife.php";
+                                } else if (user == "manager") {
+                                    "child report.php";
+                                } else if (user = "parent") {
+                                    "dashboard.php";
+                                }
+                            };
+                        }
                     </script>
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>

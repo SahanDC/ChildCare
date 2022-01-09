@@ -1,5 +1,6 @@
 <?php
 require_once('models/user.php');
+require_once('models/AdviceObserver.php');
 
 class Midwife extends User implements AdviceObserver
 {

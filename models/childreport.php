@@ -12,6 +12,7 @@ class ChildReport
     private $name;
     private $age;
     private $guardian;
+    private $requestId;
     private $area;
     private $centre;
     private $NVD;
@@ -19,8 +20,9 @@ class ChildReport
     private $last_vaccination;
     private $weights;
     protected $vaccine_data;
+    private static $child_reports = array();
 
-    public function __construct($childid)
+    private function __construct($childid)
     {
         $this->ChildId = trim($childid);
         $this->database = new Dbh();
@@ -69,6 +71,16 @@ class ChildReport
     public function setGuardian($guardian)
     {
         $this->guardian = $guardian;
+        return $this;
+    }
+
+    public function getRequestId()
+    {
+        return $this->requestId;
+    }
+    public function setRequestID($requestId)
+    {
+        $this->requestId = $requestId;
         return $this;
     }
 
@@ -142,6 +154,19 @@ class ChildReport
         return $this;
     }
 
+        //----------------------- get child report --------------------------------------
+        public static function getChildreport($childid){
+            if (array_key_exists($childid,self :: $child_reports)){
+                if(!empty(self :: $child_reports[$childid])){
+                    return self:: $child_reports[$childid];
+                }else{
+                    return new ChildReport($childid);
+                }
+            }else{
+                return new ChildReport($childid);
+            }
+        }
+    
 
     //----------------------data view functiins--------------------------------------- 
 
@@ -342,6 +367,7 @@ class ChildReport
                 $this->name = $report["Name"];
                 $this->age = round((strtotime(date("Y-m-d", time())) - strtotime($report['Birthday'])) / (60 * 60 * 24 * 30));
                 $this->guardian = $report["Guardian"];
+                $this->requestId = $report["RequestId"];
                 $this->area = $report["Area"];
                 $this->centre = $report["Centre"];
                 $this->NVD = $report["NVD"];
@@ -408,6 +434,6 @@ class ChildReport
             }
         }
 
-        $requestObj->createReport();
+        //$requestObj->createReport();
     }
 }
