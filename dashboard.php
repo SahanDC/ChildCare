@@ -62,9 +62,9 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
 
 <body>
     <!-- header section starts  -->
-    <!-- <header style="background-color: rgb(181, 239, 241);">
+    <header style="background-color: rgb(181, 239, 241);">
         <div class="container" style="background-color: rgb(181, 239, 241);">
-            <h1>Hello <?php //echo $_SESSION["firstname"] . " " . $_SESSION["lastname"] 
+            <h1>Hello <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]
                         ?></h1>
             <nav class="nav">
                 <ul>
@@ -75,10 +75,10 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
             </nav>
             <div class="fas fa-bars"></div>
         </div>
-    </header> -->
+    </header>
     <!-- header section ends  -->
 
-    <nav class=" navbar sticky-top navbar-expand-sm navbar-light mb-4 bg-light">
+    <!-- <nav class=" navbar sticky-top navbar-expand-sm navbar-light mb-4 bg-light">
         <div class="container">
             <a class="navbar-brand" href="./dashboard.php">Child Care Management System</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,34 +92,35 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
 
                     <li class="nav-item px-3">
                         <a class="nav-link" href="./advice.php">Medical Advices</a>
-                    </li>
-                    <!-- <li class="nav-item px-3">
+                    </li> -->
+    <!-- <li class="nav-item px-3">
                         <a class="nav-link" href="./controllers/logout.php">Log out</a>
                     </li> -->
-                    <li class="nav-item dropdown">
+    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="far fa-user-circle p-1"></i><?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"] ?>
+                            <i class="far fa-user-circle p-1"></i><?php //echo $_SESSION["firstname"] . " " . $_SESSION["lastname"] 
+                                                                    ?>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <!-- <li><a class="dropdown-item" href="#">Account</a></li> -->
-                            <!-- <li><a class="dropdown-item" href="#">Another action</a></li> -->
-                            <!-- <li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+    <!-- <li><a class="dropdown-item" href="#">Account</a></li> -->
+    <!-- <li><a class="dropdown-item" href="#">Another action</a></li> -->
+    <!-- <li>
                                 <hr class="dropdown-divider">
                             </li> -->
-                            <li><a class="dropdown-item" href="./controllers/logout.php">Log out</a></li>
+    <!-- <li><a class="dropdown-item" href="./controllers/logout.php">Log out</a></li>
                         </ul>
-                    </li>
-                    <!-- <li class="nav-item">
+                    </li> -->
+    <!-- <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li> -->
-                </ul>
-                <!-- <form class="d-flex">
+    <!-- </ul> -->
+    <!-- <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form> -->
-            </div>
+    <!-- </div>
         </div>
-    </nav>
+    </nav> -->
     <!-- <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd">
         <div class="container-fluid">
             <a class="navbar-brand" href="./dashboard.php">Child Care</a>
@@ -136,20 +137,22 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
             </div>
         </div>
     </nav> -->
-
+    <br>
+    <br>
+    <br>
     <div class="container-xxl px-5">
 
 
 
-        <div class="row">
+        <div class="row" id="main">
 
 
-            <div class="col-xl-6 col-lg-6 order-2 order-lg-2 px-4">
+            <div class="col-xl-6 col-lg-6 order-2 order-lg-2 px-4 border-start border-dark">
                 <div class="container-xl mt-3 mb-3">
                     <!-- {$_SESSION["id"]} -->
                     <?php $requests = $parentObj->getRequestsByParent($_SESSION["id"]);
                     $count = 0; ?>
-                    <h5 class="row justify-content-center mb-3">Child Report Requests</h5>
+                    <h5 class="row justify-content-center mb-3" id="topic">Child Report Requests</h5>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
 
                         <?php foreach ($requests as $request) { ?>
@@ -257,7 +260,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
 
                     <div class="row mx-auto w-75">
 
-                        <button class="btn btn-outline-success" onclick="enable_upload()">Open New Child Report <i id="icon" class="fas fa-chevron-circle-down px-2"></i></button>
+                        <button class="btn btn-info" onclick="enable_upload()">Open New Child Report <i id="icon" class="fas fa-chevron-circle-down px-2"></i></button>
                     </div>
                     <!-- <a class="btn btn-light" href="">Child Reports</a> -->
 
@@ -308,7 +311,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                     // child_reports = $connection->query("SELECT * FROM child_report WHERE GuardianId = '{$_SESSION["id"]}' ORDER BY Birthday ASC");
                     // if ($child_reports->num_rows > 0) { 
                     ?>
-                    <h5 class="row justify-content-center mb-3">Child Reports</h5>
+                    <h5 class="row justify-content-center mb-3" id="topic">Child Reports</h5>
                     <?php
                     // while ($row = $child_reports->fetch_assoc()) {
                     foreach ($reports as $row) {
@@ -317,7 +320,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
 
                             <div class="card mb-3">
                                 <!-- <h5 class="card-header bg-white text-dark d-flex justify-content-center p-2"><?php echo $row["Name"] ?></h5> -->
-                                <div class="card-body bg-light">
+                                <div class="card-body">
                                     <!-- border border-1 border-light rounded-3 -->
                                     <!-- <h5 class="card-title row justify-content-center my-2 p-2"></h5> -->
                                     <?php if ($row['NVD'] != '') { ?>
@@ -368,7 +371,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                                         <p class="card-text m-0">Next weight recording: <?php echo $next_weight_date ?></p>
                                     <?php } ?>
                                     <div class="text-center mt-2">
-                                        <a href="./child_report.php/?ChildId=<?php echo $row["ChildId"] ?>" class="btn btn-outline-dark">View Child Report</a>
+                                        <a href="./child_report.php/?ChildId=<?php echo $row["ChildId"] ?>" class="btn btn-info">View Child Report</a>
                                     </div>
                                 </div>
                             </div>

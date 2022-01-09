@@ -1,5 +1,5 @@
 body{
-    background-image: url(../img/hospiytal.jpg);
+    background-image: url(../img/parentphoto1.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -100,7 +100,11 @@ header .fa-bars {
     display: none;
 }
 
-.container-xxl{
-    background-color: blueviolet;
-
+#main{
+    background-color: rgb(43, 189, 247, 0.3);
 }
+
+#topic{
+    font-weight: bold;
+}
+
