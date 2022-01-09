@@ -69,7 +69,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
             <nav class="nav">
                 <ul>
                     <li><a href="login.php">Home</a></li>
-                    <li><a href="parents health advices.php">See Medical Advice</a></li>
+                    <li><a href="health advices.php">See Medical Advice</a></li>
                     <li><a href="./controllers/logout.php">log Out</a></li>
                 </ul>
             </nav>
@@ -326,15 +326,17 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                                     <?php if ($row['NVD'] != '') { ?>
 
                                         <?php if (0 > (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
-                                            <p class="alert-auto alert-danger text-center p-1 mb-0">Vaccination on <?php echo $row['NVD']; ?> missed</p>
+                                            <p class="alert-auto alert-danger text-center p-1 mb-0">Vaccination on <?php echo $row['NVD']; ?> missed</p><br>
+                                            
                                         <?php } ?>
                                         <?php if (14 >= (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 && 0 <= (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
                                             <p class="alert-auto alert-warning text-center p-1 mb-0"><?php echo (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400;
-                                                                                                        ?> days more for next vaccination</p>
+                                                                                                        ?> days more for next vaccination</p><br>
                                         <?php } ?>
+                                        
                                         <?php if (14 < (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
                                             <p class="alert-auto alert-success text-center p-1 mb-0"><?php echo (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400;
-                                                                                                        ?> days more for next vaccination</p>
+                                                                                                        ?> days more for next vaccination</p><br>
                                         <?php } ?>
                                     <?php } else { ?>
                                         <p class="alert alert-light text-center"></p>

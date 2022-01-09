@@ -1,6 +1,8 @@
 <?php require_once('config/db.php');
 require_once('models/manager.php');
 
+$user = $_SESSION['role'];
+
 $manager = new Manager($connection, $_SESSION['id'], $_SESSION['firstname'] . " " . $_SESSION['lastname'], $_SESSION['email']);
 $advices = $manager->get_advices();
 
@@ -44,6 +46,11 @@ if (isset($_POST['delete'])) {
   <link href="css/footer.css" rel="stylesheet">
   <link href="css/header.css" rel="stylesheet">
   <link href="css/healthAdviceStyle.css" rel="stylesheet">
+  <?php
+  if (!strcmp($user, "parent")) { ?>
+    <link rel="stylesheet" href="./css/dashboardStyle.css">
+  <?php
+  } ?>
 
   <title>Health advices</title>
   <title>Document</title>
@@ -66,71 +73,96 @@ if (isset($_POST['delete'])) {
 
 
   <!--header start-->
-  <header>
-    <div class="px-3 py-2 text-black">
-      <div class="container">
-        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-          <li class="name">
-            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-              <use xlink:href="#home" />
-            </svg>
-            <h3>Harshani Bandara</h3>
-          </li>
-          <li class="details">
-            <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
-          </li>
-
-          <li class="details">
-            <a href="manager.php" class="nav-link text-secondary">
+  <?php
+  if (!strcmp($user, "manager")) { ?>
+    <header>
+      <div class="px-3 py-2 text-black">
+        <div class="container">
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li class="name">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                 <use xlink:href="#home" />
               </svg>
-              <p class="hover-underline-animation">
-                Home
-              </p>
-            </a>
-          </li>
+              <h3>Harshani Bandara</h3>
+            </li>
+            <li class="details">
+              <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
+            </li>
 
-          <li class="details">
-            <a href="health advices.php" class="nav-link text-black">
+            <li class="details">
+              <a href="manager.php" class="nav-link text-secondary">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                  <use xlink:href="#home" />
+                </svg>
+                <p class="hover-underline-animation">
+                  Home
+                </p>
+              </a>
+            </li>
+
+            <li class="details">
+              <a href="health advices.php" class="nav-link text-black">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                  <use xlink:href="#speedometer2" />
+                </svg>
+                <p class="hover-underline-animation">
+                  Health Advice
+                </p>
+              </a>
+            </li>
+            <li class="details">
+              <a href="child report.php" class="nav-link text-black">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                  <use xlink:href="#table" />
+                </svg>
+                <p class="hover-underline-animation">
+                  Child Reports
+                </p>
+              </a>
+            </li>
+            <li class="details">
+              <a href="requests.php" class="nav-link text-black">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                  <use xlink:href="#grid" />
+                </svg>
+                <p class="hover-underline-animation">
+                  Child Report Request
+                </p>
+              </a>
+            </li>
+            <li class="details">
+              <!-- <a href="profile.php" class="nav-link text-white"> -->
               <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#speedometer2" />
-              </svg>
-              <p class="hover-underline-animation">
-                Health Advice
-              </p>
-            </a>
-          </li>
-          <li class="details">
-            <a href="child report.php" class="nav-link text-black">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#table" />
-              </svg>
-              <p class="hover-underline-animation">
-                Child Reports
-              </p>
-            </a>
-          </li>
-          <li class="details">
-            <a href="requests.php" class="nav-link text-black">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#grid" />
-              </svg>
-              <p class="hover-underline-animation">
-                Child Report Request
-              </p>
-            </a>
-          </li>
-          <li class="details">
-            <!-- <a href="profile.php" class="nav-link text-white"> -->
-            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-              <use xlink:href="#people-circle" />
-            </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
-          </li>
-        </ul>
+                <use xlink:href="#people-circle" />
+              </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
+  <?php
+  }
+  ?>
+
+  <?php
+  if (!strcmp($user, "parent")) { ?>
+    <header style="background-color: rgb(181, 239, 241);">
+      <div class="container" style="background-color: rgb(181, 239, 241);">
+        <h1>Hello <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]
+                  ?></h1>
+        <nav class="nav">
+          <ul>
+            <li><a href="login.php">Home</a></li>
+            <li><a href="parents health advices.php">See Medical Advice</a></li>
+            <li><a href="./controllers/logout.php">log Out</a></li>
+          </ul>
+        </nav>
+        <div class="fas fa-bars"></div>
+      </div>
+    </header>
+  <?php
+  }
+  ?>
   <!--header finish-->
   <br>
   <!-- <div class="container">
@@ -203,41 +235,47 @@ if (isset($_POST['delete'])) {
   </div>
   <!--slider finish-->
 
-  <!--add advice button-->
-  <!-- Button trigger modal -->
-  <div class="container">
-    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Add New Advice
-    </button>
 
-    <!-- Modal -->
+  <?php
+  if (!strcmp($user, "manager")) { ?>
+    <!--add advice button-->
+    <!-- Button trigger modal -->
+    <div class="container">
+      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add New Advice
+      </button>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Advice</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Modal -->
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Advice</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="" method="POST">
+
+              <div class="modal-body">
+                <div class="col-md-12"><label class="labels">Advice Topic</label><textarea class="form-control" id="topic_area" name="topic" rows="3" placeholder="enter advice topic here. " required></textarea></div>
+                <div class="col-md-12"><label class="labels">Advice content </label><textarea class="form-control" id="content_area" name="content" rows="8" placeholder="enter advice content here. " required></textarea></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" name="submit"><input type="submit" class="btn btn-info" value="submit" name="submit"></button>
+              </div>
+            </form>
+            <!-- finish -->
           </div>
-
-          <form action="" method="POST">
-
-            <div class="modal-body">
-              <div class="col-md-12"><label class="labels">Advice Topic</label><textarea class="form-control" id="topic_area" name="topic" rows="3" placeholder="enter advice topic here. " required></textarea></div>
-              <div class="col-md-12"><label class="labels">Advice content </label><textarea class="form-control" id="content_area" name="content" rows="8" placeholder="enter advice content here. " required></textarea></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-info" name="submit"><input type="submit" class="btn btn-info" value="submit" name="submit"></button>
-            </div>
-          </form>
-          <!-- finish -->
         </div>
       </div>
     </div>
-  </div>
 
-  <!--finish add advice-->
-  <!--advices grid-->
+    <!--finish add advice-->
+    <!--advices grid-->
+  <?php
+  }
+  ?>
 
   <div class="container">
 
@@ -270,18 +308,18 @@ if (isset($_POST['delete'])) {
           <p><?php echo $advice->get_content();
 
               ?></p>
-          <div class="container">
 
-            <?php
-            ?>
+          <?php
+          if (!strcmp($user, "manager")) { ?>
+            <div class="container">
             <form method="post">
               <button type="button" onclick="addEdit()" class="btn btn-info"><a href="update record.php?id=<?php echo  $advice->get_id(); ?>">EDIT</a> </button>
               <button type="submit" name="delete" class="btn btn-info" value='<?php echo $advice->get_id(); ?>'>DELETE</button>
-
-
-
             </form>
           </div>
+          <?php
+          } ?>
+
         </div>
       </div>
 
