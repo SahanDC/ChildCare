@@ -1,6 +1,6 @@
 <?php
 include_once('config/db.php');
-
+include_once('controllers/autoloader.php');
 // if ($_SESSION['role'] == 'parent') {
 //     header("Location: ./dashboard.php");
 // }
@@ -62,7 +62,7 @@ $place_Men = '';
 $comment_Men = '';
 
 $errors = array();
-
+$manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
 function check_req_fields($req_fields)
 {
     // checks required fields
@@ -99,83 +99,84 @@ if (isset($_POST['submit'])) {
     $center = $_POST['center'];
     $midwife_email = $_POST['midwife_email'];
     $NVD = $_POST['NVD'];
+    $vaccines = array();
 
     $date_BCG = $_POST['date_BCG'];
     $place_BCG = $_POST['place_BCG'];
     $comment_BCG = $_POST['comment_BCG'];
     $BCG = ($date_BCG == '' && $place_BCG == '') ? '' : date("Y/m/d", strtotime($date_BCG)) . '_' . $place_BCG . '_' . $comment_BCG;
-    echo $BCG;
+    array_push($vaccines,$BCG);
+    //echo $BCG;
 
     $date_triple = $_POST['date_triple'];
     $place_triple = $_POST['place_triple'];
     $comment_triple = $_POST['comment_triple'];
     $triple = ($date_triple == '' && $place_triple == '') ? '' : date("Y/m/d", strtotime($date_triple)) . '_' . $place_triple . '_' . $comment_triple;
-
+    array_push($vaccines,$triple);
 
     $date_triple_polio = $_POST['date_triple_polio'];
     $place_triple_polio = $_POST['place_triple_polio'];
     $comment_triple_polio = $_POST['comment_triple_polio'];
     $triple_polio = ($date_triple_polio == '' && $place_triple_polio == '') ? '' : date("Y/m/d", strtotime($date_triple_polio)) . '_' . $place_triple_polio . '_' . $comment_triple_polio;
-
+    array_push($vaccines,$triple_polio);
 
     $date_MMR = $_POST['date_MMR'];
     $place_MMR = $_POST['place_MMR'];
     $comment_MMR = $_POST['comment_MMR'];
     $MMR = ($date_MMR == '' && $place_MMR == '') ? '' : date("Y/m/d", strtotime($date_MMR)) . '_' . $place_MMR . '_' . $comment_MMR;
-
+    array_push($vaccines,$MMR);
 
     $date_JE = $_POST['date_JE'];
     $place_JE = $_POST['place_JE'];
     $comment_JE = $_POST['comment_JE'];
     $JE = ($date_JE == '' && $place_JE == '') ? '' : date("Y/m/d", strtotime($date_JE)) . '_' . $place_JE . '_' . $comment_JE;
-
+    array_push($vaccines,$JE);
 
     $date_dual_polio = $_POST['date_dual_polio'];
     $place_dual_polio = $_POST['place_dual_polio'];
     $comment_dual_polio = $_POST['comment_dual_polio'];
     $dual_polio = ($date_dual_polio == '' && $place_dual_polio == '') ? '' : date("Y/m/d", strtotime($date_dual_polio)) . '_' . $place_dual_polio . '_' . $comment_dual_polio;
-
+    array_push($vaccines,$dual_polio);
 
     $date_HAB = $_POST['date_HAB'];
     $place_HAB = $_POST['place_HAB'];
     $comment_HAB = $_POST['comment_HAB'];
     $HAB = ($date_HAB == '' && $place_HAB == '') ? '' : date("Y/m/d", strtotime($date_HAB)) . '_' . $place_HAB . '_' . $comment_HAB;
-
+    array_push($vaccines,$HAB);
 
     $date_AR = $_POST['date_AR'];
     $place_AR = $_POST['place_AR'];
     $comment_AR = $_POST['comment_AR'];
     $AR = ($date_AR == '' && $place_AR == '') ? '' : date("Y/m/d", strtotime($date_AR)) . '_' . $place_AR . '_' . $comment_AR;
-
+    array_push($vaccines,$AR);
 
     $date_CP = $_POST['date_CP'];
     $place_CP = $_POST['place_CP'];
     $comment_CP = $_POST['comment_CP'];
     $CP = ($date_CP == '' && $place_CP == '') ? '' : date("Y/m/d", strtotime($date_CP)) . '_' . $place_CP . '_' . $comment_CP;
-
+    array_push($vaccines,$CP);
 
     $date_Men = $_POST['date_Men'];
     $place_Men = $_POST['place_Men'];
     $comment_Men = $_POST['comment_Men'];
     $Men = ($date_Men == '' && $place_Men == '') ? '' : date("Y/m/d", strtotime($date_Men)) . '_' . $place_Men . '_' . $comment_Men;
+    array_push($vaccines,$Men);
 
+    $manager->createChildReport($child_name,$birthday,$guardian,$guardian_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
+    // $not_null = array('child_name', 'birthday', 'guardian', 'guardian_id', 'birth_place', 'area', 'center', 'midwife_email');
+    // $errors = array_merge($errors, check_req_fields($not_null));
 
-    $not_null = array('child_name', 'birthday', 'guardian', 'guardian_id', 'birth_place', 'area', 'center', 'midwife_email');
-    $errors = array_merge($errors, check_req_fields($not_null));
+    // $query = "INSERT INTO child_report(Name, Birthday, Guardian, GuardianId, BirthPlace, Area, Centre, MidwifeEmail, NVD, BCG, Triple, Triple_Polio, MMR, Japanese_Encephalitis, Dual_Polio, Hepatitis_AB, Anti_Rabies, Chicken_Pox, Meningicoccal) VALUES('{$child_name}','{$birthday}','{$guardian}','{$guardian_id}','{$birth_place}','{$area}','{$center}','{$midwife_email}','{$NVD}', '{$BCG}', '{$triple}','{$triple_polio}','{$MMR}','{$JE}','{$dual_polio}','{$HAB}','{$AR}','{$CP}','{$Men}')";
 
-    $query = "INSERT INTO child_report(Name, Birthday, Guardian, GuardianId, BirthPlace, Area, Centre, MidwifeEmail, NVD, BCG, Triple, Triple_Polio, MMR, Japanese_Encephalitis, Dual_Polio, Hepatitis_AB, Anti_Rabies, Chicken_Pox, Meningicoccal) VALUES('{$child_name}','{$birthday}','{$guardian}','{$guardian_id}','{$birth_place}','{$area}','{$center}','{$midwife_email}','{$NVD}', '{$BCG}', '{$triple}','{$triple_polio}','{$MMR}','{$JE}','{$dual_polio}','{$HAB}','{$AR}','{$CP}','{$Men}')";
+    // if (empty($errors)) {
+    //     $insert_query = mysqli_query($connection, $query);
 
-    if (empty($errors)) {
-        $insert_query = mysqli_query($connection, $query);
-
-        if ($insert_query) {
-            header('Location:midwife.php?'); 
-        } else {
-            $errors[] = 'Failed to Add a report';
-        }
-    }
-    
-
+    //     if ($insert_query) {
+    //         header('Location:midwife.php?'); 
+    //     } else {
+    //         $errors[] = 'Failed to Add a report';
+    //     }
+    // }
     
 }
 
@@ -203,8 +204,8 @@ if (isset($_POST['submit'])) {
     </nav>
 
     <?php
-    if (!empty($errors)) {
-        display_errors($errors);
+    if (!empty($manager->Errors)) {
+        display_errors($manager->Errors);
     }
     ?>
 
