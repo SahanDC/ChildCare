@@ -92,12 +92,28 @@ class Request
         $this->clinic_card = $request['clinic_card'];
         $this->uploaded_on = $request['uploaded_on'];
 
-        if ($request['status'] == 'New') {
-            $this->status = new NewRequest();
-        }
+        // if ($request['status'] == 'New') {
+        //     $this->status = new NewRequest();
+        // }
 
-        if ($request['status'] == 'Invalid') {
-            $this->status = new Invalid();
+        // if ($request['status'] == 'Invalid') {
+        //     $this->status = new Invalid();
+        // }
+
+        $st = $request['status'];
+        switch ($st) {
+            case $st == 'New':
+                $this->status = new NewRequest();
+                break;
+            case $st == 'Invalid':
+                $this->status = new Invalid();
+                break;
+            case $st == 'Valid':
+                $this->status = new Valid();
+                break;
+            case $st == 'Created':
+                $this->status = new Created();
+                break;
         }
 
         return $this->status->validate($this);
@@ -113,12 +129,27 @@ class Request
         $this->clinic_card = $request['clinic_card'];
         $this->uploaded_on = $request['uploaded_on'];
 
-        if ($request['status'] == 'New') {
-            $this->status = new NewRequest();
-        }
+        // if ($request['status'] == 'New') {
+        //     $this->status = new NewRequest();
+        // }
 
-        if ($request['status'] == 'Valid') {
-            $this->status = new Valid();
+        // if ($request['status'] == 'Valid') {
+        //     $this->status = new Valid();
+        // }
+        $st = $request['status'];
+        switch ($st) {
+            case $st == 'New':
+                $this->status = new NewRequest();
+                break;
+            case $st == 'Invalid':
+                $this->status = new Invalid();
+                break;
+            case $st == 'Valid':
+                $this->status = new Valid();
+                break;
+            case $st == 'Created':
+                $this->status = new Created();
+                break;
         }
 
         return $this->status->decline($this);
@@ -134,10 +165,26 @@ class Request
         $this->clinic_card = $request['clinic_card'];
         $this->uploaded_on = $request['uploaded_on'];
 
-        if ($request['status'] == 'Valid') {
-            $this->status = new Valid();
-            $this->status->createReport($this);
+        // if ($request['status'] == 'Valid') {
+        //     $this->status = new Valid();
+        // }
+        $st = $request['status'];
+        switch ($st) {
+            case $st == 'New':
+                $this->status = new NewRequest();
+                break;
+            case $st == 'Invalid':
+                $this->status = new Invalid();
+                break;
+            case $st == 'Valid':
+                $this->status = new Valid();
+                break;
+            case $st == 'Created':
+                $this->status = new Created();
+                break;
         }
+
+        $this->status->createChildReport($this);
         // return $this->connection->query("UPDATE request set status = 'Invalid' where id = $id");
     }
 }
@@ -147,7 +194,7 @@ abstract class State
 {
     public abstract function validate($request);
     public abstract function decline($request);
-    public abstract function createReport($request);
+    public abstract function createChildReport($request);
 }
 
 class NewRequest extends State
@@ -160,9 +207,11 @@ class NewRequest extends State
     {
         return $request->setStatus(new Invalid());
     }
-    public function createReport($request)
+    public function createChildReport($request)
     {
-        echo "transition cannot be done from current state";
+        return $request->setStatus(new Created());
+
+        // echo "transition cannot be done from current state";
     }
 }
 class Created extends State
@@ -175,7 +224,7 @@ class Created extends State
     {
         echo "transition cannot be done from current state";
     }
-    public function createReport($request)
+    public function createChildReport($request)
     {
         echo "transition cannot be done from current state";
     }
@@ -190,7 +239,7 @@ class Invalid extends State
     {
         echo "transition cannot be done from current state";
     }
-    public function createReport($request)
+    public function createChildReport($request)
     {
         echo "transition cannot be done from current state";
     }
@@ -205,7 +254,7 @@ class Valid extends State
     {
         return $request->setStatus(new Invalid());
     }
-    public function createReport($request)
+    public function createChildReport($request)
     {
         return $request->setStatus(new Created());
     }

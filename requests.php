@@ -13,7 +13,7 @@ if ($_SESSION['role'] == 'midwife') {
 $requestObj = new Request($connection);
 
 if (isset($_POST['valid'])) {
-    $requestObj->validateDocuments($_POST['reqId']);
+    $requestObj->createReport($_POST['reqId']);
     // $connection->query("UPDATE request set status = 'Valid' where id = '{$_POST['reqId']}'");
 }
 

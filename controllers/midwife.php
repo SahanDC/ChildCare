@@ -18,10 +18,10 @@ $mail = $_SESSION['email'];
 
 $_SESSION['type'] = 'Midwife';
 
-$midwifeObj = new Midwife($connection, $email);
+$midwifeObj = new Midwife($connection, $mail);
 $details = $midwifeObj->getDetails();
 
-$midwifeObj2 = new Midwife($connection, $email);
+$midwifeObj2 = new Midwife($connection, $mail);
 $childReportDetails = $midwifeObj2->getChildReportDetails($mail, $search);
 $vaccinateWithinTwoWeeks = $midwifeObj2->getChildReportDetails($mail, '');
 $vaccinationMissed = $midwifeObj2->getChildReportDetails($mail, '');
