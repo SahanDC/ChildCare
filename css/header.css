@@ -1,0 +1,13 @@
+.px-3{
+    background-color: rgb(181, 239, 241);
+}
+
+.px-3 .container .nav .name {
+    justify-content: left;
+    align-items: left;
+}
+
+.px-3 .container .nav .details{
+    justify-content: right;
+    align-items: right;
+}

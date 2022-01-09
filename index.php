@@ -180,6 +180,8 @@ if (isset($_SESSION['login'])) {
 </section>
 
 
+<!-- footer section starts -->
+
 
 <section class="footer">
 

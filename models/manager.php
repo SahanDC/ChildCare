@@ -130,12 +130,12 @@ class manager
         $this->notifyAllObservers($topic, $content);
     }
 
-    public function getRequestById($id)
-    {
-        $query = $this->connection->query("SELECT * FROM request where id = $id");
-        $request = $query->fetch_assoc();
-        return $request;
-    }
+    // public function getRequestById($id)
+    // {
+    //     $query = $this->connection->query("SELECT * FROM request where id = $id");
+    //     $request = $query->fetch_assoc();
+    //     return $request;
+    // }
 
     public function getRequests()
     {
@@ -162,7 +162,7 @@ class manager
         }
 
         while ($row = $query->fetch_assoc()) {
-            $childreport = new ChildReport($row['ChildId']);
+            $childreport = ChildReport:: getChildreport($row['ChildId']);
             $childreport->addDetails($row);
 
             $this->childReport_array[$row['ChildId']] = $childreport;
@@ -186,22 +186,21 @@ class manager
         }
     }
 
-    //--------------------------error handilig functions --------------------------
-    // checks required fields
-    private function check_req_fields($req_fields, $field_names)
-    {
-        for ($i = 0; $i < sizeof($req_fields); $i++) {
-            if (empty(trim($req_fields[$i]))) {
-                array_push($this->Errors, $field_names[$i] . ' is required.');
+    public function createChildReport($child_name,$birthday,$guardian,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines){
+        $requestobj = new Request($this->connection);
+        $request = $requestobj->getRequestById($Request_id);
+        $guardianId = $request['parent_id'];
+            $childreport = ChildReport::cloneChildreport();
+            if($request['clinic_card']!=null){
+                $errors=$childreport->createChildReport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
+            }else{
+                $errors=$childreport->createChildReport_Noreport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD);
             }
+        array_merge($this->Errors,$errors);
+        if(empty($errors)){
+            $requestobj->createReport($Request_id);
+            array_push($this->Errors,"change state");
         }
-    }
-
-
-    private function checkLength($field, $len, $field_name)
-    {
-        if (strlen($field) > $len) {
-            array_push($this->Errors, $field_name . " is too long.");
-        }
+        return $this->Errors;
     }
 }
