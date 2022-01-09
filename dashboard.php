@@ -1,7 +1,7 @@
 <?php include('config/db.php');
 include('controllers/upload.php');
 require_once('models/request.php');
-require_once('models/parent.php');
+require_once('models/user_parent.php');
 
 if (!isset($_SESSION['login'])) {
     header("Location: ./login.php");
