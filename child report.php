@@ -183,10 +183,10 @@ $ChildReports = $manager->getChildreports($search);
     <?php if (!empty($ChildReports)) {
       foreach ($ChildReports as $id => $ChildReport) {
     ?>
-        <a href="child_report.php?ChildId= <?php echo $ChildReport->getChildId(); ?>">
+        <a  id="<?php echo $ChildReport->getChildId(); ?>" onclick="directChildreport(this)">
           <div class="row mb-4">
             <div class="col-3 themed-grid-col"><?php echo $ChildReport->getChildId(); ?>
-        </a>
+
   </div>
   <div class="col-3 themed-grid-col"><?php echo $ChildReport->getName(); ?></div>
   <div class="col-3 themed-grid-col"><?php echo $ChildReport->getCentre(); ?></div>
@@ -223,6 +223,17 @@ $ChildReports = $manager->getChildreports($search);
         <a href="#">Linkedin</a>
         <a href="#">Github</a>
       </div>
+  </footer>
+</div>
+
+
+<script>
+  function directChildreport(e){
+    e.onclick =function(){
+      window.location = "child_report.php?ChildId= ".concat(e.id);
+    };
+  }
+</script>
 
     </div>
 
