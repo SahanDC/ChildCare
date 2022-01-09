@@ -447,4 +447,28 @@ class ChildReport
         return $this->Errors;
         //$requestObj->createReport();
     }
+    public function createChildReport_Noreport($child_name, $birthday, $guardian, $guardian_id,$Request_id,$birth_place, $area, $center, $midwife_email, $NVD)
+    {
+        $vaccine_name = array("BCG Vaccine", "Triple Vaccine", "Triple/Polio Vaccine", "MMR Vaccine", "Japanese Encephalitis Vaccine", "Dual Polio Vaccine", "Hepatitis A, B Vaccine (there are separate vaccines for both A and B as well)", "Anti Rabies Vaccine", "Chicken Pox Vaccine", "Meningicoccal Vaccine");
+        $req_fields = array($child_name, $birthday, $guardian, $guardian_id,$Request_id,$birth_place, $area, $center, $midwife_email, $NVD);
+        $field_names = array("Name", "Birthday", "Guardian", "Guardian ID","Request Id", "Birth Place", "Area", "Centre", "Midwife email", "Next vaccination date");
+        $this->check_req_fields($req_fields, $field_names);
+        // print_r($vaccines);
+
+        if (empty($this->Errors)) {
+            $query = "INSERT INTO child_report(Name, Birthday, Guardian, GuardianId, RequestId, BirthPlace, Area, Centre, MidwifeEmail, NVD) VALUES('{$child_name}','{$birthday}','{$guardian}','{$guardian_id}','{$Request_id}','{$birth_place}','{$area}','{$center}','{$midwife_email}','{$NVD}')";
+            if (empty($errors)) {
+                $insert_query = mysqli_query($this->database->connect(), $query);
+
+                if ($insert_query) {
+                    header('Location:manager.php');
+                } else {
+                    $errors[] = 'Failed to Add a report';
+                }
+            }
+        }
+        return $this->Errors;
+        //$requestObj->createReport();
+    }
+
 }

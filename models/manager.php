@@ -131,12 +131,12 @@ class manager
         $this->notifyAllObservers($topic, $content);
     }
 
-    public function getRequestById($id)
-    {
-        $query = $this->connection->query("SELECT * FROM request where id = $id");
-        $request = $query->fetch_assoc();
-        return $request;
-    }
+    // public function getRequestById($id)
+    // {
+    //     $query = $this->connection->query("SELECT * FROM request where id = $id");
+    //     $request = $query->fetch_assoc();
+    //     return $request;
+    // }
 
     public function getRequests()
     {
@@ -188,10 +188,20 @@ class manager
     }
 
     public function createChildReport($child_name,$birthday,$guardian,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines){
-        $request = $this->getRequestById($Request_id);
+        $requestobj = new Request($this->connection);
+        $request = $requestobj->getRequestById($Request_id);
         $guardianId = $request['parent_id'];
-        $childreport = ChildReport::cloneChildreport();
-        $ereors=$childreport->createChildReport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
-        array_merge($this->Errors,$ereors);
+            $childreport = ChildReport::cloneChildreport();
+            if($request['clinic_card']!=null){
+                $errors=$childreport->createChildReport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
+            }else{
+                $errors=$childreport->createChildReport_Noreport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD);
+            }
+        array_merge($this->Errors,$errors);
+        if(empty($errors)){
+            $requestobj->createReport($Request_id);
+            array_push($this->Errors,"change state");
+        }
+        return $this->Errors;
     }
 }
