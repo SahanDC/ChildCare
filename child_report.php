@@ -27,8 +27,8 @@ include('controllers/childreport.php');
             <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
             <nav class="nav">
                 <ul>
-                    <li><a href="midwife.php">Back</a></li>
-                    <li><a href="./controllers/logout.php">Log Out</a></li>
+                    <li><a href='' id="back" onclick="goBack()" >Back</a></li>
+                    <li><a href="http://localhost/Childcare/controllers/logout.php">Log Out</a></li>
                 </ul>
             </nav>
             <div class="fas fa-bars"></div>
@@ -380,17 +380,15 @@ include('controllers/childreport.php');
                         }
                     </script>
                     <script>
-                        function editVaccination(e) {
-                            document.getElementById("back").href = function() {
+                        function goBack(){
                                 let user = <?php echo json_encode($_SESSION['role']); ?>;
                                 if (user == "midwife") {
-                                    "midwife.php";
+                                    document.getElementById("back").href ="http://localhost/Childcare/midwife.php";
                                 } else if (user == "manager") {
-                                    "child report.php";
-                                } else if (user = "parent") {
-                                    "dashboard.php";
+                                    document.getElementById("back").href ="http://localhost/Childcare/child report.php";
+                                } else if (user == "parent") {
+                                    document.getElementById("back").href ="http://localhost/Childcare/dashboard.php";
                                 }
-                            };
                         }
                     </script>
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

@@ -1,6 +1,6 @@
 <?php 
     include_once('config/db.php');
-    include_once('autoloader.php');
+    include_once('models/manager.php');
     if (!isset($_SESSION['login'])) {
         header("Location: ./login.php");
     }

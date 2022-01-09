@@ -1,6 +1,6 @@
 <?php
 include_once('config/db.php');
-include_once('controllers/autoloader.php');
+include_once('models/childreport.php');
 // if ($_SESSION['role'] == 'parent') {
 //     header("Location: ./dashboard.php");
 // }
@@ -14,7 +14,7 @@ include_once('controllers/autoloader.php');
 $child_name = '';
 $birthday = '';
 $guardian = '';
-$guardian_id = '';
+//$guardian_id = '';
 $Request_id = '';
 $birth_place = '';
 $area = '';
@@ -64,18 +64,24 @@ $comment_Men = '';
 
 $errors = array();
 $manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
-function check_req_fields($req_fields)
-{
-    // checks required fields
-    $errors = array();
+$childreport = ChildReport::cloneChildreport();
 
-    foreach ($req_fields as $field) {
-        if (empty(trim($_POST[$field]))) {
-            $errors[] = $field . ' is required.';
-        }
-    }
-    return $errors;
+if (isset($_GET['id'])) {
+    $Request_id = $_GET['id'];
 }
+
+// function check_req_fields($req_fields)
+// {
+//     // checks required fields
+//     $errors = array();
+
+//     foreach ($req_fields as $field) {
+//         if (empty(trim($_POST[$field]))) {
+//             $errors[] = $field . ' is required.';
+//         }
+//     }
+//     return $errors;
+// }
 
 function display_errors($errors)
 {
@@ -93,7 +99,7 @@ if (isset($_POST['submit'])) {
     // print_r($_POST);
     $child_name = $_POST['child_name'];
     $birthday = $_POST['birthday'];
-    $guardian = $_POST['guardian'];
+    //$guardian = $_POST['guardian'];
     $guardian_id = $_POST['guardian_id'];
     $Request_id = $_POST['Request_id'];
     $birth_place = $_POST['birth_place'];
@@ -164,7 +170,7 @@ if (isset($_POST['submit'])) {
     $Men = ($date_Men == '' && $place_Men == '') ? '' : date("Y/m/d", strtotime($date_Men)) . '_' . $place_Men . '_' . $comment_Men;
     array_push($vaccines,$Men);
 
-    $manager->createChildReport($child_name,$birthday,$guardian,$guardian_id,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
+    $manager->createChildReport($child_name,$birthday,$guardian,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
     // $not_null = array('child_name', 'birthday', 'guardian', 'guardian_id', 'birth_place', 'area', 'center', 'midwife_email');
     // $errors = array_merge($errors, check_req_fields($not_null));
 
@@ -225,14 +231,14 @@ if (isset($_POST['submit'])) {
                 <label class="form-label">Guardian Name</label>
                 <input type="text" class="form-control" name="guardian" placeholder=" Guardian Name " value=<?php echo $guardian ?>>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label class="form-label">Guardian Id</label>
-                <input type="text" class="form-control" name="guardian_id" placeholder=" Guardian Id " value=<?php echo $guardian_id ?>>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Guardian Id</label>
-                <input type="text" class="form-control" name="Request_id" placeholder=" Request Id " value=<?php echo $Request_id ?>>
-            </div>
+                <input type="hidden" class="form-control" name="guardian_id" placeholder=" Guardian Id " value=<?php echo $guardian_id ?>>
+            </div> -->
+            <!-- <div class="mb-3">
+                <label class="form-label">Request Id</label> -->
+                <input type="hidden" class="form-control" name="Request_id" placeholder=" Request Id " value=<?php echo $Request_id ?>>
+            <!-- </div> -->
             <div class="mb-3">
                 <label class="form-label">Birth Place</label>
                 <input type="text" class="form-control" name="birth_place" placeholder=" Birth Place " value=<?php echo $birth_place ?>>
