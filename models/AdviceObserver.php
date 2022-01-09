@@ -1,5 +1,5 @@
 <?php
 interface AdviceObserver
 {
-    public function update();
+    public function update($topic, $content);
 }
