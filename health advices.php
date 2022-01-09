@@ -258,9 +258,9 @@ if (isset($_POST['delete'])) {
 
     // $advice_set = "SELECT * FROM advice WHERE isdeleted=0";
     // $result_advices = mysqli_query($connection, $advice_set);
+    $newAdvice = $manager->get_advices();
 
-
-    foreach ($advices as $id => $advice) {
+    foreach ($newAdvice as $id => $advice) {
       // print_r($advice);
       // echo $advice->get_id();
     ?>

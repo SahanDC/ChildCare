@@ -25,68 +25,68 @@ include_once('controllers/manager.php');
   <!-- added ********************************************************************************-->
 
   <div class="px-3 py-2 text-black">
-      <div class="container">
-        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-          <li class="name">
+    <div class="container">
+      <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <li class="name">
+          <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+            <use xlink:href="#home" />
+          </svg>
+          <h3>Harshani Bandara</h3>
+        </li>
+        <li class="details">
+          <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
+        </li>
+
+        <li class="details">
+          <a href="manager.php" class="nav-link text-black">
             <svg class="bi d-block mx-auto mb-1" width="24" height="24">
               <use xlink:href="#home" />
             </svg>
-            <h3>Harshani Bandara</h3>
-          </li>
-          <li class="details">
-            <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
-          </li>
+            <p class="hover-underline-animation">
+              Home
+            </p>
+          </a>
+        </li>
 
-          <li class="details">
-            <a href="manager.php" class="nav-link text-secondary">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#home" />
-              </svg>
-              <p class="hover-underline-animation">
-                Home
-              </p>
-            </a>
-          </li>
-
-          <li class="details">
-            <a href="health advices.php" class="nav-link text-black">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#speedometer2" />
-              </svg>
-              <p class="hover-underline-animation">
-                Health Advice
-              </p>
-            </a>
-          </li>
-          <li class="details">
-            <a href="child report.php" class="nav-link text-black">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#table" />
-              </svg>
-              <p class="hover-underline-animation">
-                Child Reports
-              </p>
-            </a>
-          </li>
-          <li class="details">
-            <a href="requests.php" class="nav-link text-black">
-              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                <use xlink:href="#grid" />
-              </svg>
-              <p class="hover-underline-animation">
-                Child Report Request
-              </p>
-            </a>
-          </li>
-          <li class="details">
-            <!-- <a href="profile.php" class="nav-link text-white"> -->
+        <li class="details">
+          <a href="health advices.php" class="nav-link text-black">
             <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-              <use xlink:href="#people-circle" />
-            </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
-          </li>
-        </ul>
-      </div>
+              <use xlink:href="#speedometer2" />
+            </svg>
+            <p class="hover-underline-animation">
+              Health Advice
+            </p>
+          </a>
+        </li>
+        <li class="details">
+          <a href="child report.php" class="nav-link text-black">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+              <use xlink:href="#table" />
+            </svg>
+            <p class="hover-underline-animation">
+              Child Reports
+            </p>
+          </a>
+        </li>
+        <li class="details">
+          <a href="requests.php" class="nav-link text-black">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+              <use xlink:href="#grid" />
+            </svg>
+            <p class="hover-underline-animation">
+              Child Report Request
+            </p>
+          </a>
+        </li>
+        <li class="details">
+          <!-- <a href="profile.php" class="nav-link text-white"> -->
+          <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+            <use xlink:href="#people-circle" />
+          </svg><a class="btn btn-danger" href="./controllers/logout.php">Log out</a>
+        </li>
+      </ul>
     </div>
+  </div>
 
 
   <!--header finish-->
@@ -128,7 +128,7 @@ include_once('controllers/manager.php');
             <div class="modal-footer">
               <!-- <button type="button" class="btn btn-primary" name="submit"><input type="submit" value="submit" name="submit" style="background-color: blue;"></button>
             -->
-              <input type="submit" value="submit" name="submit" style="background-color: blue;">
+              <input class="btn btn-info" type="submit" value="submit" name="submit">
             </div>
           </form>
           <!-- finish -->
@@ -177,10 +177,10 @@ include_once('controllers/manager.php');
     <br>
 
     <div class="row mb-4">
-      <div class="col-3 themed-grid-col">ID</div>
-      <div class="col-3 themed-grid-col">EMAIL</div>
-      <div class="col-3 themed-grid-col">CENTER</div>
-      <div class="col-3 themed-grid-col">AREAS</div>
+      <div class="col-3 themed-grid-col-title">ID</div>
+      <div class="col-3 themed-grid-col-title">EMAIL</div>
+      <div class="col-3 themed-grid-col-title">CENTER</div>
+      <div class="col-3 themed-grid-col-title">AREAS</div>
     </div>
     <?php
     ?>
@@ -242,40 +242,35 @@ include_once('controllers/manager.php');
 
   <!-- footer section starts -->
 
+  <footer>
+    <section class="footer">
 
-  <section class="footer">
+      <div class="container">
 
-    <div class="container">
+        <div class="row">
 
-      <div class="row">
+          <div class="col-md-6" data-aos="fade-right">
+            <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur nemo porro quasi minima consequuntur dolorum, quas amet in autem id?</p>
+          </div>
 
-        <div class="col-md-6" data-aos="fade-right">
-          <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur nemo porro quasi minima consequuntur dolorum, quas amet in autem id?</p>
-        </div>
+          <div class="col-md-6 text-center" data-aos="fade-left">
+            <h3>share</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Linkedin</a>
+            <a href="#">Github</a>
+          </div>
 
-        <!-- <div class="col-md-4 text-center" data-aos="fade-up">
-                  <h3>links</h3>
-                  <a href="#">LOGIN</a>
-                  <a href="#">Signup</a>
-
-              </div> -->
-
-        <div class="col-md-6 text-center" data-aos="fade-left">
-          <h3>share</h3>
-          <a href="#">Facebook</a>
-          <a href="#">Twitter</a>
-          <a href="#">Linkedin</a>
-          <a href="#">Github</a>
         </div>
 
       </div>
 
-    </div>
+      <h4 class="credit text-center mx-auto">created by <span>TEAM NINJAS-GROUP 23</span> | all rights reserved.</h4>
 
-    <h4 class="credit text-center mx-auto">created by <span>TEAM NINJAS-GROUP 23</span> | all rights reserved.</h4>
+    </section>
 
-  </section>
+  </footer>
 
   <!-- footer section ends -->
 

@@ -1,29 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap");
 
-/* :root {
-    --blue: #0188df;
-    --black: #354046;
-}
-
-* {
-    font-family: "Roboto", sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border: none !important;
-    outline: none !important;
-    text-decoration: none !important;
-    text-transform: capitalize;
-    font-weight: 400;
-    transition: all 0.2s linear;
-} */
 footer {
-    /* position: absolute; */
+    position: absolute;
     bottom: 0;
     width: 100%;
 }
 .footer {
-    background: var(--black);
+    background: rgba(116, 116, 116, 0.808);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .footer p {
@@ -42,7 +28,7 @@ footer {
 }
 
 .footer .col-md-6:nth-child(1) a span {
-    color: var(--blue);
+    color: blue;
     font-size: 1 rem;
 }
 
@@ -59,7 +45,7 @@ footer {
 }
 
 .footer a:hover {
-    color: var(--blue);
+    color: blue;
 }
 
 .footer .credit {
@@ -72,5 +58,5 @@ footer {
 }
 
 .footer .credit span {
-    color: var(--blue);
+    color: blue;
 }

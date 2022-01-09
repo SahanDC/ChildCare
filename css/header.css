@@ -21,3 +21,8 @@
     align-items: right;
     float: left;
 }
+
+.px-3 .container .nav .details p{
+    color: black;
+}
+
