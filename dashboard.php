@@ -14,6 +14,7 @@ if ($_SESSION['role'] == 'midwife') {
 }
 
 $parentObj = new User_Parent($connection, $_SESSION['email']);
+
 ?>
 
 
@@ -363,8 +364,9 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                                     <p class="card-text m-0">Midwife: <?php echo $row["MidwifeEmail"] ?></p>
                                     <p class="card-text m-0">Centre: <?php echo $row["Centre"] ?></p>
                                     <p class="card-text m-0">Next vaccination: <?php echo $row["NVD"] ?></p>
-                                    <p class="card-text m-0">Next weight recording: <?php echo $next_weight_date ?></p>
-
+                                    <?php if ($row['Weight'] != '' || $row['Weight'] != NULL) { ?>
+                                        <p class="card-text m-0">Next weight recording: <?php echo $next_weight_date ?></p>
+                                    <?php } ?>
                                     <div class="text-center mt-2">
                                         <a href="./child_report.php/?ChildId=<?php echo $row["ChildId"] ?>" class="btn btn-outline-dark">View Child Report</a>
                                     </div>

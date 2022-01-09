@@ -4,6 +4,7 @@ require_once('advice.php');
 require_once('adviceobserver.php');
 require_once('user_parent.php');
 require_once('midwife.php');
+require_once('request.php');
 
 // Swiftmailer library
 require_once './lib/vendor/autoload.php';
@@ -162,7 +163,7 @@ class manager
         }
 
         while ($row = $query->fetch_assoc()) {
-            $childreport = ChildReport:: getChildreport($row['ChildId']);
+            $childreport = ChildReport::getChildreport($row['ChildId']);
             $childreport->addDetails($row);
 
             $this->childReport_array[$row['ChildId']] = $childreport;
@@ -186,21 +187,27 @@ class manager
         }
     }
 
-    public function createChildReport($child_name,$birthday,$guardian,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines){
+    public function createChildReport($child_name, $birthday, $guardian, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines)
+    {
         $requestobj = new Request($this->connection);
         $request = $requestobj->getRequestById($Request_id);
         $guardianId = $request['parent_id'];
-            $childreport = ChildReport::cloneChildreport();
-            if($request['clinic_card']!=null){
-                $errors=$childreport->createChildReport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
-            }else{
-                $errors=$childreport->createChildReport_Noreport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD);
-            }
-        array_merge($this->Errors,$errors);
-        if(empty($errors)){
-            $requestobj->createReport($Request_id);
-            array_push($this->Errors,"change state");
+        $childreport = ChildReport::cloneChildreport();
+        if ($request['clinic_card'] != null) {
+            $errors = $childreport->createChildReport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines);
+        } else {
+            $errors = $childreport->createChildReport_Noreport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD);
         }
-        return $this->Errors;
+        array_merge($this->Errors, $errors);
+        if (empty($errors)) {
+            // $requestobj->createReport($Request_id);
+            array_push($this->Errors, "change state");
+            return 0;
+        } else {
+            return 1;
+        }
+        // $requestobj->createReport($Request_id);
+
+        // return $this->Errors;
     }
 }
