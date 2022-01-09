@@ -1,107 +1,129 @@
 /*#five grid tries first grid styles in patient manager page*/
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap");
+
+:root {
+    --blue: #0188df;
+    --black: #354046;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+    text-transform: capitalize;
+    font-weight: 400;
+    transition: all 0.2s linear;
+}
+
 .themed-grid-col {
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-    background-color: rgba(86, 61, 124, .15);
-    border: 1px solid rgba(86, 61, 124, .2);
-  }
-  
-  .themed-container {
-    padding: .75rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background-color: rgba(86, 61, 124, 0.15);
+    border: 1px solid rgba(86, 61, 124, 0.2);
+}
+
+.themed-container {
+    padding: 0.75rem;
     margin-bottom: 1.5rem;
-    background-color: rgba(0, 123, 255, .15);
-    border: 1px solid rgba(0, 123, 255, .2);
-  }
-  .bd-placeholder-img {
+    background-color: rgba(0, 123, 255, 0.15);
+    border: 1px solid rgba(0, 123, 255, 0.2);
+}
+
+.bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-  }
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
     .bd-placeholder-img-lg {
-      font-size: 3.5rem;
+        font-size: 3.5rem;
     }
-  }
-  /*finish*/
+}
+/*finish*/
 
-  /*footer*/
-  .b-example-divider {
+/*footer*/
+.b-example-divider {
     height: 3rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid rgba(0, 0, 0, 0.15);
     border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-  }
-  
-  .bi {
-    vertical-align: -.125em;
+    box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+        inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+}
+
+.bi {
+    vertical-align: -0.125em;
     fill: currentColor;
-  }
-  .bd-placeholder-img {
+}
+.bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-  }
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
     .bd-placeholder-img-lg {
-      font-size: 3.5rem;
+        font-size: 3.5rem;
     }
-  /*finish*/
+    /*finish*/
 
-  /*slider style in medical advise page */
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
-
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
+    /*slider style in medical advise page */
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
     }
-  }
-  
 
-/* Carousel base class */
-.carousel {
-    margin-bottom: 4rem;
-  }
-  /* Since positioning the image, we need to help out the caption */
-  .carousel-caption {
-    bottom: 3rem;
-    z-index: 10;
-  }
-  
-  /* Declare heights because of positioning of img element */
-  .carousel-item {
-    height: 32rem;
-  }
-  .carousel-item > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 32rem;
-    }}
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
 
+    /* Carousel base class */
+    .carousel {
+        margin-bottom: 4rem;
+    }
+    /* Since positioning the image, we need to help out the caption */
+    .carousel-caption {
+        bottom: 3rem;
+        z-index: 10;
+    }
 
-  /* hower effect of menu bar */
-  .hover-underline-animation {
+    /* Declare heights because of positioning of img element */
+    .carousel-item {
+        height: 32rem;
+    }
+    .carousel-item > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        height: 32rem;
+    }
+}
+
+/* hower effect of menu bar */
+.hover-underline-animation {
     display: inline-block;
     position: relative;
-    color: #f1f2f3;
-  }
-  
-  .hover-underline-animation:after {
-    content: '';
+    color: #000000;
+    font-weight: bold;
+}
+
+.hover-underline-animation:after {
+    content: "";
     position: absolute;
     width: 100%;
     transform: scaleX(0);
@@ -111,10 +133,10 @@
     background-color: #0087ca;
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
-  }
-  
-  .hover-underline-animation:hover:after {
+}
+
+.hover-underline-animation:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
-  /*  */
+}
+/*  */

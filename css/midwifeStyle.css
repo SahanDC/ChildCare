@@ -110,6 +110,58 @@ header .fa-bars {
 
 .search .btn a:visited,
 .search .btn a:link {
-    color: #090C89;
+    color: #090c89;
     text-decoration: none;
+}
+
+.footer {
+    background: var(--black);
+}
+
+.footer p {
+    font-size: 1rem;
+    color: #eee;
+    padding: 1rem 0;
+}
+
+.footer .col-md-6 {
+    padding: 1.3rem;
+}
+
+.footer .col-md-6:nth-child(1) a {
+    font-size: rem;
+    color: #fff;
+}
+
+.footer .col-md-6:nth-child(1) a span {
+    color: var(--blue);
+    font-size: 1 rem;
+}
+
+.footer a {
+    font-size: 1.5rem;
+    color: #ccc;
+    display: block;
+}
+
+.footer h3 {
+    color: #fff;
+    font-size: rem;
+}
+
+.footer a:hover {
+    color: var(--blue);
+}
+
+.footer .credit {
+    color: #fff;
+    width: 80%;
+    margin: 0;
+    padding: 2rem 0;
+    padding-bottom: 4rem;
+    border-top: 0.1rem solid #ccc !important;
+}
+
+.footer .credit span {
+    color: var(--blue);
 }
