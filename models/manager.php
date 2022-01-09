@@ -92,7 +92,6 @@ class manager
             if ($row['role'] == 'midwife') {
                 $observer = new Midwife($this->connection, $row['email']);
             }
-            // $observer->setEmail($row['email']);
             array_push($this->observers, $observer);
         }
         return $this->observers;
@@ -131,25 +130,6 @@ class manager
         $this->notifyAllObservers($topic, $content);
     }
 
-    // public function getRequestById($id)
-    // {
-    //     $query = $this->connection->query("SELECT * FROM request where id = $id");
-    //     $request = $query->fetch_assoc();
-    //     return $request;
-    // }
-
-    public function getRequests()
-    {
-        $query = $this->connection->query("SELECT * FROM request ORDER BY uploaded_on DESC");
-        $requests = array();
-        while ($row = $query->fetch_assoc()) {
-            // $requests[] = $row;
-            array_push($requests, $row);
-        }
-        return $requests;
-    }
-
-
     public function getChildreports($search_)
     {
         if ($search_ != '') {
@@ -172,42 +152,11 @@ class manager
         return $this->childReport_array;
     }
 
-
-    // public function addObserver($observer)
-    // {
-    //     $this->observers = $this->getObservers();
-    //     $this->observers[] = $observer;
-    // }
-
     public function notifyAllObservers($topic, $content)
     {
         $this->observers = $this->getObservers();
         foreach ($this->observers as $observer) {
             $observer->update($topic, $content);
         }
-    }
-
-    public function createChildReport($child_name, $birthday, $guardian, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines)
-    {
-        $requestobj = new Request($this->connection);
-        $request = $requestobj->getRequestById($Request_id);
-        $guardianId = $request['parent_id'];
-        $childreport = ChildReport::cloneChildreport();
-        if ($request['clinic_card'] != null) {
-            $errors = $childreport->createChildReport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines);
-        } else {
-            $errors = $childreport->createChildReport_Noreport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD);
-        }
-        array_merge($this->Errors, $errors);
-        if (empty($errors)) {
-            // $requestobj->createReport($Request_id);
-            array_push($this->Errors, "change state");
-            return 0;
-        } else {
-            return 1;
-        }
-        // $requestobj->createReport($Request_id);
-
-        // return $this->Errors;
     }
 }
