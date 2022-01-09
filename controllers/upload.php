@@ -1,7 +1,12 @@
 <?php
 include('config/db.php');
+require_once('models/request.php');
 
-global $connection;
+// $connection;
+
+global $requestObj;
+
+$requestObj = new Request($connection);
 
 define('UPLOAD_DIRECTORY', './requests/');
 define('MAXSIZE', 10485760);
@@ -32,7 +37,10 @@ function handleUpload1($connection)
     if ($isUploadedFile && $validSize && validFileType($uploadedTempFile, $destFile)) {
         $upload = move_uploaded_file($uploadedTempFile, $destFile);
         if ($upload) {
-            $success = $connection->query("INSERT into request (parent_id, birth_certificate, uploaded_on, status) VALUES ('" . $_SESSION['id'] . "', '" . $filename . "', now(), 'New')");
+            $requestObj = new Request($connection);
+            $success = $requestObj->createRequest1($_SESSION['id'], $filename);
+
+            // $connection->query("INSERT into request (parent_id, birth_certificate, uploaded_on, status) VALUES ('" . $_SESSION['id'] . "', '" . $filename . "', now(), 'New')");
 
             if ($success) {
                 // $response = 'The file was uploaded successfully!';
@@ -81,7 +89,9 @@ function handleUpload2($connection)
            </div>';
     }
     if ($upload1 && $upload2) {
-        $success = $connection->query("INSERT into request (parent_id, birth_certificate, clinic_card, uploaded_on, status) VALUES ('" . $_SESSION['id'] . "', '" . $filename1 . "', '" . $filename2 . "', now(), 'New')");
+        $requestObj = new Request($connection);
+        $success = $requestObj->createRequest2($_SESSION['id'], $filename1, $filename2);
+        // $connection->query("INSERT into request (parent_id, birth_certificate, clinic_card, uploaded_on, status) VALUES ('" . $_SESSION['id'] . "', '" . $filename1 . "', '" . $filename2 . "', now(), 'New')");
 
         if ($success) {
             // $response = 'The files were uploaded successfully!';
