@@ -5,8 +5,7 @@ class Midwife extends User implements AdviceObserver
 {
     private $connection;
 
-    private $id;
-    private $email;
+    private $midwifeId;
     private $center;
     private $area;
 
@@ -22,11 +21,11 @@ class Midwife extends User implements AdviceObserver
     ///////////////////////////////////////////////////////////
     public function getId()
     {
-        return $this->id;
+        return $this->midwifeId;
     }
-    public function setId($id)
+    public function setId($midwifeId)
     {
-        $this->id = $id;
+        $this->midwifeId = $midwifeId;
         return $this;
     }
 

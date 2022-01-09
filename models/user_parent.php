@@ -1,5 +1,6 @@
 <?php
 require_once('models/user.php');
+include('controllers/autoloader.php');
 
 class User_Parent extends User implements AdviceObserver
 {
