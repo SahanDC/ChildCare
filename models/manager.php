@@ -11,7 +11,7 @@ require_once './lib/vendor/autoload.php';
 global $connection;
 
 // $parentObj = new User_Parent($connection);
-// $midwifeObj = new Midwife($connection);
+// $midwifeObj = new Midwife($connection, $_SESSION['email']);
 
 class manager
 {
@@ -57,7 +57,7 @@ class manager
         }
 
         while ($row = $query->fetch_assoc()) {
-            $midwife = new Midwife($this->connection);
+            $midwife = new Midwife($this->connection, $_SESSION);
             $midwife->setId($row['id']);
             $midwife->setEmail($row['email']);
             $midwife->setCentre($row['centre']);
@@ -86,13 +86,12 @@ class manager
         $this->observers = array();
         while ($row = $query->fetch_assoc()) {
             if ($row['role'] == 'parent') {
-                $observer = new User_parent($this->connection);
-                $observer->setEmail($row['email']);
+                $observer = new User_parent($this->connection, $row['email']);
             }
             if ($row['role'] == 'midwife') {
-                $observer = new Midwife($this->connection);
-                $observer->setEmail($row['email']);
+                $observer = new Midwife($this->connection, $row['email']);
             }
+            // $observer->setEmail($row['email']);
             array_push($this->observers, $observer);
         }
         return $this->observers;
