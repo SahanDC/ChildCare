@@ -29,7 +29,9 @@ button a:hover{
     color: white;
 }
 
-
+#question{
+    font-size: 130%;
+}
 
 #topic_area,
 #content_area{

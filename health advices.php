@@ -2,11 +2,13 @@
 require_once('models/manager.php');
 
 $manager = new Manager($connection, $_SESSION['id'], $_SESSION['firstname'] . " " . $_SESSION['lastname'], $_SESSION['email']);
+$advices = $manager->get_advices();
 
 if (isset($_POST['submit'])) {
   $topic = $_POST['topic'];
   $content = $_POST['content'];
   $is_deleted = 0;
+
   $manager->addAdvice($topic, $content);
   // $query = "INSERT INTO advice (topic, content, isdeleted) VALUES ('{$topic}','{$content}',{$is_deleted})";
 
@@ -20,6 +22,8 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_POST['delete'])) {
+  // print_r($_POST);
+  // print_r($manager->getAdvice_array());
   $manager->deleteAdvice($_POST['delete']);
 }
 
@@ -238,17 +242,15 @@ if (isset($_POST['delete'])) {
   <div class="container">
 
     <h2 class="mt-4">Advices</h2>
-    <p>Is the advice from your child’s doctor falling on deaf ears?<br>
-      <strong>A good parent is someone who strives to make decisions in the best interest of the child. <br> What makes a great parent isn’t only defined by the parent’s action, but also their intention.<br>
+    <p style="font-size: 130%;">Is the advice from your child’s doctor falling on deaf ears?</p>
+    <br>
+    <p>
+      <strong>A good parent is someone who strives to make decisions in the best interest of the child. What makes a great parent isn’t only defined by the parent’s action, but also their intention. A good parent doesn’t have to be perfect. No one is perfect. No child is perfect either … keeping this in mind is important when we set our expectations. Successful parenting is not about achieving perfection. But it doesn’t mean that we shouldn’t work towards that goal. Set high standards for ourselves first and then our children second. We serve as role models for them.<br>
 
-        A good parent doesn’t have to be perfect. No one is perfect. No child is perfect either … keeping this in mind is important when we set our expectations.<br>
-
-        Successful parenting is not about achieving perfection. But it doesn’t mean that we shouldn’t work towards that goal. Set high standards for ourselves first and then our children second. We serve as role models for them.<br>
-
-        Here are 10 tips on learning good parenting skills and avoiding bad parenting. Many of them are not
+        Here are some tips on learning good parenting skills and avoiding bad parenting. Many of them are not
         quick nor easy. And probably no one can do all of them all of the time. But if you can keep working
         on the tips in this parenting guide, even though you may only do part of these some of the time, you will
-        still be moving in the right direction.
+        still be moving in the right direction.<br><br>
 
       </strong>
     </p>
@@ -257,9 +259,10 @@ if (isset($_POST['delete'])) {
     // $advice_set = "SELECT * FROM advice WHERE isdeleted=0";
     // $result_advices = mysqli_query($connection, $advice_set);
 
-    $advices = $manager->get_advices();
 
     foreach ($advices as $id => $advice) {
+      // print_r($advice);
+      // echo $advice->get_id();
     ?>
       <div class="row mb-3">
         <div class="col-md-4 themed-grid-col"><?php echo $advice->get_topic(); ?></div>

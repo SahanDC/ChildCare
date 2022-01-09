@@ -22,7 +22,6 @@ include_once('controllers/manager.php');
 </head>
 
 <body>
-
   <!-- added ********************************************************************************-->
 
   <div class="px-3 py-2 text-black">
