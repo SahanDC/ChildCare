@@ -1,6 +1,8 @@
 <?php
+include('config/db.php');
 require_once('models/user.php');
 require_once('models/AdviceObserver.php');
+require_once('models/user.php');
 
 class Midwife extends User implements AdviceObserver
 {
@@ -15,8 +17,26 @@ class Midwife extends User implements AdviceObserver
         $this->connection = $db;
     }
 
-    public function update()
+    public function update($topic, $content)
     {
+        $email = $this->getEmail();
+        $email = 'thamindukiridana@gmail.com';
+        // Create the Transport
+        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
+            ->setUsername('childcare.cse@gmail.com')
+            ->setPassword('childcare19');
+
+        // Create the Mailer using your created Transport
+        $mailer = new Swift_Mailer($transport);
+        // Create a message
+        $message = (new Swift_Message($topic))
+            ->setFrom([$email => 'Child Care'])
+            ->setTo($email)
+            ->addPart($content, "text/html")
+            ->setBody('Hello! User');
+
+        // Send the message
+        $result = $mailer->send($message);
     }
 
     ///////////////////////////////////////////////////////////

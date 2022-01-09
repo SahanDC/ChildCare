@@ -28,9 +28,8 @@ include('controllers/childreport.php');
             <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
             <nav class="nav">
                 <ul>
-                    <li><a href="" id="back" onclick="goBack()">Back</a></li>
-                    <!-- <div class="col bg-primary text-center"><button type="button" id="back" onclick="goBack()" class="btn btn-dark m1-2">BACK</button></div> -->
-                    <li><a href="./controllers/logout.php">Log Out</a></li>
+                    <li><a href='' id="back" onclick="goBack()" >Back</a></li>
+                    <li><a href="http://localhost/Childcare/controllers/logout.php">Log Out</a></li>
                 </ul>
             </nav>
             <div class="fas fa-bars"></div>
@@ -382,18 +381,16 @@ include('controllers/childreport.php');
                         }
                     </script>
                     <script>
-                        document.getElementById("back").onclick = function() {
-                            let user = <?php echo json_encode($_SESSION['role']); ?>;
-                            if (user == "midwife") {
-                                location.href = "midwife.php";
-                            } else if (user == "manager") {
-                                location.href = "child report.php";
-                            } else if (user == "parent") {
-                                location.href = "dashboard.php";
-                            }
-                        };
-
-                        // }   
+                        function goBack(){
+                                let user = <?php echo json_encode($_SESSION['role']); ?>;
+                                if (user == "midwife") {
+                                    document.getElementById("back").href ="http://localhost/Childcare/midwife.php";
+                                } else if (user == "manager") {
+                                    document.getElementById("back").href ="http://localhost/Childcare/child report.php";
+                                } else if (user == "parent") {
+                                    document.getElementById("back").href ="http://localhost/Childcare/dashboard.php";
+                                }
+                        }
                     </script>
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
