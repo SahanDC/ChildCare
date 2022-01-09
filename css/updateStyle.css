@@ -1,0 +1,12 @@
+body{
+    background-image: url(../img/healthadvice4.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: left;
+    height: 100%;
+}
+
+.container{
+    margin-top: 10%;
+}

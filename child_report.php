@@ -11,30 +11,121 @@ include('controllers/childreport.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/child_reportStyle.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <title>Child Report</title>
     <style>
+        body {
+            background-color: white;
+        }
 
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap");
+
+        :root {
+            --blue: #0188df;
+            --black: #354046;
+        }
+
+        * {
+            font-family: "Roboto", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none !important;
+            text-transform: capitalize;
+            font-weight: 400;
+            transition: all 0.2s linear;
+        }
+
+        header {
+            width: 100%;
+            
+            top: 0;
+            left: 0;
+            padding: 1rem 1rem;
+            z-index: 500;
+        }
+
+        .header-active {
+            background: #fff;
+            box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header a {
+            color: var(--black);
+        }
+
+        header a:hover {
+            color: var(--blue);
+        }
+
+        header .container .logo {
+            font-size: 2rem;
+        }
+
+        header .container .logo span {
+            color: var(--blue);
+        }
+
+        header .nav ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            list-style: none;
+        }
+
+        header .nav ul li {
+            margin: 0 1rem;
+        }
+
+        header .nav ul li a {
+            font-size: 1.5rem;
+            /* font-weight: bold; */
+        }
+
+        header .fa-bars {
+            font-size: 3.5rem;
+            color: var(--blue);
+            cursor: pointer;
+            display: none;
+        }
+
+        #weightTable {
+            margin-top: 5%;
+        }
     </style>
 </head>
 
 <body>
     <!-- header section starts  -->
-    <header style="background-color: rgb(181, 239, 241);">
-        <div class="container" style="background-color: rgb(181, 239, 241);">
-            <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
-            <nav class="nav">
-                <ul>
-                    <li><a href='' id="back" onclick="goBack()" >Back</a></li>
-                    <li><a href="http://localhost/Childcare/controllers/logout.php">Log Out</a></li>
-                </ul>
-            </nav>
-            <div class="fas fa-bars"></div>
-        </div>
-    </header>
+    <?php
+    if (!strcmp($user, "manager") || !strcmp($user, "midwife") || !strcmp($user, "parent")) {?>
+        <header style="background-color: rgb(181, 239, 241);">
+            <div class="container" style="background-color: rgb(181, 239, 241);">
+                <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
+                <nav class="nav">
+                    <ul>
+                        <li><a href='' id="back" onclick="goBack()">Back</a></li>
+                        <li><a href="http://localhost/Childcare/controllers/logout.php">Log Out</a></li>
+                    </ul>
+                </nav>
+                <div class="fas fa-bars"></div>
+            </div>
+        </header>
+    <?php
+    }
+    ?>
     <!-- header section ends  -->
 
     <?php if (!empty($report1->Errors) && (in_array("Fail database", $report1->Errors) || in_array("Childreport not found", $report1->Errors))) {
@@ -137,10 +228,10 @@ include('controllers/childreport.php');
             <?php
         }
             ?>
-        <!-- ----------------------------------------------------------------------Manager ----------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------Manager ----------------------------------------------------------------------------->
 
 
-        <!-- ----------------------------------------------------------------------Midwife ----------------------------------------------------------------------------->
+            <!-- ----------------------------------------------------------------------Midwife ----------------------------------------------------------------------------->
             <?php
             if (!strcmp($user, "midwife")) { ?>
                 <form action='child_report.php' method='post'>
@@ -197,7 +288,7 @@ include('controllers/childreport.php');
                 <?php
             }
                 ?>
-        <!-- ----------------------------------------------------------------------Midwife ----------------------------------------------------------------------------->
+                <!-- ----------------------------------------------------------------------Midwife ----------------------------------------------------------------------------->
 
                 <div class="container mt-5">
                     <table class="table table-bordered border-5 border-dark table-hover">
@@ -381,15 +472,15 @@ include('controllers/childreport.php');
                         }
                     </script>
                     <script>
-                        function goBack(){
-                                let user = <?php echo json_encode($_SESSION['role']); ?>;
-                                if (user == "midwife") {
-                                    document.getElementById("back").href ="http://localhost/Childcare/midwife.php";
-                                } else if (user == "manager") {
-                                    document.getElementById("back").href ="http://localhost/Childcare/child report.php";
-                                } else if (user == "parent") {
-                                    document.getElementById("back").href ="http://localhost/Childcare/dashboard.php";
-                                }
+                        function goBack() {
+                            let user = <?php echo json_encode($_SESSION['role']); ?>;
+                            if (user == "midwife") {
+                                document.getElementById("back").href = "http://localhost/Childcare/midwife.php";
+                            } else if (user == "manager") {
+                                document.getElementById("back").href = "http://localhost/Childcare/child report.php";
+                            } else if (user == "parent") {
+                                document.getElementById("back").href = "http://localhost/Childcare/dashboard.php";
+                            }
                         }
                     </script>
                     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
