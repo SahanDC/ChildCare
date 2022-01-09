@@ -154,30 +154,32 @@ class ChildReport
         return $this;
     }
 
-        //----------------------- get child report --------------------------------------
-        public static function getChildreport($childid){
-            if (array_key_exists($childid,self :: $child_reports)){
-                if(!empty(self :: $child_reports[$childid])){
-                    return self:: $child_reports[$childid];
-                }else{
-                    return new ChildReport($childid);
-                }
-            }else{
+    //----------------------- get child report --------------------------------------
+    public static function getChildreport($childid)
+    {
+        if (array_key_exists($childid, self::$child_reports)) {
+            if (!empty(self::$child_reports[$childid])) {
+                return self::$child_reports[$childid];
+            } else {
                 return new ChildReport($childid);
             }
+        } else {
+            return new ChildReport($childid);
         }
-        public static function cloneChildreport(){
-            if (array_key_exists(20,self :: $child_reports)){
-                if(!empty(self :: $child_reports[20])){
-                    return self:: $child_reports[20];
-                }else{
-                    return new ChildReport(20);
-                }
-            }else{
+    }
+    public static function cloneChildreport()
+    {
+        if (array_key_exists(20, self::$child_reports)) {
+            if (!empty(self::$child_reports[20])) {
+                return self::$child_reports[20];
+            } else {
                 return new ChildReport(20);
             }
+        } else {
+            return new ChildReport(20);
         }
-    
+    }
+
 
     //----------------------data view functiins--------------------------------------- 
 
@@ -421,11 +423,11 @@ class ChildReport
     }
 
 
-    public function createChildReport($child_name, $birthday, $guardian, $guardian_id,$Request_id,$birth_place, $area, $center, $midwife_email, $NVD, $vaccines)
+    public function createChildReport($child_name, $birthday, $guardian, $guardian_id, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines)
     {
         $vaccine_name = array("BCG Vaccine", "Triple Vaccine", "Triple/Polio Vaccine", "MMR Vaccine", "Japanese Encephalitis Vaccine", "Dual Polio Vaccine", "Hepatitis A, B Vaccine (there are separate vaccines for both A and B as well)", "Anti Rabies Vaccine", "Chicken Pox Vaccine", "Meningicoccal Vaccine");
-        $req_fields = array($child_name, $birthday, $guardian, $guardian_id,$Request_id,$birth_place, $area, $center, $midwife_email, $NVD);
-        $field_names = array("Name", "Birthday", "Guardian", "Guardian ID","Request Id", "Birth Place", "Area", "Centre", "Midwife email", "Next vaccination date");
+        $req_fields = array($child_name, $birthday, $guardian, $guardian_id, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD);
+        $field_names = array("Name", "Birthday", "Guardian", "Guardian ID", "Request Id", "Birth Place", "Area", "Centre", "Midwife email", "Next vaccination date");
         $this->check_req_fields($req_fields, $field_names);
         // print_r($vaccines);
         foreach ($vaccines as $id => $vaccine) {
@@ -434,6 +436,29 @@ class ChildReport
 
         if (empty($this->Errors)) {
             $query = "INSERT INTO child_report(Name, Birthday, Guardian, GuardianId, RequestId, BirthPlace, Area, Centre, MidwifeEmail, NVD, BCG, Triple, Triple_Polio, MMR, Japanese_Encephalitis, Dual_Polio, Hepatitis_AB, Anti_Rabies, Chicken_Pox, Meningicoccal) VALUES('{$child_name}','{$birthday}','{$guardian}','{$guardian_id}','{$Request_id}','{$birth_place}','{$area}','{$center}','{$midwife_email}','{$NVD}', '{$vaccines[0]}', '{$vaccines[1]}','{$vaccines[2]}','{$vaccines[3]}','{$vaccines[4]}','{$vaccines[5]}','{$vaccines[6]}','{$vaccines[7]}','{$vaccines[8]}','{$vaccines[9]}')";
+            if (empty($errors)) {
+                $insert_query = mysqli_query($this->database->connect(), $query);
+
+                if ($insert_query) {
+                    header('Location:manager.php');
+                } else {
+                    $errors[] = 'Failed to Add a report';
+                }
+            }
+        }
+        return $this->Errors;
+        //$requestObj->createReport();
+    }
+    public function createChildReport_Noreport($child_name, $birthday, $guardian, $guardian_id, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD)
+    {
+        $vaccine_name = array("BCG Vaccine", "Triple Vaccine", "Triple/Polio Vaccine", "MMR Vaccine", "Japanese Encephalitis Vaccine", "Dual Polio Vaccine", "Hepatitis A, B Vaccine (there are separate vaccines for both A and B as well)", "Anti Rabies Vaccine", "Chicken Pox Vaccine", "Meningicoccal Vaccine");
+        $req_fields = array($child_name, $birthday, $guardian, $guardian_id, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD);
+        $field_names = array("Name", "Birthday", "Guardian", "Guardian ID", "Request Id", "Birth Place", "Area", "Centre", "Midwife email", "Next vaccination date");
+        $this->check_req_fields($req_fields, $field_names);
+        // print_r($vaccines);
+
+        if (empty($this->Errors)) {
+            $query = "INSERT INTO child_report(Name, Birthday, Guardian, GuardianId, RequestId, BirthPlace, Area, Centre, MidwifeEmail, NVD) VALUES('{$child_name}','{$birthday}','{$guardian}','{$guardian_id}','{$Request_id}','{$birth_place}','{$area}','{$center}','{$midwife_email}','{$NVD}')";
             if (empty($errors)) {
                 $insert_query = mysqli_query($this->database->connect(), $query);
 

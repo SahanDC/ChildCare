@@ -11,7 +11,7 @@ require_once './lib/vendor/autoload.php';
 global $connection;
 
 // $parentObj = new User_Parent($connection);
-// $midwifeObj = new Midwife($connection);
+// $midwifeObj = new Midwife($connection, $_SESSION['email']);
 
 class manager
 {
@@ -57,7 +57,7 @@ class manager
         }
 
         while ($row = $query->fetch_assoc()) {
-            $midwife = new Midwife($this->connection);
+            $midwife = new Midwife($this->connection, $_SESSION);
             $midwife->setId($row['id']);
             $midwife->setEmail($row['email']);
             $midwife->setCentre($row['centre']);
@@ -86,13 +86,12 @@ class manager
         $this->observers = array();
         while ($row = $query->fetch_assoc()) {
             if ($row['role'] == 'parent') {
-                $observer = new User_parent($this->connection);
-                $observer->setEmail($row['email']);
+                $observer = new User_parent($this->connection, $row['email']);
             }
             if ($row['role'] == 'midwife') {
-                $observer = new Midwife($this->connection);
-                $observer->setEmail($row['email']);
+                $observer = new Midwife($this->connection, $row['email']);
             }
+            // $observer->setEmail($row['email']);
             array_push($this->observers, $observer);
         }
         return $this->observers;
@@ -131,12 +130,12 @@ class manager
         $this->notifyAllObservers($topic, $content);
     }
 
-    public function getRequestById($id)
-    {
-        $query = $this->connection->query("SELECT * FROM request where id = $id");
-        $request = $query->fetch_assoc();
-        return $request;
-    }
+    // public function getRequestById($id)
+    // {
+    //     $query = $this->connection->query("SELECT * FROM request where id = $id");
+    //     $request = $query->fetch_assoc();
+    //     return $request;
+    // }
 
     public function getRequests()
     {
@@ -188,10 +187,20 @@ class manager
     }
 
     public function createChildReport($child_name,$birthday,$guardian,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines){
-        $request = $this->getRequestById($Request_id);
+        $requestobj = new Request($this->connection);
+        $request = $requestobj->getRequestById($Request_id);
         $guardianId = $request['parent_id'];
-        $childreport = ChildReport::cloneChildreport();
-        $ereors=$childreport->createChildReport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
-        array_merge($this->Errors,$ereors);
+            $childreport = ChildReport::cloneChildreport();
+            if($request['clinic_card']!=null){
+                $errors=$childreport->createChildReport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
+            }else{
+                $errors=$childreport->createChildReport_Noreport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD);
+            }
+        array_merge($this->Errors,$errors);
+        if(empty($errors)){
+            $requestobj->createReport($Request_id);
+            array_push($this->Errors,"change state");
+        }
+        return $this->Errors;
     }
 }

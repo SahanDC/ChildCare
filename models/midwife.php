@@ -8,19 +8,21 @@ class Midwife extends User implements AdviceObserver
 {
     private $connection;
 
+    private $email;
     private $midwifeId;
     private $center;
     private $area;
 
-    public function __construct($db)
+    public function __construct($db, $email)
     {
         $this->connection = $db;
+        $this->email = $email;
     }
 
     public function update($topic, $content)
     {
         $email = $this->getEmail();
-        $email = 'thamindukiridana@gmail.com';
+        // $email = 'thamindukiridana@gmail.com';
         // Create the Transport
         $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
             ->setUsername('childcare.cse@gmail.com')

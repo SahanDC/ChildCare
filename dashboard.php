@@ -13,7 +13,7 @@ if ($_SESSION['role'] == 'midwife') {
     header("Location: ./midwife.php");
 }
 
-$parentObj = new User_Parent($connection);
+$parentObj = new User_Parent($connection, $_SESSION['email']);
 ?>
 
 
@@ -25,7 +25,7 @@ $parentObj = new User_Parent($connection);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./css/dashboardStyle.css">
     <!-- <link href="css/patientmanager_styles.css" rel="stylesheet"> -->
@@ -63,7 +63,8 @@ $parentObj = new User_Parent($connection);
     <!-- header section starts  -->
     <!-- <header style="background-color: rgb(181, 239, 241);">
         <div class="container" style="background-color: rgb(181, 239, 241);">
-            <h1>Hello <?php //echo $_SESSION["firstname"] . " " . $_SESSION["lastname"] ?></h1>
+            <h1>Hello <?php //echo $_SESSION["firstname"] . " " . $_SESSION["lastname"] 
+                        ?></h1>
             <nav class="nav">
                 <ul>
                     <li><a href="login.php">Home</a></li>
