@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300&display=swap");
+
+:root {
+    --blue: #0188df;
+    --black: #354046;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+    text-transform: capitalize;
+    font-weight: 400;
+    transition: all 0.2s linear;
+}
+
+.footer {
+    background: var(--black);
+
+}
+
+.footer p {
+    font-size: 1rem;
+    color: #eee;
+    padding: 1rem 0;
+}
+
+.footer .col-md-6 {
+    padding: 1.3rem;
+}
+
+.footer .col-md-6:nth-child(1) a {
+    font-size: rem;
+    color: #fff;
+}
+
+.footer .col-md-6:nth-child(1) a span {
+    color: var(--blue);
+    font-size: 1 rem;
+}
+
+.footer a {
+    font-size: 1.5rem;
+    color: #ccc;
+    display: block;
+}
+
+.footer h3 {
+    color: #fff;
+    font-size: rem;
+}
+
+.footer a:hover {
+    color: var(--blue);
+}
+
+.footer .credit {
+    color: #fff;
+    width: 80%;
+    margin: 0;
+    padding: 2rem 0;
+    padding-bottom: 4rem;
+    border-top: 0.1rem solid #ccc !important;
+}
+
+.footer .credit span {
+    color: var(--blue);
+}
