@@ -163,7 +163,7 @@ class manager
         }
 
         while ($row = $query->fetch_assoc()) {
-            $childreport = new ChildReport($row['ChildId']);
+            $childreport = ChildReport:: getChildreport($row['ChildId']);
             $childreport->addDetails($row);
 
             $this->childReport_array[$row['ChildId']] = $childreport;
@@ -187,22 +187,11 @@ class manager
         }
     }
 
-    //--------------------------error handilig functions --------------------------
-    // checks required fields
-    private function check_req_fields($req_fields, $field_names)
-    {
-        for ($i = 0; $i < sizeof($req_fields); $i++) {
-            if (empty(trim($req_fields[$i]))) {
-                array_push($this->Errors, $field_names[$i] . ' is required.');
-            }
-        }
-    }
-
-
-    private function checkLength($field, $len, $field_name)
-    {
-        if (strlen($field) > $len) {
-            array_push($this->Errors, $field_name . " is too long.");
-        }
+    public function createChildReport($child_name,$birthday,$guardian,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines){
+        $request = $this->getRequestById($Request_id);
+        $guardianId = $request['parent_id'];
+        $childreport = ChildReport::cloneChildreport();
+        $ereors=$childreport->createChildReport($child_name,$birthday,$guardian,$guardianId,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
+        array_merge($this->Errors,$ereors);
     }
 }

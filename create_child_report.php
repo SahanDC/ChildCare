@@ -1,6 +1,6 @@
 <?php
 include_once('config/db.php');
-include_once('models/childreport.php');
+include_once('models/manager.php');
 // if ($_SESSION['role'] == 'parent') {
 //     header("Location: ./dashboard.php");
 // }
@@ -64,7 +64,6 @@ $comment_Men = '';
 
 $errors = array();
 $manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
-$childreport = ChildReport::cloneChildreport();
 
 if (isset($_GET['id'])) {
     $Request_id = $_GET['id'];
@@ -99,8 +98,8 @@ if (isset($_POST['submit'])) {
     // print_r($_POST);
     $child_name = $_POST['child_name'];
     $birthday = $_POST['birthday'];
-    //$guardian = $_POST['guardian'];
-    $guardian_id = $_POST['guardian_id'];
+    $guardian = $_POST['guardian'];
+    //$guardian_id = $_POST['guardian_id'];
     $Request_id = $_POST['Request_id'];
     $birth_place = $_POST['birth_place'];
     $area = $_POST['area'];

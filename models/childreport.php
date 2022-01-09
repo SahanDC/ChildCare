@@ -1,8 +1,8 @@
 <?php
 include_once('dbh.php');
-include('controllers/autoloader.php');
+//include('controllers/autoloader.php');
 
-$requestObj = new Request($connection);
+// $requestObj = new Request($connection);
 
 class ChildReport
 {
@@ -444,7 +444,7 @@ class ChildReport
                 }
             }
         }
-
+        return $this->Errors;
         //$requestObj->createReport();
     }
 }
