@@ -1,5 +1,7 @@
 <?php
-class Midwife
+require_once('models/user.php');
+
+class Midwife extends User implements AdviceObserver
 {
     private $connection;
 
@@ -12,6 +14,11 @@ class Midwife
     {
         $this->connection = $db;
     }
+
+    public function update()
+    {
+    }
+
     ///////////////////////////////////////////////////////////
     public function getId()
     {
