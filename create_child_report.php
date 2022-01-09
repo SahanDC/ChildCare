@@ -15,6 +15,7 @@ $child_name = '';
 $birthday = '';
 $guardian = '';
 $guardian_id = '';
+$Request_id = '';
 $birth_place = '';
 $area = '';
 $center = '';
@@ -94,6 +95,7 @@ if (isset($_POST['submit'])) {
     $birthday = $_POST['birthday'];
     $guardian = $_POST['guardian'];
     $guardian_id = $_POST['guardian_id'];
+    $Request_id = $_POST['Request_id'];
     $birth_place = $_POST['birth_place'];
     $area = $_POST['area'];
     $center = $_POST['center'];
@@ -162,7 +164,7 @@ if (isset($_POST['submit'])) {
     $Men = ($date_Men == '' && $place_Men == '') ? '' : date("Y/m/d", strtotime($date_Men)) . '_' . $place_Men . '_' . $comment_Men;
     array_push($vaccines,$Men);
 
-    $manager->createChildReport($child_name,$birthday,$guardian,$guardian_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
+    $manager->createChildReport($child_name,$birthday,$guardian,$guardian_id,$Request_id,$birth_place,$area,$center,$midwife_email,$NVD,$vaccines);
     // $not_null = array('child_name', 'birthday', 'guardian', 'guardian_id', 'birth_place', 'area', 'center', 'midwife_email');
     // $errors = array_merge($errors, check_req_fields($not_null));
 
@@ -226,6 +228,10 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label class="form-label">Guardian Id</label>
                 <input type="text" class="form-control" name="guardian_id" placeholder=" Guardian Id " value=<?php echo $guardian_id ?>>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Guardian Id</label>
+                <input type="text" class="form-control" name="Request_id" placeholder=" Request Id " value=<?php echo $Request_id ?>>
             </div>
             <div class="mb-3">
                 <label class="form-label">Birth Place</label>
