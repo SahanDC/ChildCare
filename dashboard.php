@@ -148,6 +148,84 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
 
 
             <div class="col-xl-6 col-lg-6 order-2 order-lg-2 px-4 border-start border-dark">
+
+
+                <!-- <div class="row mx-auto w-75">
+
+                        <button class="btn btn-info" onclick="">Open New Child Report <i id="icon" class="fas fa-chevron-circle-down px-2"></i></button>
+                    </div> -->
+
+                <!-- <a class="btn btn-light" href="">Child Reports</a> -->
+
+
+                <?php echo $response; ?>
+                <!-- <h4>Open a Child Report</h4> -->
+
+
+                <!-- Button trigger modal -->
+                <div class="row mx-auto w-75">
+                    <button type="button" class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Open a Child Report for your child
+                    </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Open New Child Report</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container bg-light py-2" id="upload_form">
+                                    <p>1. Upload a pdf copy of your child's birth certificate.</p>
+                                    <p class="mb-0">2. Upload a pdf copy of your child's clinic card.</p>
+                                    <p>&emsp;(if your child has one)</p>
+                                    <div class="container col justify-content-center border mt-3 m-3 p-3 rounded">
+
+                                        <form action="" method="post" enctype="multipart/form-data">
+
+                                            <!-- <label for="file">Birth certificate:</label>
+<input class="form-control-file mb-2" type="file" name="file" id="file"> -->
+                                            <div class="mb-4">
+                                                <label for="formFile" class="form-label">1. Birth certificate:</label>
+                                                <input class="form-control" type="file" name="file1" id="file1">
+                                            </div>
+                                            <!-- <label for="file">Clinic card (if exist):</label>
+<input class="form-control-file mb-2 disabled" type="file" name="file2" id="file2"> -->
+                                            <div class="mb-4">
+                                                <label for="formFileDisabled" class="form-label">2. Clinic card:</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="clinic_card" value="Yes" id="flexCheckDefault" onclick="enable_cc()">
+                                                    <label class=" form-check-label" for="flexCheckDefault">
+                                                        Select if your child has a clinic card
+                                                    </label>
+                                                </div>
+                                                <input class="form-control" type="file" id="formFileDisabled" name="file2" id="file2" disabled>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-3">
+                                                <input class="btn btn-primary" type="submit" value="Upload">
+                                            </div>
+                                            <!-- <div class="d-flex justify-content-center">
+                                                    <input class="btn btn-primary mt-2" type="submit" value="Upload">
+                                                </div> -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
                 <div class="container-xl mt-3 mb-3">
                     <!-- {$_SESSION["id"]} -->
                     <?php $requests = $parentObj->getRequestsByParent($_SESSION["id"]);
@@ -218,11 +296,11 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                                             <!-- <iframe src="<?php echo $file1; ?>" width="90%" height="500px">
                             </iframe> -->
                                             <div class="row justify-content-evenly p-2">
-                                                <div class="col-6 p-0">
+                                                <div class="col-sm-6 p-0">
 
                                                     <a style="text-decoration: none;" href="<?php echo $file1; ?>" target="_blank"><i class="fas fa-file p-1"></i> Birth Certificate</a>
                                                 </div>
-                                                <div class="col-6 p-0">
+                                                <div class="col-sm-6 p-0">
 
                                                     <?php
                                                     if ($request["clinic_card"] == NULL) { ?>
@@ -256,50 +334,10 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                 </div>
                 <div class="container p-3 mb-3 mt-3">
                     <!-- <h6><?php echo $_SESSION['firstname']; ?>
-<?php echo $_SESSION['lastname']; ?></h6> -->
-
-                    <div class="row mx-auto w-75">
-
-                        <button class="btn btn-info" onclick="enable_upload()">Open New Child Report <i id="icon" class="fas fa-chevron-circle-down px-2"></i></button>
-                    </div>
-                    <!-- <a class="btn btn-light" href="">Child Reports</a> -->
+                        <?php echo $_SESSION['lastname']; ?></h6> -->
 
 
-                    <?php echo $response; ?>
-                    <!-- <h4>Open a Child Report</h4> -->
 
-                    <div class="container d-none bg-light py-2 mb-5 mt-3" id="upload_form">
-                        <p>1. Upload a pdf copy of your child's birth certificate.</p>
-                        <p>2. Upload a pdf copy of your child's clinic card (if your child has one). </p>
-                        <div class="container col justify-content-center border mt-5 m-3 p-3 rounded">
-
-                            <form action="" method="post" enctype="multipart/form-data">
-
-                                <!-- <label for="file">Birth certificate:</label>
-<input class="form-control-file mb-2" type="file" name="file" id="file"> -->
-                                <div class="mb-4">
-                                    <label for="formFile" class="form-label">1. Birth certificate:</label>
-                                    <input class="form-control" type="file" name="file1" id="file1">
-                                </div>
-                                <!-- <label for="file">Clinic card (if exist):</label>
-<input class="form-control-file mb-2 disabled" type="file" name="file2" id="file2"> -->
-                                <div class="mb-4">
-                                    <label for="formFileDisabled" class="form-label">2. Clinic card:</label>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" name="clinic_card" value="Yes" id="flexCheckDefault" onclick="enable_cc()">
-                                        <label class=" form-check-label" for="flexCheckDefault">
-                                            Select if your child has a clinic card
-                                        </label>
-                                    </div>
-                                    <input class="form-control" type="file" id="formFileDisabled" name="file2" id="file2" disabled>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <input class="btn btn-primary mt-2" type="submit" value="Upload">
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -326,17 +364,17 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                                     <?php if ($row['NVD'] != '') { ?>
 
                                         <?php if (0 > (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
-                                            <p class="alert-auto alert-danger text-center p-1 mb-0">Vaccination on <?php echo $row['NVD']; ?> missed</p><br>
-                                            
+                                            <p class="alert-auto alert-danger text-center p-1 mb-0">Vaccination on <?php echo $row['NVD']; ?> missed</p>
+
                                         <?php } ?>
                                         <?php if (14 >= (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 && 0 <= (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
                                             <p class="alert-auto alert-warning text-center p-1 mb-0"><?php echo (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400;
-                                                                                                        ?> days more for next vaccination</p><br>
+                                                                                                        ?> days more for next vaccination</p>
                                         <?php } ?>
-                                        
+
                                         <?php if (14 < (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400) { ?>
                                             <p class="alert-auto alert-success text-center p-1 mb-0"><?php echo (strtotime($row['NVD']) - strtotime(date("Y-m-d", time()))) / 86400;
-                                                                                                        ?> days more for next vaccination</p><br>
+                                                                                                        ?> days more for next vaccination</p>
                                         <?php } ?>
                                     <?php } else { ?>
                                         <p class="alert alert-light text-center"></p>
@@ -362,7 +400,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                                                                                                 ?> days more to record weight</p>
                                         <?php } ?>
                                     <?php } else { ?>
-                                        <p class="alert alert-light text-center"></p>
+                                        <!-- <p class="alert alert-light text-center"></p> -->
                                     <?php } ?>
                                     <p class="card-text m-0">Name: <?php echo $row["Name"] ?></p>
                                     <p class="card-text m-0">Birthdate: <?php echo $row["Birthday"] ?></p>
