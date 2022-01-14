@@ -47,7 +47,7 @@ if (isset($_POST['delete'])) {
   <link href="css/header.css" rel="stylesheet">
   <link href="css/healthAdviceStyle.css" rel="stylesheet">
   <?php
-  if (!strcmp($user, "parent")) { ?>
+  if (!strcmp($user, "parent") || !strcmp($user, "midwife")) { ?>
     <link rel="stylesheet" href="./css/dashboardStyle.css">
   <?php
   } ?>
@@ -145,7 +145,7 @@ if (isset($_POST['delete'])) {
   ?>
 
   <?php
-  if (!strcmp($user, "parent")) { 
+  if (!strcmp($user, "parent") || !strcmp($user, "midwife")) { 
     $parentObj = new User_Parent($connection,$_SESSION['email']);
     
     ?>
@@ -156,7 +156,7 @@ if (isset($_POST['delete'])) {
         <nav class="nav">
           <ul>
             <li><a href="login.php">Home</a></li>
-            <li><a href="<?php echo $parentObj->viewMedicalAdvices(); ?>">See Medical Advice</a></li>
+            <!-- <li><a href="<?php echo $parentObj->viewMedicalAdvices(); ?>">See Medical Advice</a></li> -->
             <li><a href="./controllers/logout.php">log Out</a></li>
           </ul>
         </nav>
