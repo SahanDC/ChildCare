@@ -39,4 +39,7 @@ class User
     public function viewChildReport($id){
         return "window.location ='child_report.php?ChildId={$id}'";
     }
+    public function viewMedicalAdvices(){
+        return 'health advices.php';
+    }
 }

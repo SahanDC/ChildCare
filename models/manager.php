@@ -5,6 +5,7 @@ require_once('adviceobserver.php');
 require_once('user_parent.php');
 require_once('midwife.php');
 require_once('request.php');
+require_once('childreport.php');
 
 // Swiftmailer library
 require_once './lib/vendor/autoload.php';

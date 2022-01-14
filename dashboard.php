@@ -69,7 +69,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
             <nav class="nav">
                 <ul>
                     <li><a href="login.php">Home</a></li>
-                    <li><a href="health advices.php">See Medical Advice</a></li>
+                    <li><a href="<?php echo $parentObj->viewMedicalAdvices(); ?>">See Medical Advice</a></li>
                     <li><a href="./controllers/logout.php">log Out</a></li>
                 </ul>
             </nav>

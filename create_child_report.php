@@ -11,6 +11,8 @@ if ($_SESSION['role'] == 'midwife') {
     header("Location: ./midwife.php");
 }
 
+$manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
+
 ?>
 
 
@@ -29,8 +31,8 @@ if ($_SESSION['role'] == 'midwife') {
 <body>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="btn btn-primary" href="#" role="button">See Medical Advice</a>
-            <a class="btn btn-danger" href="#" role="button">Log Out</a>
+            <a class="btn btn-primary" href="<?php echo $manager->viewMedicalAdvices(); ?>" role="button">See Medical Advice</a>
+            <a class="btn btn-danger" href="./controllers/logout.php" role="button">Log Out</a>
         </div>
     </nav>
 

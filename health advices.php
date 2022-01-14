@@ -101,7 +101,7 @@ if (isset($_POST['delete'])) {
             </li>
 
             <li class="details">
-              <a href="health advices.php" class="nav-link text-black">
+              <a href="<?php echo $manager->viewMedicalAdvices(); ?>" class="nav-link text-black">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#speedometer2" />
                 </svg>
@@ -145,7 +145,10 @@ if (isset($_POST['delete'])) {
   ?>
 
   <?php
-  if (!strcmp($user, "parent")) { ?>
+  if (!strcmp($user, "parent")) { 
+    $parentObj = new User_Parent($connection,$_SESSION['email']);
+    
+    ?>
     <header style="background-color: rgb(181, 239, 241);">
       <div class="container" style="background-color: rgb(181, 239, 241);">
         <h1>Hello <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]
@@ -153,7 +156,7 @@ if (isset($_POST['delete'])) {
         <nav class="nav">
           <ul>
             <li><a href="login.php">Home</a></li>
-            <li><a href="parents health advices.php">See Medical Advice</a></li>
+            <li><a href="<?php echo $parentObj->viewMedicalAdvices(); ?>">See Medical Advice</a></li>
             <li><a href="./controllers/logout.php">log Out</a></li>
           </ul>
         </nav>
@@ -163,6 +166,36 @@ if (isset($_POST['delete'])) {
   <?php
   }
   ?>
+
+<!-- ---------------------------------------sahan you have to check out this ------------------------------ -->
+
+  <?php 
+  // if (!strcmp($user, "midwife")) { 
+  //   $midwifeObj = new Midwife($connection, $_SESSION['email']);
+    ?>
+    <!-- header section starts  -->
+    <!-- <header style="background-color: rgb(181, 239, 241);">
+          <div class="container" style="background-color: rgb(181, 239, 241);">
+              <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem.</a>
+              <nav class="nav">
+                  <ul>
+                      <li><a href="<?php //echo $midwifeObj->viewMedicalAdvices(); ?>">See Medical Advice</a></li>
+                      <li><a href="./controllers/logout.php">Log Out</a></li>
+                  </ul>
+              </nav>
+              <div class="fas fa-bars"></div>
+          </div>
+      </header> -->
+      <!-- header section ends  -->
+  <?php 
+  //}
+  ?>
+
+<!-- --------------------------------------------------------------------------------------------------------- -->
+
+
+
+
   <!--header finish-->
   <br>
   <!-- <div class="container">

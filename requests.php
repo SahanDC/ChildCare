@@ -1,5 +1,7 @@
-<?php include('config/db.php');
+<?php
+include('config/db.php');
 require_once('models/request.php');
+require_once('models/manager.php');
 if (!isset($_SESSION['login'])) {
     header("Location: ./login.php");
 }
@@ -9,7 +11,7 @@ if ($_SESSION['role'] == 'parent') {
 if ($_SESSION['role'] == 'midwife') {
     header("Location: ./midwife.php");
 }
-
+$manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
 $requestObj = new Request($connection);
 
 if (isset($_POST['valid'])) {
@@ -65,7 +67,7 @@ if (isset($_POST['invalid'])) {
                 </li>
 
                 <li class="details">
-                    <a href="health advices.php" class="nav-link text-black">
+                    <a href="<?php echo $manager->viewMedicalAdvices(); ?>" class="nav-link text-black">
                         <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                             <use xlink:href="#speedometer2" />
                         </svg>

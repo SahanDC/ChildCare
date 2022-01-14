@@ -49,7 +49,7 @@ include_once('controllers/manager.php');
         </li>
 
         <li class="details">
-          <a href="health advices.php" class="nav-link text-black">
+          <a href="<?php echo $manager->viewMedicalAdvices(); ?>" class="nav-link text-black">
             <svg class="bi d-block mx-auto mb-1" width="24" height="24">
               <use xlink:href="#speedometer2" />
             </svg>

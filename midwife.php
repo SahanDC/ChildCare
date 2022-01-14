@@ -22,7 +22,7 @@
             <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem.</a>
             <nav class="nav">
                 <ul>
-                    <li><a href="login.php">See Medical Advice</a></li>
+                    <li><a href="<?php echo $midwifeObj->viewMedicalAdvices(); ?>">See Medical Advice</a></li>
                     <li><a href="./controllers/logout.php">Log Out</a></li>
                 </ul>
             </nav>
