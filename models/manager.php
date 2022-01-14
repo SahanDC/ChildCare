@@ -14,7 +14,7 @@ global $connection;
 // $parentObj = new User_Parent($connection);
 // $midwifeObj = new Midwife($connection, $_SESSION['email']);
 
-class manager
+class manager extends User
 {
     private $connection;
     private $userId;

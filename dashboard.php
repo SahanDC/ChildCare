@@ -411,7 +411,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                                         <p class="card-text m-0">Next weight recording: <?php echo $next_weight_date ?></p>
                                     <?php } ?>
                                     <div class="text-center mt-2">
-                                        <a href="./child_report.php/?ChildId=<?php echo $row["ChildId"] ?>" class="btn btn-info">View Child Report</a>
+                                        <a onclick="<?php echo $parentObj->viewChildReport($row['ChildId']);?>" class="btn btn-info">View Child Report</a>
                                     </div>
                                 </div>
                             </div>

@@ -12,6 +12,7 @@ class Midwife extends User implements AdviceObserver
     private $midwifeId;
     private $center;
     private $area;
+    private $childReportDetails = array();
 
     public function __construct($db, $email)
     {
@@ -95,7 +96,6 @@ class Midwife extends User implements AdviceObserver
 
     public function getChildReportDetails($mail, $search_)
     {
-        $childReportDetails = array();
         if ($search_ != '') {
             // echo "search<br>";
             $search = mysqli_real_escape_string($this->connection, $search_);
@@ -112,10 +112,10 @@ class Midwife extends User implements AdviceObserver
         //     print_r($row);
         // }
         while ($row = $query->fetch_assoc()) {
-            array_push($childReportDetails, $row);
+            array_push($this->childReportDetails, $row);
             //print_r($row);
         }
-        return $childReportDetails;
+        return $this->childReportDetails;
     }
 
     //this is not completed
@@ -137,4 +137,5 @@ class Midwife extends User implements AdviceObserver
         }
         return $advices;
     }
+
 }
