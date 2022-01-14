@@ -146,7 +146,7 @@ if (isset($_POST['delete'])) {
 
   <?php
   if (!strcmp($user, "parent") || !strcmp($user, "midwife")) { 
-    $parentObj = new User_Parent($connection,$_SESSION['email']);
+    $userobj = new user($connection);
     
     ?>
     <header style="background-color: rgb(181, 239, 241);">
@@ -156,7 +156,7 @@ if (isset($_POST['delete'])) {
         <nav class="nav">
           <ul>
             <li><a href="login.php">Home</a></li>
-            <!-- <li><a href="<?php echo $parentObj->viewMedicalAdvices(); ?>">See Medical Advice</a></li> -->
+            <!-- <li><a href="<?php echo $userobj->viewMedicalAdvices(); ?>">See Medical Advice</a></li> -->
             <li><a href="./controllers/logout.php">log Out</a></li>
           </ul>
         </nav>
@@ -166,35 +166,6 @@ if (isset($_POST['delete'])) {
   <?php
   }
   ?>
-
-<!-- ---------------------------------------sahan you have to check out this ------------------------------ -->
-
-  <?php 
-  // if (!strcmp($user, "midwife")) { 
-  //   $midwifeObj = new Midwife($connection, $_SESSION['email']);
-    ?>
-    <!-- header section starts  -->
-    <!-- <header style="background-color: rgb(181, 239, 241);">
-          <div class="container" style="background-color: rgb(181, 239, 241);">
-              <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem.</a>
-              <nav class="nav">
-                  <ul>
-                      <li><a href="<?php //echo $midwifeObj->viewMedicalAdvices(); ?>">See Medical Advice</a></li>
-                      <li><a href="./controllers/logout.php">Log Out</a></li>
-                  </ul>
-              </nav>
-              <div class="fas fa-bars"></div>
-          </div>
-      </header> -->
-      <!-- header section ends  -->
-  <?php 
-  //}
-  ?>
-
-<!-- --------------------------------------------------------------------------------------------------------- -->
-
-
-
 
   <!--header finish-->
   <br>

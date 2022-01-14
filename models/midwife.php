@@ -94,9 +94,9 @@ class Midwife extends User implements AdviceObserver
         return $details;
     }
 
-    public function getChildReportDetails($mail, $search_)
+    public function getChildReportDetails($mail, $search_ ,$delayedornext)
     {
-        if ($search_ != '') {
+        if (!$delayedornext) {
             // echo "search<br>";
             $search = mysqli_real_escape_string($this->connection, $search_);
             //$query = "SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%')) And MidwifeEmail = '$mail'";
@@ -118,24 +118,5 @@ class Midwife extends User implements AdviceObserver
         return $this->childReportDetails;
     }
 
-    //this is not completed
-    public function getD($search_)
-    {
-        $advices = array();
-        if ($search_ != '') {
-
-            echo "search<br>";
-            $search = mysqli_real_escape_string($this->connection, $search_);
-            $query = $this->connection->query("SELECT * FROM midwife WHERE (id LIKE '%{$search}%'or areas '%{$search}%' OR email LIKE '%{$search}% );");
-            echo ("query");
-        } else {
-            $query = $this->connection->query("SELECT * FROM midwife ;");
-        }
-
-        while ($row = $query->fetch_assoc()) {
-            array_push($advices, $row);
-        }
-        return $advices;
-    }
 
 }
