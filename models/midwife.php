@@ -95,29 +95,41 @@ class Midwife extends User implements AdviceObserver
     }
 
     public function getChildReportDetails($mail, $search_)
-    {   
+    {
         $childReportDetails = array();
-        if ($search_ !='') {
-            // echo "search<br>";
+
+        if ($search_ != '') {
             $search = mysqli_real_escape_string($this->connection, $search_);
-            //$query = "SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%')) And MidwifeEmail = '$mail'";
             $query = $this->connection->query("SELECT * FROM child_report WHERE (ChildId LIKE '%{$search}%' OR (name LIKE '%{$search}%')) And MidwifeEmail = '$mail'");
         } else {
-            //$query = "SELECT * FROM child_report WHERE MidwifeEmail = '$mail'";
             $query = $this->connection->query("SELECT * FROM child_report WHERE MidwifeEmail = '$mail'");
         }
-        //$result = mysqli_query($this->connection,$query);
 
-        // while ($row = mysqli_fetch_assoc($result)) {
-        //     array_push($childReportDetails, $row);
-        //     print_r($row);
-        // }
         while ($row = $query->fetch_assoc()) {
             array_push($childReportDetails, $row);
-            //print_r($row);
         }
         return $childReportDetails;
     }
 
+    public function vaccinationWithin2Weeks($childReportDetails)
+    {
+        $vaccinateWithinTwoWeeks = array();
+        foreach ($childReportDetails as $item) {
+            if (((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 14) && ((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 > 0)) {
+                array_push($vaccinateWithinTwoWeeks, $item);
+            }
+        }
+        return $vaccinateWithinTwoWeeks;
+    }
 
+    public function vaccinationMissed($childReportDetails)
+    {
+        $vaccinationMiss = array();
+        foreach ($childReportDetails as $item) {
+            if ((strtotime($item['NVD']) - strtotime(date("Y-m-d", time()))) / 86400 < 0) {
+                array_push($vaccinationMiss, $item);
+            }
+        }
+        return $vaccinationMiss;
+    }
 }
