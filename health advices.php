@@ -83,7 +83,8 @@ if (isset($_POST['delete'])) {
               <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                 <use xlink:href="#home" />
               </svg>
-              <h3>Harshani Bandara</h3>
+              <h3><?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]
+                  ?></h3>
             </li>
             <li class="details">
               <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
