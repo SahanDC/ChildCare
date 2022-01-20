@@ -216,10 +216,10 @@ class ChildReport
     {
         if ($this->getWeights() == null) {
             $this->get_details();
-            echo "null";
+            // echo "null";
         }
         if ($this->getWeights()[0] != '') {
-            echo "yes";
+            // echo "yes";
             for ($j = 0; $j < count($this->getWeights()); $j++) {
                 $curr_weights = explode("_", $this->getWeights()[$j]);
                 $var_date = strtotime($curr_weights[0]);

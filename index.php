@@ -204,7 +204,7 @@ if (isset($_SESSION['login'])) {
             <div class="col-md-4 text-center" data-aos="fade-up">
                 <h3>links</h3>
                 <a href="#">LOGIN</a>
-                <a href="#">Signup</a>
+                <a href="#">SIGNUP</a>
                 
             </div>
 
