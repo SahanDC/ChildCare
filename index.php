@@ -191,7 +191,7 @@ if (isset($_SESSION['login'])) {
 
             <div class="col-md-4" data-aos="fade-right">
                 <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur nemo porro quasi minima consequuntur dolorum, quas amet in autem id?</p>
+                <p>Our child care management system allows parents, and midwives to access everything securely about the children remotely at their fingertips</p>
             </div>
 
             <div class="col-md-4 text-center" data-aos="fade-up">
