@@ -26,6 +26,7 @@ class ChildReport
     {
         $this->ChildId = trim($childid);
         $this->database = new Dbh();
+        $this::$child_reports[$childid]=$this;
     }
 
     public static $vaccine = array("BCG Vaccine", "Triple Vaccine", "Triple/Polio Vaccine", "MMR Vaccine", "Japanese Encephalitis Vaccine", "Dual Polio Vaccine", "Hepatitis A, B Vaccine (there are separate vaccines for both A and B as well)", "Anti Rabies Vaccine", "Chicken Pox Vaccine", "Meningicoccal Vaccine");

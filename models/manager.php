@@ -149,6 +149,7 @@ class manager extends User
 
             $this->childReport_array[$row['ChildId']] = $childreport;
         }
+        unset($this->childReport_array[20]);
         // print_r($midwives);
         return $this->childReport_array;
     }
