@@ -165,23 +165,30 @@ if (isset($_POST['submit'])) {
     $Men = ($date_Men == '' && $place_Men == '') ? '' : date("Y/m/d", strtotime($date_Men)) . '_' . $place_Men . '_' . $comment_Men;
     array_push($vaccines, $Men);
 
+
     // $success = $manager->createChildReport($child_name, $birthday, $guardian, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines);
+
     $requestObj = new Request($connection);
-    $requestObj->createReport($Request_id);
 
     $request = $requestObj->getRequestById($Request_id);
     $guardianId = $request['parent_id'];
     $childreport = ChildReport::cloneChildreport();
     if ($request['clinic_card'] != null) {
         $errors = $childreport->createChildReport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines);
+        $requestObj->createReport($Request_id);
     } else {
         $errors = $childreport->createChildReport_Noreport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD);
+        $requestObj->createReport($Request_id);
     }
+
+
     array_merge($this->Errors, $errors);
     if (empty($errors)) {
         // $requestobj->createReport($Request_id);
         array_push($this->Errors, "change state");
     }
+
+
     // $requestObj = new Request($connection);
 
     // $not_null = array('child_name', 'birthday', 'guardian', 'guardian_id', 'birth_place', 'area', 'center', 'midwife_email');

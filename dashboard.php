@@ -158,74 +158,6 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                 <!-- <a class="btn btn-light" href="">Child Reports</a> -->
 
 
-                <?php echo $response; ?>
-                <!-- <h4>Open a Child Report</h4> -->
-
-
-                <!-- Button trigger modal -->
-                <div class="row mx-auto w-75">
-                    <button type="button" class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Open a Child Report for your child
-                    </button>
-                </div>
-
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Open New Child Report</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container bg-light py-2" id="upload_form">
-                                    <p>1. Upload a pdf copy of your child's birth certificate.</p>
-                                    <p class="mb-0">2. Upload a pdf copy of your child's clinic card.</p>
-                                    <p>&emsp;(if your child has one)</p>
-                                    <div class="container col justify-content-center border mt-3 m-3 p-3 rounded">
-
-                                        <form action="" method="post" enctype="multipart/form-data">
-
-                                            <!-- <label for="file">Birth certificate:</label>
-<input class="form-control-file mb-2" type="file" name="file" id="file"> -->
-                                            <div class="mb-4">
-                                                <label for="formFile" class="form-label">1. Birth certificate:</label>
-                                                <input class="form-control" type="file" name="file1" id="file1">
-                                            </div>
-                                            <!-- <label for="file">Clinic card (if exist):</label>
-<input class="form-control-file mb-2 disabled" type="file" name="file2" id="file2"> -->
-                                            <div class="mb-4">
-                                                <label for="formFileDisabled" class="form-label">2. Clinic card:</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="clinic_card" value="Yes" id="flexCheckDefault" onclick="enable_cc()">
-                                                    <label class=" form-check-label" for="flexCheckDefault">
-                                                        Select if your child has a clinic card
-                                                    </label>
-                                                </div>
-                                                <input class="form-control" type="file" id="formFileDisabled" name="file2" id="file2" disabled>
-                                            </div>
-                                            <div class="d-flex justify-content-center mt-3">
-                                                <input class="btn btn-primary" type="submit" value="Upload">
-                                            </div>
-                                            <!-- <div class="d-flex justify-content-center">
-                                                    <input class="btn btn-primary mt-2" type="submit" value="Upload">
-                                                </div> -->
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
                 <div class="container-xl mt-3 mb-3">
                     <!-- {$_SESSION["id"]} -->
                     <?php $requests = $parentObj->getRequestsByParent($_SESSION["id"]);
@@ -340,6 +272,77 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
 
                 </div>
 
+
+                <?php echo $response; ?>
+                <!-- <h4>Open a Child Report</h4> -->
+
+
+                <!-- Button trigger modal -->
+                <div class="row mx-auto w-75">
+                    <button type="button" class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Open New Child Report
+                    </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Open New Child Report</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container bg-light py-2" id="upload_form">
+                                    <p>1. Upload a pdf copy of your child's birth certificate.</p>
+                                    <p class="mb-0">2. Upload a pdf copy of your child's clinic card.</p>
+                                    <p>&emsp;(if your child has one)</p>
+                                    <div class="container col justify-content-center border mt-3 m-3 p-3 rounded">
+
+                                        <form action="" method="post" enctype="multipart/form-data">
+
+                                            <!-- <label for="file">Birth certificate:</label>
+<input class="form-control-file mb-2" type="file" name="file" id="file"> -->
+                                            <div class="mb-4">
+                                                <label for="formFile" class="form-label">1. Birth certificate:</label>
+                                                <input class="form-control" type="file" name="file1" id="file1">
+                                            </div>
+                                            <!-- <label for="file">Clinic card (if exist):</label>
+<input class="form-control-file mb-2 disabled" type="file" name="file2" id="file2"> -->
+                                            <div class="mb-4">
+                                                <label for="formFileDisabled" class="form-label">2. Clinic card:</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="clinic_card" value="Yes" id="flexCheckDefault" onclick="enable_cc()">
+                                                    <label class=" form-check-label" for="flexCheckDefault">
+                                                        Select if your child has a clinic card
+                                                    </label>
+                                                </div>
+                                                <input class="form-control" type="file" id="formFileDisabled" name="file2" id="file2" disabled>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-3">
+                                                <input class="btn btn-primary" type="submit" value="Upload">
+                                            </div>
+                                            <!-- <div class="d-flex justify-content-center">
+                                                    <input class="btn btn-primary mt-2" type="submit" value="Upload">
+                                                </div> -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
             <div class="col-xl-6 col-lg-6 order-1 order-lg-1 px-4 justify-content-center">
@@ -411,7 +414,7 @@ $parentObj = new User_Parent($connection, $_SESSION['email']);
                                         <p class="card-text m-0">Next weight recording: <?php echo $next_weight_date ?></p>
                                     <?php } ?>
                                     <div class="text-center mt-2">
-                                        <a onclick="<?php echo $parentObj->viewChildReport($row['ChildId']);?>" class="btn btn-info">View Child Report</a>
+                                        <a onclick="<?php echo $parentObj->viewChildReport($row['ChildId']); ?>" class="btn btn-info">View Child Report</a>
                                     </div>
                                 </div>
                             </div>
