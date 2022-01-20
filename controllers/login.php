@@ -176,6 +176,7 @@ if (isset($_POST['login'])) {
                     $_SESSION['token'] = $token;
                     $_SESSION['login'] = 1;
                     $_SESSION['role'] = $role;
+                    $_SESSION['viewer'] = '';
                 } else {
                     $emailPwdErr = '<div class="alert alert-danger text-center">
                     Password incorrect

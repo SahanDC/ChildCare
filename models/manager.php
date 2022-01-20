@@ -161,4 +161,15 @@ class manager extends User
             $observer->update($topic, $content);
         }
     }
+
+    public function viewChildReport($id)
+    {
+        $_SESSION['viewer'] = 'manager';
+        return "window.location ='child_report.php?ChildId={$id}'";
+    }
+    public function viewMedicalAdvices()
+    {
+        $_SESSION['viewer'] = 'manager';
+        return 'health advices.php';
+    }
 }

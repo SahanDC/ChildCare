@@ -3,26 +3,13 @@ require_once('models/user.php');
 include_once('AdviceObserver.php');
 class User_Parent extends User implements AdviceObserver
 {
-    private $connection;
-    public $email;
-
-    public function __construct($db, $email)
-    {
-        $this->connection = $db;
-        $this->email = $email;
-    }
-
     public function update($topic, $content)
     {
-        // $parent = $this->connection->query("SELECT * FROM user WHERE id = $id");
-
         $email = $this->getEmail();
-        // $email = 'thamindukiridana@gmail.com';
         // Create the Transport
         $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
             ->setUsername('childcare.cse@gmail.com')
             ->setPassword('childcare19');
-
         // Create the Mailer using your created Transport
         $mailer = new Swift_Mailer($transport);
         // Create a message
@@ -31,7 +18,6 @@ class User_Parent extends User implements AdviceObserver
             ->setTo($email)
             ->addPart($content, "text/html")
             ->setBody('Hello! User');
-
         // Send the message
         $result = $mailer->send($message);
     }
@@ -66,5 +52,16 @@ class User_Parent extends User implements AdviceObserver
         $query = $this->connection->query("SELECT * FROM user WHERE id = $id");
         $user = $query->fetch_assoc();
         return $user;
+    }
+
+    public function viewChildReport($id)
+    {
+        $_SESSION['viewer'] = 'parent';
+        return "window.location ='child_report.php?ChildId={$id}'";
+    }
+    public function viewMedicalAdvices()
+    {
+        $_SESSION['viewer'] = 'parent';
+        return 'health advices.php';
     }
 }

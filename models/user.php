@@ -1,5 +1,5 @@
 <?php
-class User
+abstract class User
 {
 
     private $connection;
@@ -36,10 +36,6 @@ class User
         $user = $query->fetch_assoc();
         return $user;
     }
-    public function viewChildReport($id){
-        return "window.location ='child_report.php?ChildId={$id}'";
-    }
-    public function viewMedicalAdvices(){
-        return 'health advices.php';
-    }
+    public abstract function viewChildReport($id);
+    public abstract function viewMedicalAdvices();
 }
