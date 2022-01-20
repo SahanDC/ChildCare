@@ -132,4 +132,15 @@ class Midwife extends User implements AdviceObserver
         }
         return $vaccinationMiss;
     }
+
+    public function viewChildReport($id)
+    {
+        $_SESSION['viewer'] = 'midwife';
+        return "window.location ='child_report.php?ChildId={$id}'";
+    }
+    public function viewMedicalAdvices()
+    {
+        $_SESSION['viewer'] = 'midwife';
+        return 'health advices.php';
+    }
 }
