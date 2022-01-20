@@ -95,21 +95,21 @@ $requestObj = new Advice($connection);
         <!-- <h4>Advices</h4> -->
         <h5 class="row justify-content-center mt-5 mb-3">Medical Advices</h5>
         <p>Is the advice from your child’s doctor falling on deaf ears?<br> <strong>Sure you disagree with your
-             pediatrician sometimes,
-             but mostly you’re on the same page – at least in the doctor’s office.
-              You don’t take your child’s health lightly. What parent does? Still,
-               just as adults may be loath to follow their own physicians’ advice
+                pediatrician sometimes,
+                but mostly you’re on the same page – at least in the doctor’s office.
+                You don’t take your child’s health lightly. What parent does? Still,
+                just as adults may be loath to follow their own physicians’ advice
                 from time to time, parents – frustratingly for pediatricians who see
-                 their children – frequently do the same. Experts say the reasons 
-                 – like difficulty implementing recommendations at home – vary, as do the 
-                 consequences: from exposure to certain health issues that might not seem
-                  so dire to potentially putting a child’s life at risk.</strong>.</p>
+                their children – frequently do the same. Experts say the reasons
+                – like difficulty implementing recommendations at home – vary, as do the
+                consequences: from exposure to certain health issues that might not seem
+                so dire to potentially putting a child’s life at risk.</strong>.</p>
         <?php
-            $requests = $requestObj->get_advices();
-            foreach ($requests as $request) { 
-                echo $request['topic'];
-            }
-            echo $requests;
+        $requests = $requestObj->get_advices();
+        foreach ($requests as $request) {
+            echo $request['topic'];
+        }
+        echo $requests;
         ?>
         <?php
 
