@@ -67,4 +67,15 @@ class User_Parent extends User implements AdviceObserver
         $user = $query->fetch_assoc();
         return $user;
     }
+
+    public function viewChildReport($id)
+    {
+        $_SESSION['viewer'] = 'parent';
+        return "window.location ='child_report.php?ChildId={$id}'";
+    }
+    public function viewMedicalAdvices()
+    {
+        $_SESSION['viewer'] = 'parent';
+        return 'health advices.php';
+    }
 }

@@ -11,7 +11,7 @@ $name = '';
 $age = '';
 $guardian = '';
 $birth_place = '';
-$user = $_SESSION['role'];
+$user = $_SESSION['viewer'];
 //$user = "parent";
 $last_vaccination;
 $vaccine_data = array();
@@ -118,5 +118,3 @@ function display_errors($errors)
     }
     echo '</div>';
 }
-
-?>

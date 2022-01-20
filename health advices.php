@@ -1,7 +1,7 @@
 <?php require_once('config/db.php');
 require_once('models/manager.php');
 
-$user = $_SESSION['role'];
+$user = $_SESSION['viewer'];
 
 $manager = new Manager($connection, $_SESSION['id'], $_SESSION['firstname'] . " " . $_SESSION['lastname'], $_SESSION['email']);
 $advices = $manager->get_advices();
@@ -146,10 +146,10 @@ if (isset($_POST['delete'])) {
   ?>
 
   <?php
-  if (!strcmp($user, "parent") || !strcmp($user, "midwife")) { 
+  if (!strcmp($user, "parent") || !strcmp($user, "midwife")) {
     $userobj = new user($connection);
-    
-    ?>
+
+  ?>
     <header style="background-color: rgb(181, 239, 241);">
       <div class="container" style="background-color: rgb(181, 239, 241);">
         <h1>Hello <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]
@@ -317,11 +317,11 @@ if (isset($_POST['delete'])) {
           <?php
           if (!strcmp($user, "manager")) { ?>
             <div class="container">
-            <form method="post">
-              <button type="button" onclick="addEdit()" class="btn btn-info"><a href="update record.php?id=<?php echo  $advice->get_id(); ?>">EDIT</a> </button>
-              <button type="submit" name="delete" class="btn btn-info" value='<?php echo $advice->get_id(); ?>'>DELETE</button>
-            </form>
-          </div>
+              <form method="post">
+                <button type="button" onclick="addEdit()" class="btn btn-info"><a href="update record.php?id=<?php echo  $advice->get_id(); ?>">EDIT</a> </button>
+                <button type="submit" name="delete" class="btn btn-info" value='<?php echo $advice->get_id(); ?>'>DELETE</button>
+              </form>
+            </div>
           <?php
           } ?>
 
