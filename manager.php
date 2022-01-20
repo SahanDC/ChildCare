@@ -31,7 +31,8 @@ include_once('controllers/manager.php');
           <svg class="bi d-block mx-auto mb-1" width="24" height="24">
             <use xlink:href="#home" />
           </svg>
-          <h3>Harshani Bandara</h3>
+          <h3><?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]
+                  ?></h3>
         </li>
         <li class="details">
           <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
@@ -251,7 +252,7 @@ include_once('controllers/manager.php');
 
           <div class="col-md-6" data-aos="fade-right">
             <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur nemo porro quasi minima consequuntur dolorum, quas amet in autem id?</p>
+            <p>Our child care management system allows parents, and midwives to access everything securely about the children remotely at their fingertips</p>
           </div>
 
           <div class="col-md-6 text-center" data-aos="fade-left">

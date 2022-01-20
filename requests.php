@@ -11,11 +11,11 @@ if ($_SESSION['role'] == 'parent') {
 if ($_SESSION['role'] == 'midwife') {
     header("Location: ./midwife.php");
 }
-$manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_SESSION['lastname'],$_SESSION['email']);
+$manager = new Manager($connection, $_SESSION['id'], $_SESSION['firstname'] . " " . $_SESSION['lastname'], $_SESSION['email']);
 $requestObj = new Request($connection);
 
 if (isset($_POST['valid'])) {
-    $requestObj->createReport($_POST['reqId']);
+    $requestObj->validateDocuments($_POST['reqId']);
     // $connection->query("UPDATE request set status = 'Valid' where id = '{$_POST['reqId']}'");
 }
 
@@ -49,7 +49,8 @@ if (isset($_POST['invalid'])) {
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                         <use xlink:href="#home" />
                     </svg>
-                    <h3>Harshani Bandara</h3>
+                    <h3><?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]
+                        ?></h3>
                 </li>
                 <li class="details">
                     <h1>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</h1>
@@ -197,6 +198,7 @@ if (isset($_POST['invalid'])) {
                                         <form action="" method="post">
                                             <input type="hidden" id="reqId" name="reqId" value="<?php echo $requestID ?>">
                                             <input class="btn btn-success px-5 w-100" type="submit" name="valid" onclick="window.open('./create_child_report.php?id=<?= $requestID ?>')" value="Validate Documents">
+                                            <!-- <input class="btn btn-success px-5 w-100" type="submit" name="valid" value="Validate Documents"> -->
                                         </form>
                                     </div>
                                     <div class="col-sm-8 col-md-6 col-lg-5 col-xl-4 text-center mb-1 <?php if ($request['status'] == 'Invalid' || $request['status'] == 'Created') echo ('d-none') ?>">
@@ -234,7 +236,7 @@ if (isset($_POST['invalid'])) {
 
                     <div class="col-md-6" data-aos="fade-right">
                         <a href="#" class="logo"><span>C</span>hild <span>C</span>are <span>M</span>anagement <span>S</span>ystem</a>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur nemo porro quasi minima consequuntur dolorum, quas amet in autem id?</p>
+                        <p>Our child care management system allows parents, and midwives to access everything securely about the children remotely at their fingertips</p>
                     </div>
 
                     <div class="col-md-6 text-center" data-aos="fade-left">
