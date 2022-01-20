@@ -23,12 +23,10 @@ class Midwife extends User implements AdviceObserver
     public function update($topic, $content)
     {
         $email = $this->getEmail();
-        // $email = 'thamindukiridana@gmail.com';
         // Create the Transport
         $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
             ->setUsername('childcare.cse@gmail.com')
             ->setPassword('childcare19');
-
         // Create the Mailer using your created Transport
         $mailer = new Swift_Mailer($transport);
         // Create a message
@@ -37,7 +35,6 @@ class Midwife extends User implements AdviceObserver
             ->setTo($email)
             ->addPart($content, "text/html")
             ->setBody('Hello! User');
-
         // Send the message
         $result = $mailer->send($message);
     }
