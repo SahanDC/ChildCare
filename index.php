@@ -98,17 +98,24 @@ if (isset($_SESSION['login'])) {
 
             <div class="box">
                 <h3> <i class="fas fa-stethoscope"></i> Give Medical Advice. </h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, suscipit.</p>
+                <p>Medical advice is the provision of a formal professional opinion regarding what a specific individual should or
+                     should not do to restore or preserve health. We provide advices for parents regarding childre.</p>
             </div>
 
             <div class="box">
                 <h3> <i class="fas fa-syringe"></i> Notify your child's vaccination date. </h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, suscipit.</p>
+                <p>Vaccines are one of the most effective ways to prevent serious illness in children.Vaccine program has been 
+                    quite successful in reducing the number of children affected by many highly contagious diseases, 
+                    including measles, rubella, mumps, diphtheria, and polio.We provide 
+                    service to get your kid's vaccine On the correct date. </p>
             </div>
 
             <div class="box">
                 <h3> <i class="fas fa-balance-scale-right"></i> Notify your child's weight record dates. </h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, suscipit.</p>
+                <p>Your child's measurements will be used to check they're in the healthy weight range. 
+                    If your child is above a healthy weight, you can get support from your midwives.
+                You can get notification about the weight record dates of your kid. Then its your responcibility to visit 
+                center and record the weight.</p>
             </div>
 
         </div>
