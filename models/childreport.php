@@ -219,6 +219,7 @@ class ChildReport
             echo "null";
         }
         if ($this->getWeights()[0] != '') {
+            echo "yes";
             for ($j = 0; $j < count($this->getWeights()); $j++) {
                 $curr_weights = explode("_", $this->getWeights()[$j]);
                 $var_date = strtotime($curr_weights[0]);
@@ -317,7 +318,12 @@ class ChildReport
         $req_fields = array($date, $add_weight);
         $field_names = array("Date of weight cheked", "Weight");
         $this->check_req_fields($req_fields, $field_names);
-        $add_Wfield = $pre_weights . ',' . date("Y/m/d", strtotime($date)) . '_' . $add_weight;
+        if($pre_weights == ''){ 
+            $add_Wfield = date("Y/m/d", strtotime($date)) . '_' . $add_weight;
+
+        }else{
+            $add_Wfield = $pre_weights . ',' . date("Y/m/d", strtotime($date)) . '_' . $add_weight;
+        }
 
         if (empty($this->Errors)) {
             if (!$this->setWeight($add_Wfield)) {
