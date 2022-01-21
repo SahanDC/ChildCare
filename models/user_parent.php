@@ -3,6 +3,15 @@ require_once('models/user.php');
 include_once('AdviceObserver.php');
 class User_Parent extends User implements AdviceObserver
 {
+    private $connection;
+    public $email;
+
+    public function __construct($db, $email)
+    {
+        $this->connection = $db;
+        $this->email = $email;
+    }
+
     public function update($topic, $content)
     {
         $email = $this->getEmail();

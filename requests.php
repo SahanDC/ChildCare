@@ -172,7 +172,11 @@ if (isset($_POST['invalid'])) {
                                 $query_parent = $connection->query("SELECT * FROM user where id = '{$parent_id}'");
                                 ?>
 
-                                <h4 class="mt-4">Birth certificate</h4>
+
+                                <h4 class="mt-4">Birth certificate </h4>
+                                <div class="row p-2">
+                                    <a style="text-decoration: none; display:inline-block" href="<?php echo $file1; ?>" target="_blank"><i class="fas fa-file p-1"></i> Open in a new tab</a>
+                                </div>
                                 <iframe src="<?php echo $file1; ?>" width="90%" height="500px">
                                 </iframe>
 
@@ -184,6 +188,9 @@ if (isset($_POST['invalid'])) {
                                 } else {
                                     $file2 = './requests/' . $request["clinic_card"];
                                 ?>
+                                    <div class="row p-2">
+                                        <a style="text-decoration: none;" href="<?php echo $file2; ?>" target="_blank"><i class="fas fa-file p-1"></i> Open in a new tab</a>
+                                    </div>
                                     <iframe src="<?php echo $file2; ?>" width="90%" height="500px">
                                     </iframe>
                                 <?php } ?>
