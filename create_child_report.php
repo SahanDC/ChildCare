@@ -57,15 +57,15 @@ $manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_
         <form action="create_child_report.php" method="post">
             <div class="mb-3">
                 <label class="form-label">Child Name</label>
-                <input type="text" class="form-control" name="child_name" placeholder=" Child Name " value=<?php echo $child_name ?>>
+                <input type="text" class="form-control" required name="child_name" placeholder=" Child Name " value=<?php echo $child_name ?>  >
             </div>
             <div class="mb-3">
                 <label class="form-label">Birthday</label>
-                <input type="date" class="form-control" name="birthday" value=<?php echo $birthday ?>>
+                <input type="date" class="form-control" required name="birthday" value=<?php echo $birthday ?>>
             </div>
             <div class="mb-3">
                 <label class="form-label">Guardian Name</label>
-                <input type="text" class="form-control" name="guardian" placeholder=" Guardian Name " value=<?php echo $guardian ?>>
+                <input type="text" class="form-control" required name="guardian" placeholder=" Guardian Name " value=<?php echo $guardian ?>  >
             </div>
             <!-- <div class="mb-3">
                 <label class="form-label">Guardian Id</label>
@@ -73,27 +73,27 @@ $manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_
             </div> -->
             <!-- <div class="mb-3">
                 <label class="form-label">Request Id</label> -->
-            <input type="hidden" class="form-control" name="Request_id" placeholder=" Request Id " value=<?php echo $Request_id ?>>
+            <input type="hidden" class="form-control" required name="Request_id" placeholder=" Request Id " value=<?php echo $Request_id ?>  >
             <!-- </div> -->
             <div class="mb-3">
                 <label class="form-label">Birth Place</label>
-                <input type="text" class="form-control" name="birth_place" placeholder=" Birth Place " value=<?php echo $birth_place ?>>
+                <input type="text" class="form-control" required name="birth_place" placeholder=" Birth Place " value=<?php echo $birth_place ?>>
             </div>
             <div class="mb-3">
                 <label class="form-label">Living Area</label>
-                <input type="text" class="form-control" name="area" placeholder=" Living Area " value=<?php echo $area ?>>
+                <input type="text" class="form-control" required name="area" placeholder=" Living Area " value=<?php echo $area ?>>
             </div>
             <div class="mb-3">
                 <label class="form-label">Closest Vaccination Center</label>
-                <input type="text" class="form-control" name="center" placeholder=" Closest Vaccination Center " value=<?php echo $center ?>>
+                <input type="text" class="form-control" required name="center" placeholder=" Closest Vaccination Center " value=<?php echo $center ?>>
             </div>
             <div class="mb-3">
                 <label class="form-label">Midwife blongs to</label>
-                <input type="email" class="form-control" name="midwife_email" placeholder=" Midwife email address " value=<?php echo $midwife_email ?>>
+                <input type="email" class="form-control" required name="midwife_email" placeholder=" Midwife email address " value=<?php echo $midwife_email ?>>
             </div>
             <div class="mb-3">
                 <label class="form-label">Next Vaccination Date</label>
-                <input type="date" class="form-control" name="NVD" value=<?php echo $NVD ?>>
+                <input type="date" class="form-control" required name="NVD" value=<?php echo $NVD ?>>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">BCG Vaccine</label>
@@ -234,6 +234,10 @@ $manager = new Manager($connection,$_SESSION['id'],$_SESSION['firstname']." ".$_
                         <input type="text" class="form-control" name="comment_Men" placeholder=" Comments on Vaccination " value=<?php echo $comment_Men ?>>
                     </div>
                 </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Weight details</label>
+                <input type="text" class="form-control" name="Weight_details" placeholder="Weight details" value=<?php echo $Weight_details ?>>
             </div>
             <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
         </form>
