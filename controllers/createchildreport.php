@@ -14,6 +14,7 @@ $area = '';
 $center = '';
 $midwife_email = '';
 $NVD = '';
+$Weight_details = '';
 
 $date_BCG = '';
 $place_BCG = '';
@@ -91,7 +92,7 @@ function display_errors($errors)
 }
 
 if (isset($_POST['submit'])) {
-    // print_r($_POST);
+    print_r($_POST);
     $child_name = $_POST['child_name'];
     $birthday = $_POST['birthday'];
     $guardian = $_POST['guardian'];
@@ -103,6 +104,7 @@ if (isset($_POST['submit'])) {
     $midwife_email = $_POST['midwife_email'];
     $NVD = $_POST['NVD'];
     $vaccines = array();
+    $Weight_details = $_POST['Weight_details'];
 
     $date_BCG = $_POST['date_BCG'];
     $place_BCG = $_POST['place_BCG'];
@@ -174,7 +176,7 @@ if (isset($_POST['submit'])) {
     $guardianId = $request['parent_id'];
     $childreport = ChildReport::cloneChildreport();
     if ($request['clinic_card'] != null) {
-        $errors = $childreport->createChildReport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines);
+        $errors = $childreport->createChildReport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD, $vaccines,$Weight_details);
         $requestObj->createReport($Request_id);
     } else {
         $errors = $childreport->createChildReport_Noreport($child_name, $birthday, $guardian, $guardianId, $Request_id, $birth_place, $area, $center, $midwife_email, $NVD);
