@@ -50,12 +50,15 @@ function handleUpload1($connection)
                            ';
                 // header("Location: ./dashboard.php?sucess");
             } else {
-                $response = 'An unexpected error occurred; the file could not be uploaded.';
+                $response = '<div class="alert alert-danger mt-1">
+                An unexpected error occurred; the file could not be uploaded.
+              </div>
+         ';
             }
         }
     } else {
-        $response = 'Error: the file you tried to upload is not a valid file. Check file  -
-    type and size.';
+        $response = '<div class="alert alert-danger mt-1">Error: the file you tried to upload is not a valid file. Check file  -
+    type and size.</div>';
     }
     return $response;
 }
