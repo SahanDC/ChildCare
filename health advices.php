@@ -1,5 +1,6 @@
 <?php require_once('config/db.php');
 require_once('models/manager.php');
+require_once('models/user_parent.php');
 
 $user = $_SESSION['viewer'];
 
@@ -147,7 +148,7 @@ if (isset($_POST['delete'])) {
 
   <?php
   if (!strcmp($user, "parent") || !strcmp($user, "midwife")) {
-    $userobj = new user($connection);
+    // $userobj = new User_Parent($connection);
 
   ?>
     <header style="background-color: rgb(181, 239, 241);">
@@ -157,7 +158,7 @@ if (isset($_POST['delete'])) {
         <nav class="nav">
           <ul>
             <li><a href="login.php">Home</a></li>
-            <!-- <li><a href="<?php echo $userobj->viewMedicalAdvices(); ?>">See Medical Advice</a></li> -->
+            <!-- <li><a href="<?//php echo $userobj->viewMedicalAdvices(); ?>">See Medical Advice</a></li> -->
             <li><a href="./controllers/logout.php">log Out</a></li>
           </ul>
         </nav>

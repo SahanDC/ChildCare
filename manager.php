@@ -122,7 +122,7 @@ include_once('controllers/manager.php');
             <div class="modal-body">
               <div class="col-md-12"><label class="labels">midwife email</label><input type="email" name="email" class="form-control" id="mail" placeholder="name@example.com" value="" required></div>
               <div class="col-md-12"><label class="labels">midwife's center </label><input type="text" class="form-control" id="content_area" name="center" rows="8" placeholder="enter center here. ex:centre1 " required></textarea></div>
-              <div class="col-md-12"><label class="labels">midwife's ares </label><input type="text" class="form-control" id="content_area" name="area" rows="8" placeholder="enter areas here. " required></textarea></div>
+              <div class="col-md-12"><label class="labels">midwife's areas </label><input type="text" class="form-control" id="content_area" name="area" rows="8" placeholder="enter areas here. " required></textarea></div>
               <div class="col-md-12"><label class="labels">midwife's noc </label><input type="number" class="form-control" id="content_area" name="noc" rows="8" placeholder="enter number of children here. " required></textarea></div>
 
             </div>
@@ -141,7 +141,7 @@ include_once('controllers/manager.php');
 
 
   <div class="container">
-    <h2 class="mt-4">Midwieves Details</h2>
+    <h2 class="mt-4">Midwives Details</h2>
     <p>They diagnose, educate, and treat patients to ensure that they
       have the best possible care. A few of the main duties of a doctor
       are performing diagnostic tests, recommending specialists for patients,
